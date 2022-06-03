@@ -1,0 +1,6 @@
+Golf tuloskortti
+; Kenttien järjestys tiedostossa
+
+;id 	| nimi 		| kotiseura 	| tasoitus | aloitusvuosi
+1	| Janne pelaaja | Pohjolan golf | 9 	   | 2005
+	

@@ -1,0 +1,5 @@
+Golf tuloskortti
+; Kenttien järjestys tiedostossa
+
+;id	| seurannimi	| katuosoite	| postinumero	| postiosoite	| puhelinnumero
+1	| Pohjolan golf | Takametsä 2	| 71000		| Metsälä	| 045-1234567
