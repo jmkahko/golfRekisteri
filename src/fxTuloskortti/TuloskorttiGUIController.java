@@ -1,4 +1,4 @@
-package tuloskortti;
+package fxTuloskortti;
 
 /**
  * @author janne
