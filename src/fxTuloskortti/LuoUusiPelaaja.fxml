@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxTuloskortti.LuoUusiPelaajaController">
+   <bottom>
+      <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button onAction="#handleTallenna" prefHeight="24.0" text="Tallenna">
+               <tooltip>
+                  <Tooltip text="Uuden kierroksen syöttäminen" />
+               </tooltip>
+            </Button>
+            <Button onAction="#handlePeruuta" text="Peruuta">
+               <tooltip>
+                  <Tooltip text="Voidaan luoda uusi seura" />
+               </tooltip>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <right>
+      <BorderPane BorderPane.alignment="CENTER" />
+   </right>
+   <center>
+      <ScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
+         <content>
+            <GridPane hgap="10.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" minWidth="10.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Nimi:" GridPane.rowIndex="1" />
+                  <TextField prefHeight="24.0" prefWidth="94.0" text="Janne Pelaaja" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Kotiseura:" GridPane.rowIndex="2" />
+                  <Label text="Tasoitus:" GridPane.rowIndex="3" />
+                  <Label text="Aloitusvuosi:" GridPane.rowIndex="4" />
+                  <TextField text="Pohjolan Golf" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField text="9" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField text="2005" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Luo uusi käyttäjä" />
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </GridPane>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
