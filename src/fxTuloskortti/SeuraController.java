@@ -1,7 +1,7 @@
 package fxTuloskortti;
 
-import fi.jyu.mit.fxgui.Dialogs;
-import javafx.event.ActionEvent;
+import fi.jyu.mit.fxgui.ModalController;
+import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
 
 /**
@@ -9,15 +9,15 @@ import javafx.fxml.FXML;
  * @version 13.6.2022
  * Seura käyttöliittymän muokkaamista varten, voidaan syöttää uusi tuloskortti tai muokata. Voidaan muokata seurantietoja
  */
-public class SeuraController {
+public class SeuraController implements ModalControllerInterface<String> {
 
     /**
      * Voidaan muokata seurantietoja
      * @param event
      */
     @FXML
-    void handleMuokkaaSeuraa(ActionEvent event) {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    private void handleMuokkaaSeuraa() {
+        ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", null, "");
     }
     
     /**
@@ -25,8 +25,8 @@ public class SeuraController {
      * @param event
      */
     @FXML
-    void handleMuokkaaTuloskortti(ActionEvent event) {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    private void handleMuokkaaTuloskortti() {
+        ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", null, "");
     }
 
     /**
@@ -34,8 +34,26 @@ public class SeuraController {
      * @param event
      */
     @FXML
-    void handleUusiTuloskortti(ActionEvent event) {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    private void handleUusiTuloskortti() {
+        ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Luo uusi tuloskortti", null, "");
+    }
+
+    @Override
+    public String getResult() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void handleShown() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setDefault(String arg0) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

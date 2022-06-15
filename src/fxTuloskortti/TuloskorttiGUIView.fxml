@@ -57,8 +57,8 @@
           <Menu mnemonicParsing="false" text="Muokkaa">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleMuokkaaJasenta" text="Muokkaa jäsentä..." />
-                  <MenuItem mnemonicParsing="false" onAction="#handleSeura" text="Luo/Päivitä seura..." />
-                  <MenuItem mnemonicParsing="false" onAction="#handleTuloskortti" text="Luo/Päivitä tuloskortti..." />
+                  <MenuItem mnemonicParsing="false" onAction="#handleMuokkaaSeuraa" text="Luo/Päivitä seura..." />
+                  <MenuItem mnemonicParsing="false" onAction="#handleMuokkaaTuloskorttia" text="Luo/Päivitä tuloskortti..." />
                   <MenuItem mnemonicParsing="false" onAction="#handlePoistaTuloskortti" text="Poista tuloskortti..." />
                   <MenuItem mnemonicParsing="false" onAction="#handlePoistaSeura" text="Poista seura..." />
             </items>

@@ -1,6 +1,12 @@
 package fxTuloskortti;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import fi.jyu.mit.fxgui.Dialogs;
+import fi.jyu.mit.fxgui.ModalController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
@@ -16,50 +22,49 @@ public class TuloskorttiGUIController {
     /**
      * Käsitellään uuden kierroksen syöttäminen
      */
-    @FXML private void handleUusiKierros() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    @FXML 
+    private void handleUusiKierros() {
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", null, "");
     }
     
     
     /**
      * Käsitellään uuden seuran syöttäminen
      */
-    @FXML private void handleUusiSeura() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    @FXML 
+    private void handleUusiSeura() {
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoSeuraView.fxml"), "Luo seura", null, "");
     }
-    
-    /**
-     * Käsitellään uuden tuloskortin syöttäminen
-     */
-    @FXML private void handleUusiTuloskortti() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
-    }
-    
+       
     /**
      * Käsitellään seuran muokkaamista
      */
-    @FXML private void handleMuokkaaSeuraa() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    @FXML 
+    private void handleMuokkaaSeuraa() {
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("SeuraView.fxml"), "Muokkaa seuraa", null, "");
     }
     
     /**
      * Käsitellään tuloskortin muokkaamista
      */
-    @FXML private void handleMuokkaaTuloskortti() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    @FXML 
+    private void handleMuokkaaTuloskorttia() {
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", null, "");
     }
 
     /**
      * Käsitellään tallennuskäsky
      */
-    @FXML private void handleTallenna() {
+    @FXML 
+    private void handleTallenna() {
         tallenna();
     }
     
     /**
      * Käsitellään lopetuskäsky
      */
-    @FXML private void handleLopeta() {
+    @FXML 
+    private void handleLopeta() {
         tallenna();
         Platform.exit();
     }
@@ -67,64 +72,49 @@ public class TuloskorttiGUIController {
     /**
      * Käsitellään peruuta käsky
      */
-    @FXML private void handlePeruuta() {
+    @FXML 
+    private void handlePeruuta() {
         Platform.exit();
     }
     
     /**
      * Apua valikon apua painike
      */
-    @FXML
-    void handleApua() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    @FXML 
+    private void handleApua() {
+        Dialogs.showMessageDialog("Tänne tulee sovelluksen toimintaan helppejä");
     }
 
     /**
      * Muokkaa tallennettua jäsentä
      */
-    @FXML
-    void handleMuokkaaJasenta() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    @FXML 
+    private void handleMuokkaaJasenta() {
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Muokkaa jäsentä", null, "");
     }
 
     /**
      * Poistaa seuran
      */
-    @FXML
-    void handlePoistaSeura() {
+    @FXML 
+    private void handlePoistaSeura() {
         Dialogs.showMessageDialog("Ei vielä osata tehdä");
     }
 
     /**
      * Tuloskortin poistaminen
      */
-    @FXML
-    void handlePoistaTuloskortti() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
-    }
-
-    /*
-     * Luodaan/Muokataan seuraa
-     */
-    @FXML
-    void handleSeura() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
-    }
-    
-    /*
-     * Luodaan/Muokataan tuloskorttia
-     */
-    @FXML
-    void handleTuloskortti() {
+    @FXML 
+    private void handlePoistaTuloskortti() {
         Dialogs.showMessageDialog("Ei vielä osata tehdä");
     }
 
     /**
      * Apua valikon tietoja näytetään
      */
-    @FXML
-    void handleTietoja() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    @FXML 
+    private void handleTietoja() {
+        tietojaSovelluksesta();
     }
       
 
@@ -142,5 +132,17 @@ public class TuloskorttiGUIController {
      */
     private void tallenna() {
         Dialogs.showMessageDialog("Tallennetetaan! Mutta ei toimi vielä");
+    }
+    
+    private void tietojaSovelluksesta() {
+        Desktop desktop = Desktop.getDesktop();
+        try {
+            URI uri = new URI("https://tim.jyu.fi/view/kurssit/tie/ohj2/2022k/ht/jmkahkon");
+            desktop.browse(uri);
+        } catch (URISyntaxException e) {
+            return;
+        } catch (IOException e) {
+            return;
+        }
     }
 }

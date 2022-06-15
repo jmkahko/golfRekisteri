@@ -1,23 +1,22 @@
 package fxTuloskortti;
 
 import fi.jyu.mit.fxgui.Dialogs;
-import javafx.event.ActionEvent;
+import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
 
 /**
  * @author janne
  * @version 13.6.2022
  * Uuden tuloskortin luonti seuralle
  */
-public class LuoUusiTuloskorttiController {
+public class LuoUusiTuloskorttiController implements ModalControllerInterface<String> {
 
     /**
      * Peruuta muutokset
      * @param event
      */
     @FXML
-    void handlePeruuta(ActionEvent event) {
+    private void handlePeruuta() {
         Dialogs.showMessageDialog("Ei vielä osata tehdä");
     }
 
@@ -26,8 +25,26 @@ public class LuoUusiTuloskorttiController {
      * @param event
      */
     @FXML
-    void handleTallenna(ActionEvent event) {
+    private void handleTallenna() {
         Dialogs.showMessageDialog("Ei vielä osata tehdä");
+    }
+
+    @Override
+    public String getResult() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void handleShown() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setDefault(String oletus) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
