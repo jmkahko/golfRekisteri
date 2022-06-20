@@ -241,7 +241,4 @@
          </content>
       </ScrollPane>
    </center>
-   <top>
-      <Label text="Luo tuloskortti" BorderPane.alignment="CENTER" />
-   </top>
 </BorderPane>
