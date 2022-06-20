@@ -129,7 +129,7 @@ public class TuloskorttiGUIController {
     private void tietojaSovelluksesta() {
         Desktop desktop = Desktop.getDesktop();
         try {
-            URI uri = new URI("https://tim.jyu.fi/view/kurssit/tie/ohj2/2022k/ht/jmkahkon");
+            URI uri = new URI("https://gitlab.jyu.fi/jmkahkon/ohj2");
             desktop.browse(uri);
         } catch (URISyntaxException e) {
             return;
