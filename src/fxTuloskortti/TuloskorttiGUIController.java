@@ -45,11 +45,11 @@ public class TuloskorttiGUIController {
     }
     
     /**
-     * Käsitellään tuloskortin muokkaamista
+     * Käsitellään kierroksen tuloskortin muokkaus
      */
     @FXML 
-    private void handleMuokkaaTuloskorttia() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", null, "");
+    private void handleMuokkaaKierrosta() {
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa kierrosta", null, "");
     }
 
     /**
@@ -94,18 +94,10 @@ public class TuloskorttiGUIController {
     }
 
     /**
-     * Poistaa seuran
+     * Kierroksen tuloskortin poistaminen
      */
     @FXML 
-    private void handlePoistaSeura() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
-    }
-
-    /**
-     * Tuloskortin poistaminen
-     */
-    @FXML 
-    private void handlePoistaTuloskortti() {
+    private void handlePoistaKierros() {
         Dialogs.showMessageDialog("Ei vielä osata tehdä");
     }
 
