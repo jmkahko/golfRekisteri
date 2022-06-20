@@ -16,14 +16,19 @@
    <bottom>
       <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button onAction="#handleUusiTuloskortti" prefHeight="24.0" text="Syötä tuloskortti">
+            <Button mnemonicParsing="false" onAction="#handlePoistaSeura" text="Poista seura">
                <tooltip>
-                  <Tooltip text="Voidaan syöttää tuloskortti seuralle" />
+                  <Tooltip text="Voidaan poistaa valittu seura" />
                </tooltip>
             </Button>
             <Button onAction="#handleMuokkaaSeuraa" text="Muokkaa seuraa">
                <tooltip>
-                  <Tooltip text="Tallennetaan" />
+                  <Tooltip text="Voidaan muokata seuran tietoja" />
+               </tooltip>
+            </Button>
+            <Button onAction="#handleUusiTuloskortti" prefHeight="24.0" text="Syötä tuloskortti">
+               <tooltip>
+                  <Tooltip text="Voidaan syöttää tuloskortti seuralle" />
                </tooltip>
             </Button>
             <Button mnemonicParsing="false" onAction="#handleMuokkaaTuloskortti" text="Muokkaa tuloskorttia">

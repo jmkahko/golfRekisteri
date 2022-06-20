@@ -1,5 +1,6 @@
 package fxTuloskortti;
 
+import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
@@ -18,6 +19,14 @@ public class SeuraController implements ModalControllerInterface<String> {
     @FXML
     private void handleMuokkaaSeuraa() {
         ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", null, "");
+    }
+    
+    /**
+     * Voidaan poistaa valittu seura
+     */
+    @FXML
+    void handlePoistaSeura() {
+        Dialogs.showMessageDialog("Ei vielä osata tehdä");
     }
     
     /**
