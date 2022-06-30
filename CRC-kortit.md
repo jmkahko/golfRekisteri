@@ -1,4 +1,5 @@
-Käyttäjä-luokka (Kayttaja)
+## Käyttäjä-luokka (Kayttaja)
+```
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Kayttaja                | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
@@ -17,8 +18,10 @@ Käyttäjä-luokka (Kayttaja)
 |   kentäksi                           |                                      |
 | - Yksi käyttäjä ainoastaan           |                                      |
 +--------------------------------------+--------------------------------------+
+```
 
-Seura-luokka (Seura)
+## Seura-luokka (Seura)
+```
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Seura                   | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
@@ -37,8 +40,10 @@ Seura-luokka (Seura)
 |                                      |                                      |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
+```
 
-Tuloskortti-luokka (Tuloskortti)
+## Tuloskortti-luokka (Tuloskortti)
+```
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Tulokortti              | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
@@ -57,8 +62,10 @@ Tuloskortti-luokka (Tuloskortti)
 | - Osaa pyytää apua avustajiltaan     |                                      |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
+```
 
-Kierros-luokka (Kierros)
+## Kierros-luokka (Kierros)
+```
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Kierros                 | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
@@ -77,8 +84,10 @@ Kierros-luokka (Kierros)
 |   kentäksi                           |                                      |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
+```
 
-Seurat-luokka (Seurat)
+## Seurat-luokka (Seurat)
+```
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Seurat                  | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
@@ -97,13 +106,15 @@ Seurat-luokka (Seurat)
 |                                      |                                      |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
+```
 
-Tuloskortit-luokka (Tuloskortit)
+## Tuloskortit-luokka (Tuloskortit)
+```
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Seurat                  | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
 | Vastuualueet:                        | - Seura                              |
-|				       | - Tuloskortti			      |
+|                                      | - Tuloskortti                        |
 | - Pitää yllä varsinaista tuloskortti-| - Seurat                             |
 |   rekisteriä, eli lisätä ja          | - Tuloskortit                        |
 |   poistaa seuran                     |                                      |
@@ -117,8 +128,10 @@ Tuloskortit-luokka (Tuloskortit)
 |                                      |                                      |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
+```
 
-Kierrokset-luokka (Kierrokset)
+## Kierrokset-luokka (Kierrokset)
+```
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Kierrokset              | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
@@ -137,15 +150,17 @@ Kierrokset-luokka (Kierrokset)
 |                                      |                                      |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
+```
 
-Käyttöliittymä-luokka (Naytto)
+## Käyttöliittymä-luokka (Naytto)
+```
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Naytto                  | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
 | Vastuualueet:                        | - Kayttaja                           |
-|                                      | - Seura			      |
+|                                      | - Seura                              |
 | - Hoitaa kaiken näyttöön tulevan     | - Tuloskortti                        |
-|   teksti			       | - Kierros                            |
+|   tekstin                            | - Kierros                            |
 | - Hoitaa kaiken tiedon pyytämisen    |                                      |
 |   käyttäjältä (ei tiedä kayttajan    |                                      |
 |   seuran, tuloskortin eikä kierroksen|                                      |
@@ -157,3 +172,4 @@ Käyttöliittymä-luokka (Naytto)
 |                                      |                                      |
 |                                      |                                      |
 +--------------------------------------+--------------------------------------+
+```
