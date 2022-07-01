@@ -111,13 +111,13 @@
 ## Tuloskortit-luokka (Tuloskortit)
 ```
 +--------------------------------------+--------------------------------------+
-| Luokan nimi: Seurat                  | Avustajat:                           |
+| Luokan nimi: Tuloskortit             | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
 | Vastuualueet:                        | - Seura                              |
 |                                      | - Tuloskortti                        |
 | - Pitää yllä varsinaista tuloskortti-| - Seurat                             |
-|   rekisteriä, eli lisätä ja          | - Tuloskortit                        |
-|   poistaa seuran                     |                                      |
+|   rekisteriä, eli lisätä ja          |                                      |
+|   poistaa tuloskortin                |                                      |
 | - Osaa lukea ja kirjoittaa tulos-    |                                      |
 |   kortti tiedostoon                  |                                      |
 | - Osaa etsiä ja lajitella            |                                      |
