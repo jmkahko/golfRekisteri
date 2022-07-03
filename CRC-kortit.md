@@ -86,6 +86,28 @@
 +--------------------------------------+--------------------------------------+
 ```
 
+## OhjelmaTuloskortti-luokka (OhjelmaTulokortti)
+```
++--------------------------------------+--------------------------------------+
+| Luokan nimi: OhjelmaTulokortti       | Avustajat:                           |
++--------------------------------------+--------------------------------------+
+| Vastuualueet:                        | - Kayttaja                           |
+|                                      | - Seura                              |
+| - Huolehtii Kayttaja, Seura,         | - Tuloskortti                        |
+|   Tuloskortti ja Kierros -luokkien   | - Kierros                            |
+|   välisestä yhteistyöstä ja välittää |                                      |
+|   näitä tietoja pyydettäessä         |                                      |
+| - Lukee ja kirjoittaa                |                                      |
+|   OhjelmaTulokortti tiedostoon       |                                      |
+|   pyytämällä apua avustajiltaan      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
++--------------------------------------+--------------------------------------+
+```
+
 ## Seurat-luokka (Seurat)
 ```
 +--------------------------------------+--------------------------------------+
