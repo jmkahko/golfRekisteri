@@ -179,11 +179,11 @@
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Naytto                  | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
-| Vastuualueet:                        | - Kayttaja                           |
-|                                      | - Seura                              |
-| - Hoitaa kaiken näyttöön tulevan     | - Tuloskortti                        |
-|   tekstin                            | - Kierros                            |
-| - Hoitaa kaiken tiedon pyytämisen    |                                      |
+| Vastuualueet:                        | - OhjelmaTuloskortti                 |
+|                                      | - Kayttaja                           |
+| - Hoitaa kaiken näyttöön tulevan     | - Seura                              |
+|   tekstin                            | - Tuloskortti                        |
+| - Hoitaa kaiken tiedon pyytämisen    | - Kierros                            |
 |   käyttäjältä (ei tiedä kayttajan    |                                      |
 |   seuran, tuloskortin eikä kierroksen|                                      |
 |   yksityiskohtia)                    |                                      |
