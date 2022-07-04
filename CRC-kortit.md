@@ -47,9 +47,9 @@
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Tulokortti              | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
-| Vastuualueet:                        | - Seura                              |
+| Vastuualueet:                        |                                      |
 |                                      |                                      |
-| - Huolehtii tuloskorttien tiedoista  |                                      |
+| - Huolehtii tuloskortin tiedoista    |                                      |
 | - Ei tiedä käyttöliittymästä         |                                      |
 | - Tietää seuran kentät (id,          |                                      |
 |   seuran, vaylan, pituudet, par, hcp)|                                      |
@@ -69,8 +69,8 @@
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Kierros                 | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
-| Vastuualueet:                        | - Tuloskortti                        |
-|                                      | - Kayttaja                           |
+| Vastuualueet:                        |                                      |
+|                                      |                                      |
 | - Huolehtii kierroksen tiedoista     |                                      |
 | - Ei tiedä käyttöliittymästä         |                                      |
 | - Tietää kierroksen kentät (id,      |                                      |
@@ -86,10 +86,10 @@
 +--------------------------------------+--------------------------------------+
 ```
 
-## OhjelmaTuloskortti-luokka (OhjelmaTulokortti)
+## GolfRekisteri-luokka (GolfRekisteri)
 ```
 +--------------------------------------+--------------------------------------+
-| Luokan nimi: OhjelmaTulokortti       | Avustajat:                           |
+| Luokan nimi: GolfRekisteri           | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
 | Vastuualueet:                        | - Kayttaja                           |
 |                                      | - Seura                              |
@@ -97,9 +97,31 @@
 |   Tuloskortti ja Kierros -luokkien   | - Kierros                            |
 |   välisestä yhteistyöstä ja välittää |                                      |
 |   näitä tietoja pyydettäessä         |                                      |
-| - Lukee ja kirjoittaa                |                                      |
-|   OhjelmaTulokortti tiedostoon       |                                      |
-|   pyytämällä apua avustajiltaan      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
++--------------------------------------+--------------------------------------+
+```
+
+## Kayttajat-luokka (Kayttajat)
+```
++--------------------------------------+--------------------------------------+
+| Luokan nimi: Kayttajat               | Avustajat:                           |
++--------------------------------------+--------------------------------------+
+| Vastuualueet:                        | - Kayttaja                           |
+|                                      |                                      |
+| - Pitää yllä varsinaista kayttaja-   |                                      |
+|   rekisteriä, eli lisätä ja          |                                      |
+|   poistaa seuran                     |                                      |
+| - Osaa lukea ja kirjoittaa kayttaja  |                                      |
+|   tiedostoon                         |                                      |
+| - Osaa etsiä ja lajitella            |                                      |
+|                                      |                                      |
 |                                      |                                      |
 |                                      |                                      |
 |                                      |                                      |
@@ -135,9 +157,9 @@
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Tuloskortit             | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
-| Vastuualueet:                        | - Seura                              |
-|                                      | - Tuloskortti                        |
-| - Pitää yllä varsinaista tuloskortti-| - Seurat                             |
+| Vastuualueet:                        | - Tuloskortti                        |
+|                                      |                                      |
+| - Pitää yllä varsinaista tuloskortti-|                                      |
 |   rekisteriä, eli lisätä ja          |                                      |
 |   poistaa tuloskortin                |                                      |
 | - Osaa lukea ja kirjoittaa tulos-    |                                      |
@@ -157,9 +179,9 @@
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Kierrokset              | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
-| Vastuualueet:                        | - Kayttaja                           |
-|                                      | - Tuloskortti                        |
-| - Pitää yllä varsinaista kierrokset- | - Tuloskortit                        |
+| Vastuualueet:                        | - Kierrokset                         |
+|                                      |                                      |
+| - Pitää yllä varsinaista kierrokset- |                                      |
 |   rekisteriä, eli lisätä ja          |                                      |
 |   poistaa kierroksen                 |                                      |
 | - Osaa lukea ja kirjoittaa kierros   |                                      |
@@ -179,7 +201,7 @@
 +--------------------------------------+--------------------------------------+
 | Luokan nimi: Naytto                  | Avustajat:                           |
 +--------------------------------------+--------------------------------------+
-| Vastuualueet:                        | - OhjelmaTuloskortti                 |
+| Vastuualueet:                        | - GolfRekisteri                      |
 |                                      | - Kayttaja                           |
 | - Hoitaa kaiken näyttöön tulevan     | - Seura                              |
 |   tekstin                            | - Tuloskortti                        |
