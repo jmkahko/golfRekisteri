@@ -3,6 +3,7 @@ package fxTuloskortti;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import tuloskortti.GolfRekisteri;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,10 @@ public class TuloskorttiMain extends Application {
             scene.getStylesheets().add(getClass().getResource("tuloskortti.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.setTitle("Tuloskortti");
+            
+            // Asetetaan GolfRekisterin tiedot käyttöliittymälle
+            GolfRekisteri golfRekisteri = new GolfRekisteri();
+            tuloskorttiCtrl.setGolfRekisteri(golfRekisteri);
             
             Platform.setImplicitExit(false); // jos tämän laittaa, pitää itse sulkea
             

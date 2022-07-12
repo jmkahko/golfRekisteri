@@ -77,7 +77,7 @@
             <Label text="Kierrokset" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <ListChooser prefHeight="200.0" rivit="Päiväys&#9;Kenttä&#9;&#9;Tulos&#10;2.6.2022&#9;Pohjolan golf&#9;16&#10;4.6.2022&#9;Pohjolan golf&#9;15" BorderPane.alignment="CENTER" />
+            <ListChooser fx:id="chooserKierrokset" prefHeight="200.0" rivit="Päiväys&#9;Kenttä&#9;&#9;Tulos&#10;2.6.2022&#9;Pohjolan golf&#9;16&#10;4.6.2022&#9;Pohjolan golf&#9;15" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </right>

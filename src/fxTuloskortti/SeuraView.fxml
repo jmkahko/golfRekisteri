@@ -288,7 +288,7 @@
             </GridPane>
          </top>
          <center>
-            <ListChooser rivit="Pohjolan Golf&#10;Etelä Golf&#10;Ukkos Golf&#10;" BorderPane.alignment="CENTER">
+            <ListChooser fx:id="chooserSeurat" rivit="Pohjolan Golf&#10;Etelä Golf&#10;Ukkos Golf&#10;" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="10.0" top="5.0" />
                </BorderPane.margin>

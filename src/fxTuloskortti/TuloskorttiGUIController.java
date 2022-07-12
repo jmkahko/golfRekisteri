@@ -4,11 +4,21 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import fi.jyu.mit.fxgui.ComboBoxChooser;
 import fi.jyu.mit.fxgui.Dialogs;
+import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.ModalController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import tuloskortti.GolfRekisteri;
+import tuloskortti.SailoException;
+import tuloskortti.Seura;
 
 /**
  * Luokka käyttöliittymän tapahtumien hoitamiseksi
@@ -16,15 +26,26 @@ import javafx.fxml.FXML;
  * @version 13.6.2022
  *
  */
-public class TuloskorttiGUIController {
-      
+public class TuloskorttiGUIController implements Initializable {
+    
+    /**
+     * Kierrokset listaus
+     */
+    @FXML
+    private ListChooser<Seura> chooserKierrokset; // TODO VAIHDA TÄHÄN SEURAN TILALLE KIERROKSET!!! Tämä vaan testaus
+    
+    @Override
+    public void initialize(URL url, ResourceBundle bundle) {
+        chooserKierrokset.clear();
+    }
     
     /**
      * Käsitellään uuden kierroksen syöttäminen
      */
     @FXML 
     private void handleUusiKierros() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", null, "");
+        //ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", null, "");
+        uusiKierros();
     }
     
     
@@ -109,6 +130,10 @@ public class TuloskorttiGUIController {
         tietojaSovelluksesta();
     }
       
+// =================================================================
+// Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
+    
+    private GolfRekisteri golfRekisteri;
 
     /**
      * Tarkistetaan onko tallennus tehty
@@ -136,5 +161,45 @@ public class TuloskorttiGUIController {
         } catch (IOException e) {
             return;
         }
+    }
+    
+    /**
+     * Asetetaan käytettävä GolfRekisteri
+     * @param golfRekisteri jota käytetään
+     */
+    public void setGolfRekisteri(GolfRekisteri golfRekisteri) {
+        this.golfRekisteri = golfRekisteri;
+    }
+    
+    
+    /**
+     * @param seuranro annetaan seuran numero
+     */
+    public void haeKierros(int seuranro) {
+        chooserKierrokset.clear();
+        
+        int index = 0;
+        for (int x = 0; x < golfRekisteri.getSeuroja(); x++) {
+            Seura seura = golfRekisteri.annaSeura(x);
+            if (seura.getTunnusNro() == seuranro) index = x;
+            chooserKierrokset.add(seura.getSeurannimi(), seura);
+        }
+        chooserKierrokset.setSelectedIndex(index);
+    }
+    
+    /**
+     * Lisätään tuloskorttiin uusi seura
+     */
+    public void uusiKierros() {
+        Seura uusiSeura = new Seura();
+        uusiSeura.rekisteroi();
+        uusiSeura.taytaTestiTiedoilla();
+        
+        try {
+            golfRekisteri.lisaaSeura(uusiSeura);
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog("Ongelmia uuden seuran luonnissa: " + e.getMessage());
+        }
+        haeKierros(uusiSeura.getTunnusNro());
     }
 }

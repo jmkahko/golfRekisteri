@@ -1,9 +1,11 @@
 package fxTuloskortti;
 
 import fi.jyu.mit.fxgui.Dialogs;
+import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
+import tuloskortti.Seura;
 
 /**
  * @author janne
@@ -11,10 +13,15 @@ import javafx.fxml.FXML;
  * Seura käyttöliittymän muokkaamista varten, voidaan syöttää uusi tuloskortti tai muokata. Voidaan muokata seurantietoja
  */
 public class SeuraController implements ModalControllerInterface<String> {
-
+   
+    /**
+     * Golf seurojen listaus
+     */
+    @FXML
+    private ListChooser<Seura> chooserSeurat;
+    
     /**
      * Voidaan muokata seurantietoja
-     * @param event
      */
     @FXML
     private void handleMuokkaaSeuraa() {
@@ -31,7 +38,6 @@ public class SeuraController implements ModalControllerInterface<String> {
     
     /**
      * Voidaan muokata tuloskorttia
-     * @param event
      */
     @FXML
     private void handleMuokkaaTuloskortti() {
@@ -40,7 +46,6 @@ public class SeuraController implements ModalControllerInterface<String> {
 
     /**
      * Voidaan syöttää uusi tuloskortti
-     * @param event
      */
     @FXML
     private void handleUusiTuloskortti() {
@@ -64,5 +69,10 @@ public class SeuraController implements ModalControllerInterface<String> {
         // TODO Auto-generated method stub
         
     }
+    
+ // =================================================================
+ // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
+
+    
 
 }
