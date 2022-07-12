@@ -17,24 +17,13 @@ public class UusiKayttaja {
     }
     
     /**
-     * Arvotaan satunnainen kokonaisluku väliltä [ala, yla]
-     * @param ala arvonnan alaraja
-     * @param yla arvonnan yläraja
-     * @return palauttaa satunnaisen kokonaisluvun väliltä [ala, yla]
-     */
-    public static int arvoLuku(int ala, int yla) {
-        double luku = (yla-ala)*Math.random() + ala;
-        return (int)Math.round(luku);
-    }
-    
-    /**
      * Arvotaan satunnainen pelaaja ennalta määrätyistä nimistä
      * @return palauttaa pelaajan nimen
      */
     public static String arvoPelaaja() {
         String[] nimi = {"Roope Ankka", "Taavi Ankka", "Tupu", "Hupu", "Lupu", "Hannu Hanhi", "Touho Ankka", "Sisuvius Ankka", "Hansu Hanhi",
                 "Into Ankka", "José Carioca", "Panchito Pistoles", "Pelle Peloton", "Iines Ankka", "Mikki Hiiri", "Hessu Hopo"};
-        return nimi[arvoLuku(0,15)];
+        return nimi[Yleinen.arvoLuku(0,15)];
     }
     
     /**
@@ -45,18 +34,4 @@ public class UusiKayttaja {
         double vuosi = (2010-1940)*Math.random() + 1940;
         return (int)Math.round(vuosi);
     }
-    
-    
-    /**
-     * Arvotaan satunnainen golf seura ennalta määrätyistä seuroista
-     * @return palauttaa golf seuran nimen
-     */
-    public static String arvoGolfSeura() {
-        String[] seura = {"Ankkalinna Golf", "Hanhivaara Golf", "Fyrkkala Golf", "Kurjenmutka Golf", "Sorsakylä Golf", "Tavilaakso Golf",
-                "Sorsala Golf", "Hepsula Golf", "Rankkalinna Golf", "Kukkola Golf", "Ankkala Golf", "Puluperä Golf", "Joutsenlampi Golf"};
-        return seura[arvoLuku(0,12)];
-    }
-    
-    
-
 }
