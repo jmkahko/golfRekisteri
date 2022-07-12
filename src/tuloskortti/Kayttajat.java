@@ -25,7 +25,7 @@ package tuloskortti;
  */
 public class Kayttajat {
     
-    private static final int MAX_KAYTTAJIA = 3;
+    private static final int MAX_KAYTTAJIA = 2;
     private int lkm = 0;
     private Kayttaja[] alkiot;
     
@@ -56,7 +56,6 @@ public class Kayttajat {
      * kayttajat.annaKayttaja(0) == henkilo2 === false;
      * kayttajat.annaKayttaja(0) == henkilo1 === true;
      * kayttajat.annaKayttaja(5) === henkilo1; #THROWS IndexOutOfBoundsException
-     * kayttajat.lisaa(henkilo2); kayttajat.getLkm() === 3;
      * kayttajat.lisaa(henkilo3); #THROWS SailoException
      * </pre> 
      */

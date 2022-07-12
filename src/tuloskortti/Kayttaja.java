@@ -4,6 +4,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 import kanta.UusiKayttaja;
+import kanta.UusiSeura;
 
 /**
  * +--------------------------------------+--------------------------------------+
@@ -106,7 +107,7 @@ public class Kayttaja {
      */
     public void taytaTestiTiedoilla() {
         this.nimi = UusiKayttaja.arvoPelaaja();
-        this.kotiseura = UusiKayttaja.arvoGolfSeura();
+        this.kotiseura = UusiSeura.arvoGolfSeura();
         this.tasoitus = UusiKayttaja.arvoTasoitus();
         this.aloitusvuosi = UusiKayttaja.arvoVuosi();
     }
