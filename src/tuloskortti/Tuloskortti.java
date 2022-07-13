@@ -30,7 +30,7 @@ import kanta.UusiTuloskortti;
 public class Tuloskortti {
 
     private int id;
-    private int seuraid;
+    private int seuraId;
     private int vayla;
     private int pituus62;
     private int pituus55;
@@ -48,7 +48,7 @@ public class Tuloskortti {
      */
     public Tuloskortti() {
         this.id = 0;
-        this.seuraid = 0;
+        this.seuraId = 0;
         this.vayla = 0;
         this.pituus62 = 0;
         this.pituus55 = 0;
@@ -64,7 +64,7 @@ public class Tuloskortti {
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta(PrintStream out) {
-        out.println(String.format("%03d", id) + "|" + this.seuraid + "|" + this.vayla + "|" + this.pituus62 + "|" + this.pituus55 + 
+        out.println(String.format("%03d", id) + "|" + this.seuraId + "|" + this.vayla + "|" + this.pituus62 + "|" + this.pituus55 + 
                 "|" + this.pituus51 + "|" + this.pituus48 + "|" + this.par + "|" + this.hcp);
     }
     
@@ -116,7 +116,7 @@ public class Tuloskortti {
      * @param vaylanro tuodaan mones väylä halutaan tehdä
      */
     public void taytaTestiTiedoilla(int seuranro, int vaylanro) {
-        this.seuraid = seuranro;
+        this.seuraId = seuranro;
         this.vayla = vaylanro;
         UusiTuloskortti.luoVayla();
         this.pituus62 = UusiTuloskortti.getPituus62();

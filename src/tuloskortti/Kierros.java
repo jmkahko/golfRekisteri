@@ -31,7 +31,7 @@ public class Kierros {
 
     private int id;
     private int tuloskorttiId;
-    private int kayttaja;
+    private int kayttajaId;
     private String kierrospaiva;
     private int pelattuTee;
     private int vayla;
@@ -47,7 +47,7 @@ public class Kierros {
     public Kierros() {
         this.id = 0;
         this.tuloskorttiId = 0;
-        this.kayttaja = 0;
+        this.kayttajaId = 0;
         this.kierrospaiva = "01-01-2022";
         this.pelattuTee = 0;
         this.vayla = 0;
@@ -60,7 +60,7 @@ public class Kierros {
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta(PrintStream out) {
-        out.println(String.format("%03d", id) + "|" + this.tuloskorttiId + "|" + this.kayttaja + "|" + this.kierrospaiva + "|" + this.pelattuTee + 
+        out.println(String.format("%03d", id) + "|" + this.tuloskorttiId + "|" + this.kayttajaId + "|" + this.kierrospaiva + "|" + this.pelattuTee + 
                 "|" + this.vayla + "|" + this.tulos);
     }
     
@@ -115,7 +115,7 @@ public class Kierros {
      */
     public void taytaTestiTiedoilla(int tuloskorttinro, int kayttajanro, int vaylanro, int parLuku) {
         this.tuloskorttiId = tuloskorttinro;
-        this.kayttaja = kayttajanro;
+        this.kayttajaId = kayttajanro;
         this.kierrospaiva = "01-01-2022";
         this.pelattuTee = 55;
         this.vayla = vaylanro;
