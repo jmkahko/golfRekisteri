@@ -75,11 +75,29 @@ public class Kierros {
     
     
     /**
-     * Palauttaa tuloskortin id:n
+     * Palauttaa kierroksen id:n
      * @return palauttaa id:n
      */
     public int getTunnusNro() {
         return this.id;
+    }
+    
+
+    /**
+     * Palauttaa tuloskortin id:n
+     * @return palauttaa id:n
+     */
+    public int getTuloskorttiId() {
+        return this.tuloskorttiId;
+    }
+    
+    
+    /**
+     * Palauttaa käyttäjän id:n
+     * @return palauttaa id:n
+     */
+    public int getKayttajaId() {
+        return this.kayttajaId;
     }
     
     
