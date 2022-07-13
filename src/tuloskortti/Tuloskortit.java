@@ -87,7 +87,6 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
      *  tuloskortit.lisaaTuloskortti(vayla2);
      *  Tuloskortti vayla3 = new Tuloskortti(2,3,320,308,308,284,4,9); 
      *  tuloskortit.lisaaTuloskortti(vayla3);
-
      *  
      *  List<Tuloskortti> loytyneet;
      *  loytyneet = tuloskortit.annaTuloskortit(3);
