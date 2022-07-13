@@ -3,8 +3,6 @@ package tuloskortti;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import kanta.UusiKayttaja;
-import kanta.UusiSeura;
 import kanta.UusiTuloskortti;
 
 /**
