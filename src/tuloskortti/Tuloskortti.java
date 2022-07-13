@@ -58,6 +58,28 @@ public class Tuloskortti {
         this.hcp = 0;
     }
     
+    /**
+     * @param seuraId seuran numero
+     * @param vayla väylän numero
+     * @param pituus62 väylän pituus tee- paikalta
+     * @param pituus55 väylän pituus tee- paikalta
+     * @param pituus51 väylän pituus tee- paikalta
+     * @param pituus48 väylän pituus tee- paikalta
+     * @param par väylän par tulos
+     * @param hcp väylän hcp luku
+     */
+    public Tuloskortti(int seuraId, int vayla, int pituus62, int pituus55, int pituus51, int pituus48, int par, int hcp) {
+        this.rekisteroi();
+        this.seuraId = seuraId;
+        this.vayla = vayla;
+        this.pituus62 = pituus62;
+        this.pituus55 = pituus55;
+        this.pituus51 = pituus51;
+        this.pituus48 = pituus48;
+        this.par = par;
+        this.hcp = hcp;
+    }
+    
     
     /**
      * Tulostetaan tuloskortin tiedot
@@ -84,6 +106,14 @@ public class Tuloskortti {
      */
     public int getTunnusNro() {
         return this.id;
+    }
+    
+    /**
+     * Palauttaa seuran id:n
+     * @return palauttaa id:n
+     */
+    public int getSeuraNro() {
+        return this.seuraId;
     }
     
     
