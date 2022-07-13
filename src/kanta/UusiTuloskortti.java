@@ -23,7 +23,7 @@ public class UusiTuloskortti {
         par = Yleinen.arvoLuku(3, 5);
         hcp = Yleinen.arvoLuku(1, 18);
         
-        // Arvotaan väylän pituus tee- paikalle 55
+        // Arvotaan väylän pituus paikalle 55
         if (par == 3) {
             pituus55 = Yleinen.arvoLuku(105, 150);
         } else if (par == 4) {
@@ -38,7 +38,7 @@ public class UusiTuloskortti {
         pituus62 = pituus55 + arvo62;
         pituus48 = pituus55 - arvo48;
         
-        // Arvotaan tee- paikan 51 pituus. Joko tee- paikan 48 tai 55 pituus
+        // Arvotaan väylän pituus paikalle 51. Joko tee- paikan 48 tai 55 pituus
         int arvo51 = Yleinen.arvoLuku(1, 2);
         
         if (arvo51 == 1) {
