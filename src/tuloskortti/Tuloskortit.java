@@ -73,8 +73,30 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
     }
     
     /**
+     * Haetaan tietyn seuran kaikki tuloskortin tuloskortit (väylät)
      * @param seuraId viedään seuranId tieto, että minkä seuran tuloskortti halutaan
      * @return palauttaa löydetyn tuloskortin tiedot
+     * @example
+     * <pre name="test">
+     * #import java.util.*;
+     * 
+     *  Tuloskortit tuloskortit = new Tuloskortit();
+     *  Tuloskortti vayla1 = new Tuloskortti(2,1,433,407,387,387,5,1); 
+     *  tuloskortit.lisaaTuloskortti(vayla1);
+     *  Tuloskortti vayla2 = new Tuloskortti(2,2,119,117,115,115,3,4); 
+     *  tuloskortit.lisaaTuloskortti(vayla2);
+     *  Tuloskortti vayla3 = new Tuloskortti(2,3,320,308,308,284,4,9); 
+     *  tuloskortit.lisaaTuloskortti(vayla3);
+
+     *  
+     *  List<Tuloskortti> loytyneet;
+     *  loytyneet = tuloskortit.annaTuloskortit(3);
+     *  loytyneet.size() === 0; 
+     *  loytyneet = tuloskortit.annaTuloskortit(2);
+     *  loytyneet.size() === 3; 
+     *  loytyneet.get(0) == vayla1 === true;
+     *  loytyneet.get(1) == vayla2 === true;
+     * </pre> 
      */
     public List<Tuloskortti> annaTuloskortit(int seuraId) {
         List<Tuloskortti> loydetyt = new ArrayList<Tuloskortti>();
