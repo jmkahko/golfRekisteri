@@ -123,7 +123,7 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
         
         System.out.println("============= Tuloskortti testi =================");
 
-        List<Tuloskortti> tuloskortti2 = tuloskortit.annaTuloskortit(2);
+        List<Tuloskortti> tuloskortti2 = tuloskortit.annaTuloskortit(1);
 
 
         for (Tuloskortti tulos : tuloskortti2) {
