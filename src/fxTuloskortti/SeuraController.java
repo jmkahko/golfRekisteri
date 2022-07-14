@@ -5,6 +5,8 @@ import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
+import tuloskortti.GolfRekisteri;
+import tuloskortti.SailoException;
 import tuloskortti.Seura;
 
 /**
@@ -73,6 +75,38 @@ public class SeuraController implements ModalControllerInterface<String> {
  // =================================================================
  // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
 
+    private GolfRekisteri golfRekisteri;
     
+    /**
+     * Lisätään tuloskorttiin uusi seura
+     */
+    public void uusiSeura() {
+        Seura uusiSeura = new Seura();
+        uusiSeura.rekisteroi();
+        uusiSeura.taytaTestiTiedoilla();
+        
+        try {
+            golfRekisteri.lisaaSeura(uusiSeura);
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog("Ongelmia uuden seuran luonnissa: " + e.getMessage());
+        }
+        haeSeura(uusiSeura.getTunnusNro());
+    }
+    
+    
+    /**
+     * @param seuranro annetaan seuran numero
+     */
+    public void haeSeura(int seuranro) {
+        chooserSeurat.clear();
+        
+        int index = 0;
+        for (int x = 0; x < golfRekisteri.getSeuroja(); x++) {
+            Seura seura = golfRekisteri.annaSeura(x);
+            if (seura.getTunnusNro() == seuranro) index = x;
+            chooserSeurat.add(seura.getSeurannimi(), seura);
+        }
+        chooserSeurat.setSelectedIndex(index);
+    }
 
 }

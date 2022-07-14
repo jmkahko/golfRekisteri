@@ -62,6 +62,7 @@ public class Kierrokset extends Kierros {
     public void lisaaKierros(List<Kierros> kierrosLista) {
         this.alkiot.addAll(kierrosLista);
     }
+        
     
     /**
      * @param tuloskorttiId viedään tuloskorttiId numero, että minkä tuloskortin kierros kyseessä

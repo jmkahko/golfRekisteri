@@ -26,8 +26,8 @@ public class GolfRekisteri {
     
     private Kayttajat kayttajat;
     private Seurat seurat;
-    //private Tuloskortit tuloskortit;
-    //private Kierrokset kierrokset;
+    private Tuloskortit tuloskortit;
+    private Kierrokset kierrokset;
     
     
     /**
@@ -36,6 +36,8 @@ public class GolfRekisteri {
     public GolfRekisteri() {
         this.kayttajat = new Kayttajat();
         this.seurat = new Seurat();
+        this.tuloskortit = new Tuloskortit();
+        this.kierrokset = new Kierrokset();
     }
     
     /**
@@ -86,7 +88,7 @@ public class GolfRekisteri {
     public Seura annaSeura(int i) {
         return this.seurat.annaSeura(i);
     }
-    
+        
 
     /**
      * @param args ei käytössä

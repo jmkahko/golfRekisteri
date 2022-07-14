@@ -7,15 +7,12 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import fi.jyu.mit.fxgui.ComboBoxChooser;
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.ModalController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.SailoException;
 import tuloskortti.Seura;
@@ -32,7 +29,7 @@ public class TuloskorttiGUIController implements Initializable {
      * Kierrokset listaus
      */
     @FXML
-    private ListChooser<Seura> chooserKierrokset; // TODO VAIHDA TÄHÄN SEURAN TILALLE KIERROKSET!!! Tämä vaan testaus
+    private ListChooser<Seura> chooserKierrokset; // TODO muuta tämä Kierrokseksi, nyt testin aikana Seura
     
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
@@ -54,7 +51,8 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handleUusiSeura() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoSeuraView.fxml"), "Luo seura", null, "");
+        //ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoSeuraView.fxml"), "Luo seura", null, "");
+        //uusiSeura();
     }
        
     /**
@@ -175,7 +173,7 @@ public class TuloskorttiGUIController implements Initializable {
     /**
      * @param seuranro annetaan seuran numero
      */
-    public void haeKierros(int seuranro) {
+    public void haeSeura(int seuranro) {
         chooserKierrokset.clear();
         
         int index = 0;
@@ -200,6 +198,6 @@ public class TuloskorttiGUIController implements Initializable {
         } catch (SailoException e) {
             Dialogs.showMessageDialog("Ongelmia uuden seuran luonnissa: " + e.getMessage());
         }
-        haeKierros(uusiSeura.getTunnusNro());
+        haeSeura(uusiSeura.getTunnusNro());
     }
 }
