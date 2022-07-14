@@ -2,6 +2,7 @@ package kanta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import tuloskortti.Tuloskortti;
 
@@ -149,24 +150,13 @@ public class UusiTuloskortti {
         int par4 = 18 - par3 - par5;
               
         List<Integer> hcpTaulukko = new ArrayList<Integer>();
-        hcpTaulukko.add(1);
-        hcpTaulukko.add(4);
-        hcpTaulukko.add(5);
-        hcpTaulukko.add(18);
-        hcpTaulukko.add(2);
-        hcpTaulukko.add(9);
-        hcpTaulukko.add(8);
-        hcpTaulukko.add(10);
-        hcpTaulukko.add(17);
-        hcpTaulukko.add(14);
-        hcpTaulukko.add(3);
-        hcpTaulukko.add(13);
-        hcpTaulukko.add(6);
-        hcpTaulukko.add(15);
-        hcpTaulukko.add(11);
-        hcpTaulukko.add(16);
-        hcpTaulukko.add(7);
-        hcpTaulukko.add(12);
+
+        while (hcpTaulukko.size() < 18) {
+            int arvottu = Yleinen.arvoLuku(1, 19);
+            if (!hcpTaulukko.contains(arvottu)) {
+                hcpTaulukko.add(arvottu);
+            }
+        }
         
         List<Integer> vaylaParLuku = new ArrayList<Integer>();
         
