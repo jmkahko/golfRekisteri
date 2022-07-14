@@ -152,7 +152,7 @@ public class UusiTuloskortti {
         List<Integer> hcpTaulukko = new ArrayList<Integer>();
 
         while (hcpTaulukko.size() < 18) {
-            int arvottu = Yleinen.arvoLuku(1, 19);
+            int arvottu = Yleinen.arvoLuku(1, 18);
             if (!hcpTaulukko.contains(arvottu)) {
                 hcpTaulukko.add(arvottu);
             }
