@@ -116,6 +116,22 @@ public class Tuloskortti {
         return this.seuraId;
     }
     
+    /**
+     * Palauttaa pelatun väylän numeron
+     * @return palauttaa numeron
+     */
+    public int getVaylaNro() {
+        return this.vayla;
+    }
+    
+    /**
+     * Palauttaa väylän par luvun
+     * @return palauttaa par luvun
+     */
+    public int getParLuku() {
+        return this.par;
+    }
+    
     
     /**
      * Antaa tuloskortille seuraavan rekisterinumeron.
