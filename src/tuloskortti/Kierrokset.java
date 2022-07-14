@@ -3,6 +3,8 @@ package tuloskortti;
 import java.util.ArrayList;
 import java.util.List;
 
+import kanta.UusiKierros;
+
 
 /**
  * +--------------------------------------+--------------------------------------+
@@ -54,9 +56,36 @@ public class Kierrokset extends Kierros {
     }
     
     /**
+     * Saadaan lisätty uudet kierrokset listana
+     * @param kierrosLista annetaan listaus kierroksen tuloksista
+     */
+    public void lisaaKierros(List<Kierros> kierrosLista) {
+        this.alkiot.addAll(kierrosLista);
+    }
+    
+    /**
      * @param tuloskorttiId viedään tuloskorttiId numero, että minkä tuloskortin kierros kyseessä
      * @param kayttajaId viedään kayttajaId numero, että minkä käyttäjän kierros on kyseessä
      * @return palauttaa kierrokset
+     * @example
+     * <pre name="test">
+     * #import java.util.*;
+     * 
+     *  Kierrokset kierrokset = new Kierrokset();
+     *  Kierros kierros1 = new Kierros();
+     *  kierros1.taytaTestiTiedoilla(1, 1, 2, 4, 55);
+     *  Kierros kierros2 = new Kierros();
+     *  kierros2.taytaTestiTiedoilla(2, 1, 2, 4, 48);
+     *  kierrokset.lisaaKierros(kierros1);
+     *  kierrokset.lisaaKierros(kierros2);
+     *  List<Kierros> loytyneet;
+     *  loytyneet = kierrokset.annaKierrokset(1, 1);
+     *  loytyneet.size() === 0; 
+     *  loytyneet = kierrokset.annaKierrokset(2, 1);
+     *  loytyneet.get(0) == kierros1 === true;
+     *  loytyneet.get(1) == kierros2 === true;
+     *  loytyneet.size() === 1; 
+     * </pre> 
      */
     public List<Kierros> annaKierrokset(int tuloskorttiId, int kayttajaId) {
         List<Kierros> loydetytKierrokset = new ArrayList<Kierros>();
@@ -67,27 +96,28 @@ public class Kierrokset extends Kierros {
             }
         }
         return loydetytKierrokset;
+    }
         
-    }
-    
-    
-    /**
-     * Apumetodi, jolla saadaan täytettyä testiarvot kierroksille.
-     * TODO: poista kun kaikki toimii
-     */
-    public void taytaTestiTiedoilla() {
-        //
-    }
-    
     
     /**
      * @param args ei käytössä
      */
     public static void main(String[] args) {
-        //Kierrokset kierrokset1 = new Kierrokset();
+        Kierrokset kierrokset = new Kierrokset();
         
+        kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
+        
+        Kierros kierros1 = new Kierros();
+        kierros1.taytaTestiTiedoilla(1, 1, 2, 4, 55);
+        
+        kierrokset.lisaaKierros(kierros1);
+        
+        System.out.println("============= Kierrokset testi =================");
+        List<Kierros> kierrokset2 = kierrokset.annaKierrokset(1, 1);
 
-
+        for (Kierros tulos : kierrokset2) {
+            System.out.print("Seura: " + tulos.getKayttajaId() + " ");
+            tulos.tulosta(System.out);
+        }
     }
-    
 }

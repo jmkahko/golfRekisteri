@@ -130,12 +130,13 @@ public class Kierros {
      * @param kayttajanro tuodaan käyttäjän numero
      * @param vaylanro tuodaan mones väylä halutaan tehdä
      * @param parLuku tuodaan mikä on väylän ihanne par-tulos
+     * @param pelattuTeeNro miltä tee paikalta on pelattu
      */
-    public void taytaTestiTiedoilla(int tuloskorttinro, int kayttajanro, int vaylanro, int parLuku) {
+    public void taytaTestiTiedoilla(int tuloskorttinro, int kayttajanro, int vaylanro, int parLuku, int pelattuTeeNro) {
         this.tuloskorttiId = tuloskorttinro;
         this.kayttajaId = kayttajanro;
         this.kierrospaiva = "01-01-2022";
-        this.pelattuTee = 55;
+        this.pelattuTee = pelattuTeeNro;
         this.vayla = vaylanro;
         this.tulos = UusiKierros.luoTulos(parLuku);
     }
@@ -155,8 +156,8 @@ public class Kierros {
         kierros1.tulosta(System.out);
         kierros2.tulosta(System.out);
         
-        kierros1.taytaTestiTiedoilla(1, 1, 1, 4);
-        kierros2.taytaTestiTiedoilla(1, 1, 2, 5);
+        kierros1.taytaTestiTiedoilla(1, 1, 1, 4, 55);
+        kierros2.taytaTestiTiedoilla(1, 1, 2, 5, 55);
         
         kierros1.tulosta(System.out);
         kierros2.tulosta(System.out);
