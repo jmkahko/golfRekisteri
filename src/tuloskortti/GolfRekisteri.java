@@ -101,6 +101,14 @@ public class GolfRekisteri {
     }
     
     /**
+     * Luodaan 18-väyläinen tuloskortti
+     * @param luoTuloskortti annetaan listana väylät
+     */
+    public void lisaaTuloskortti(List<Tuloskortti> luoTuloskortti) {
+        this.tuloskortit.lisaaTuloskortti(luoTuloskortti);
+    }
+    
+    /**
      * @return palauttaa tuloskorttien määrän
      */
     public int getTuloskortteja() {
