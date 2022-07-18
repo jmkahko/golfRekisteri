@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import fi.jyu.mit.fxgui.Dialogs;
@@ -14,6 +15,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import tuloskortti.GolfRekisteri;
+import tuloskortti.Kierros;
 import tuloskortti.SailoException;
 import tuloskortti.Seura;
 
@@ -42,7 +44,7 @@ public class TuloskorttiGUIController implements Initializable {
     @FXML 
     private void handleUusiKierros() {
         //ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", null, "");
-        //uusiKierros();
+        uusiKierros();
     }
     
     
@@ -201,4 +203,24 @@ public class TuloskorttiGUIController implements Initializable {
         }
         haeSeura(uusiSeura.getTunnusNro());
     }
+    
+    /**
+     * Lisätään uusi kierros
+     */
+    public void uusiKierros() {
+        Kierros uusiKierros = new Kierros();
+        uusiKierros.rekisteroi();
+        uusiKierros.taytaTestiTiedoilla(1, 1, 1, 4, 55);
+        
+        try {
+            this.golfRekisteri.lisaaKierros(uusiKierros);
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog("Ongelmia uuden kierroksen luonnissa: " + e.getMessage());
+        }
+        
+        Dialogs.showMessageDialog("Luotu uusi väylä kierrokselle. Tulostyy Console lokiin tieto");
+        uusiKierros.tulosta(System.out);
+    }
+    
+    
 }

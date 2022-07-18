@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.SailoException;
 import tuloskortti.Seura;
+import tuloskortti.Tuloskortit;
+import tuloskortti.Tuloskortti;
 
 /**
  * @author janne
@@ -52,7 +54,8 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
      */
     @FXML
     private void handleUusiTuloskortti() {
-        ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Luo uusi tuloskortti", null, "");
+        //ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Luo uusi tuloskortti", null, "");
+        uusiTuloskortti();
     }
 
     @Override
@@ -109,6 +112,23 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
             chooserSeurat.add(seura.getSeurannimi(), seura);
         }
         chooserSeurat.setSelectedIndex(index);
+    }
+    
+    /**
+     * Luodaan uusi tulokortti seuralle. Luo uuden väylän tuloskortille
+     */
+    public void uusiTuloskortti() {
+        Tuloskortti uusiTuloskortti = new Tuloskortti();
+        uusiTuloskortti.rekisteroi();
+        uusiTuloskortti.taytaTestiTiedoilla(1, 1);
+        try {
+            this.golfRekisteri.lisaaTuloskortti(uusiTuloskortti);
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog("Ongelmia uuden tuloskortin luonnissa: " + e.getMessage());
+        }
+        
+        Dialogs.showMessageDialog("Luotu tuloskortille väylä. Tulostyy Console lokiin tieto");
+        uusiTuloskortti.tulosta(System.out);
     }
 
 }
