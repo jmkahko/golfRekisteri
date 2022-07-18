@@ -1,5 +1,7 @@
 package tuloskortti;
 
+import java.util.List;
+
 /**
  * +--------------------------------------+--------------------------------------+
  * | Luokan nimi: GolfRekisteri           | Avustajat:                           |
@@ -87,6 +89,56 @@ public class GolfRekisteri {
      */
     public Seura annaSeura(int i) {
         return this.seurat.annaSeura(i);
+    }
+    
+    /**
+     * Lisätään uusi tuloskortti
+     * @param tuloskortti lisättävä tuloskortti
+     * @throws SailoException jos tuloskortin lisääminen ei onnistu
+     */
+    public void lisaaTuloskortti(Tuloskortti tuloskortti) throws SailoException {
+        this.tuloskortit.lisaaTuloskortti(tuloskortti);
+    }
+    
+    /**
+     * @return palauttaa tuloskorttien määrän
+     */
+    public int getTuloskortteja() {
+        return this.tuloskortit.getLkm();
+    }
+    
+    /**
+     * @param i Antaa GolfRekisterin tuloskortin
+     * @return palautta tuloskortin
+     */
+    public List<Tuloskortti> annaTuloskortti(int i) {
+        return this.tuloskortit.annaTuloskortit(i);
+    }
+    
+    /**
+     * Lisätään uusi kierros
+     * @param kierros lisättävä kierros
+     * @throws SailoException jos kierroksen lisääminen ei onnistu
+     */
+    public void lisaaKierros(Kierros kierros) throws SailoException {
+        this.kierrokset.lisaaKierros(kierros);
+    }
+    
+    /**
+     * @return palauttaa kierrosten määrän
+     */
+    public int getKierroksia() {
+        return this.kierrokset.getLkm();
+    }
+    
+    /**
+     * Antaa GolfRekisterin kierroksen
+     * @param seuranId seuran id numero
+     * @param kayttajaId käyttäjän id numero
+     * @return palautta kierrokset
+     */
+    public List<Kierros> annaKierrokset(int seuranId, int kayttajaId) {
+        return this.kierrokset.annaKierrokset(seuranId, kayttajaId);
     }
         
 
