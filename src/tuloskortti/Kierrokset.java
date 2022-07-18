@@ -1,6 +1,8 @@
 package tuloskortti;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import kanta.UusiKierros;
@@ -28,9 +30,9 @@ import kanta.UusiKierros;
  * @author Janne Kähkönen
  * @version 13.7.2022
  */
-public class Kierrokset extends Kierros {
+public class Kierrokset implements Iterable<Kierros> {
 
-    private List<Kierros> alkiot;
+    private Collection<Kierros> alkiot;
     
     
     /**
@@ -61,6 +63,15 @@ public class Kierrokset extends Kierros {
      */
     public void lisaaKierros(List<Kierros> kierrosLista) {
         this.alkiot.addAll(kierrosLista);
+    }
+    
+    /**
+     * Iteraattori kaikkien kierroksien läpikäyntiin
+     * @return kierros iteraattorin
+     */
+    @Override
+    public Iterator<Kierros> iterator() {
+        return this.alkiot.iterator();
     }
         
     
