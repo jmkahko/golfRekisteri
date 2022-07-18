@@ -14,20 +14,21 @@ import tuloskortti.Seura;
  * @version 13.6.2022
  * Seura käyttöliittymän muokkaamista varten, voidaan syöttää uusi tuloskortti tai muokata. Voidaan muokata seurantietoja
  */
-public class SeuraController implements ModalControllerInterface<String> {
+public class SeuraController implements ModalControllerInterface<GolfRekisteri> {
    
     /**
      * Golf seurojen listaus
      */
     @FXML
-    private ListChooser<Seura> chooserSeurat;
+    public ListChooser<Seura> chooserSeurat;
     
     /**
      * Voidaan muokata seurantietoja
      */
     @FXML
     private void handleMuokkaaSeuraa() {
-        ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", null, "");
+        //ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", null, "");
+        uusiSeura();
     }
     
     /**
@@ -55,7 +56,7 @@ public class SeuraController implements ModalControllerInterface<String> {
     }
 
     @Override
-    public String getResult() {
+    public GolfRekisteri getResult() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -67,8 +68,8 @@ public class SeuraController implements ModalControllerInterface<String> {
     }
 
     @Override
-    public void setDefault(String arg0) {
-        // TODO Auto-generated method stub
+    public void setDefault(GolfRekisteri rekisteri) {
+        this.golfRekisteri = rekisteri;
         
     }
     
@@ -76,6 +77,7 @@ public class SeuraController implements ModalControllerInterface<String> {
  // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
 
     private GolfRekisteri golfRekisteri;
+    
     
     /**
      * Lisätään tuloskorttiin uusi seura
@@ -86,7 +88,7 @@ public class SeuraController implements ModalControllerInterface<String> {
         uusiSeura.taytaTestiTiedoilla();
         
         try {
-            golfRekisteri.lisaaSeura(uusiSeura);
+            this.golfRekisteri.lisaaSeura(uusiSeura);
         } catch (SailoException e) {
             Dialogs.showMessageDialog("Ongelmia uuden seuran luonnissa: " + e.getMessage());
         }
@@ -101,8 +103,8 @@ public class SeuraController implements ModalControllerInterface<String> {
         chooserSeurat.clear();
         
         int index = 0;
-        for (int x = 0; x < golfRekisteri.getSeuroja(); x++) {
-            Seura seura = golfRekisteri.annaSeura(x);
+        for (int x = 0; x < this.golfRekisteri.getSeuroja(); x++) {
+            Seura seura = this.golfRekisteri.annaSeura(x);
             if (seura.getTunnusNro() == seuranro) index = x;
             chooserSeurat.add(seura.getSeurannimi(), seura);
         }

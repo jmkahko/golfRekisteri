@@ -42,7 +42,7 @@ public class TuloskorttiGUIController implements Initializable {
     @FXML 
     private void handleUusiKierros() {
         //ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", null, "");
-        uusiKierros();
+        //uusiKierros();
     }
     
     
@@ -52,7 +52,7 @@ public class TuloskorttiGUIController implements Initializable {
     @FXML 
     private void handleUusiSeura() {
         //ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoSeuraView.fxml"), "Luo seura", null, "");
-        //uusiSeura();
+        uusiSeura();
     }
        
     /**
@@ -60,7 +60,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handleMuokkaaSeuraa() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("SeuraView.fxml"), "Muokkaa seuraa", null, "");
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("SeuraView.fxml"), "Muokkaa seuraa", null, golfRekisteri);
     }
     
     /**
@@ -132,6 +132,7 @@ public class TuloskorttiGUIController implements Initializable {
 // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
     
     private GolfRekisteri golfRekisteri;
+    private SeuraController seuraController;
 
     /**
      * Tarkistetaan onko tallennus tehty
@@ -174,27 +175,27 @@ public class TuloskorttiGUIController implements Initializable {
      * @param seuranro annetaan seuran numero
      */
     public void haeSeura(int seuranro) {
-        chooserKierrokset.clear();
+        seuraController.chooserSeurat.clear();
         
         int index = 0;
-        for (int x = 0; x < golfRekisteri.getSeuroja(); x++) {
-            Seura seura = golfRekisteri.annaSeura(x);
+        for (int x = 0; x < this.golfRekisteri.getSeuroja(); x++) {
+            Seura seura = this.golfRekisteri.annaSeura(x);
             if (seura.getTunnusNro() == seuranro) index = x;
-            chooserKierrokset.add(seura.getSeurannimi(), seura);
+            seuraController.chooserSeurat.add(seura.getSeurannimi(), seura);
         }
-        chooserKierrokset.setSelectedIndex(index);
+        seuraController.chooserSeurat.setSelectedIndex(index);
     }
     
     /**
      * Lisätään tuloskorttiin uusi seura
      */
-    public void uusiKierros() {
+    public void uusiSeura() {
         Seura uusiSeura = new Seura();
         uusiSeura.rekisteroi();
         uusiSeura.taytaTestiTiedoilla();
         
         try {
-            golfRekisteri.lisaaSeura(uusiSeura);
+            this.golfRekisteri.lisaaSeura(uusiSeura);
         } catch (SailoException e) {
             Dialogs.showMessageDialog("Ongelmia uuden seuran luonnissa: " + e.getMessage());
         }
