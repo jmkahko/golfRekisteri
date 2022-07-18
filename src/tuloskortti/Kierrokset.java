@@ -103,7 +103,7 @@ public class Kierrokset implements Iterable<Kierros> {
         List<Kierros> loydetytKierrokset = new ArrayList<Kierros>();
         
         for (Kierros k : this.alkiot) {
-            if (k.getKayttajaId() == kayttajaId && k.getTuloskorttiId() == tuloskorttiId) {
+            if (k.getKayttajaId() == kayttajaId && k.getSeuraId() == tuloskorttiId) {
                 loydetytKierrokset.add(k);
             }
         }
@@ -119,16 +119,16 @@ public class Kierrokset implements Iterable<Kierros> {
         
         kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
         
-        Kierros kierros1 = new Kierros();
-        kierros1.taytaTestiTiedoilla(1, 1, 2, 4, 55);
+        //Kierros kierros1 = new Kierros();
+        //kierros1.taytaTestiTiedoilla(1, 1, 2, 4, 55);
         
-        kierrokset.lisaaKierros(kierros1);
+        //kierrokset.lisaaKierros(kierros1);
         
         System.out.println("============= Kierrokset testi =================");
         List<Kierros> kierrokset2 = kierrokset.annaKierrokset(1, 1);
 
         for (Kierros tulos : kierrokset2) {
-            System.out.print("Seura: " + tulos.getKayttajaId() + " ");
+            System.out.print("SeuraId: " + tulos.getSeuraId() + " ");
             tulos.tulosta(System.out);
         }
     }

@@ -30,7 +30,7 @@ import kanta.UusiKierros;
 public class Kierros {
 
     private int id;
-    private int tuloskorttiId;
+    private int seuraId;
     private int kayttajaId;
     private String kierrospaiva;
     private int pelattuTee;
@@ -46,12 +46,31 @@ public class Kierros {
      */
     public Kierros() {
         this.id = 0;
-        this.tuloskorttiId = 0;
+        this.seuraId = 0;
         this.kayttajaId = 0;
         this.kierrospaiva = "01-01-2022";
         this.pelattuTee = 0;
         this.vayla = 0;
         this.tulos = 0;
+    }
+    
+    /**
+     * Kierroksen muodostaminen annetuilla tiedoilla ja id:n luonti automaattisesti
+     * @param seuraId tuloskortti jolla kierros tehty
+     * @param kayttajaId pelaajan id numero
+     * @param kierrospaiva päivä jolloin kierretty
+     * @param pelattuTee paikka jolta pelattu
+     * @param vayla väylä
+     * @param tulos tulos väylälle
+     */
+    public Kierros(int seuraId, int kayttajaId, String kierrospaiva, int pelattuTee, int vayla, int tulos) {
+        this.rekisteroi();
+        this.seuraId = seuraId;
+        this.kayttajaId = kayttajaId;
+        this.kierrospaiva = kierrospaiva;
+        this.pelattuTee = pelattuTee;
+        this.vayla = vayla;
+        this.tulos = tulos;
     }
     
     
@@ -60,7 +79,7 @@ public class Kierros {
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta(PrintStream out) {
-        out.println(String.format("%03d", id) + "|" + this.tuloskorttiId + "|" + this.kayttajaId + "|" + this.kierrospaiva + "|" + this.pelattuTee + 
+        out.println(String.format("%03d", id) + "|" + this.seuraId + "|" + this.kayttajaId + "|" + this.kierrospaiva + "|" + this.pelattuTee + 
                 "|" + this.vayla + "|" + this.tulos);
     }
     
@@ -84,11 +103,11 @@ public class Kierros {
     
 
     /**
-     * Palauttaa tuloskortin id:n
+     * Palauttaa seuran id:n
      * @return palauttaa id:n
      */
-    public int getTuloskorttiId() {
-        return this.tuloskorttiId;
+    public int getSeuraId() {
+        return this.seuraId;
     }
     
     
@@ -126,14 +145,15 @@ public class Kierros {
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot tuloskortille.
      * TODO: poista kun kaikki toimii
-     * @param tuloskorttinro tuodaan seuran tieto
+     * @param seuraNro tuodaan seuran tieto
      * @param kayttajanro tuodaan käyttäjän numero
      * @param vaylanro tuodaan mones väylä halutaan tehdä
      * @param parLuku tuodaan mikä on väylän ihanne par-tulos
      * @param pelattuTeeNro miltä tee paikalta on pelattu
      */
-    public void taytaTestiTiedoilla(int tuloskorttinro, int kayttajanro, int vaylanro, int parLuku, int pelattuTeeNro) {
-        this.tuloskorttiId = tuloskorttinro;
+    public void taytaTestiTiedoilla(int seuraNro, int kayttajanro, int vaylanro, int parLuku, int pelattuTeeNro) {
+        this.rekisteroi();
+        this.seuraId = seuraNro;
         this.kayttajaId = kayttajanro;
         this.kierrospaiva = "01-01-2022";
         this.pelattuTee = pelattuTeeNro;
