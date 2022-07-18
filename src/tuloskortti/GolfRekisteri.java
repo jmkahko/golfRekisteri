@@ -148,6 +148,7 @@ public class GolfRekisteri {
     public List<Kierros> annaKierrokset(int seuranId, int kayttajaId) {
         return this.kierrokset.annaKierrokset(seuranId, kayttajaId);
     }
+    
         
 
     /**
