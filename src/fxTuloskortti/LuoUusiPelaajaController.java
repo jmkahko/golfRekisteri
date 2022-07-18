@@ -3,13 +3,16 @@ package fxTuloskortti;
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
+import tuloskortti.GolfRekisteri;
+import tuloskortti.Kayttaja;
+import tuloskortti.SailoException;
 
 /**
  * @author janne
  * @version 13.6.2022
  * Uuden pelaajan luonti/muokkaus controlleri
  */
-public class LuoUusiPelaajaController implements ModalControllerInterface<String> {
+public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRekisteri> {
 
     /**
      * Perutaan muutokset
@@ -26,11 +29,12 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<String
      */
     @FXML
     private  void handleTallenna() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        //Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        luoPelaaja();
     }
 
     @Override
-    public String getResult() {
+    public GolfRekisteri getResult() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -42,9 +46,31 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<String
     }
 
     @Override
-    public void setDefault(String oletus) {
-        // TODO Auto-generated method stub
+    public void setDefault(GolfRekisteri golfRekisteri) {
+        this.golfRekisteri = golfRekisteri;
         
     }
-
+    
+    // =================================================================
+    // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
+    
+    private GolfRekisteri golfRekisteri;
+    
+    /**
+     * Luodaan pelaaja tuloskortille
+     */
+    public void luoPelaaja() {
+        Kayttaja uusiKayttaja = new Kayttaja();
+        uusiKayttaja.rekisteroi();
+        uusiKayttaja.taytaTestiTiedoilla();
+        
+        try {
+            this.golfRekisteri.lisaaKayttaja(uusiKayttaja);
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog("Ongelmia uuden käyttäjän luonnissa: " + e.getMessage());
+        }
+        
+        Dialogs.showMessageDialog("Uusi käyttäjä luotu. Tulostuu Console lokiin tieto");
+        uusiKayttaja.tulosta(System.out);
+    }
 }

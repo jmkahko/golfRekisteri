@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import fi.jyu.mit.fxgui.Dialogs;
@@ -222,5 +221,12 @@ public class TuloskorttiGUIController implements Initializable {
         uusiKierros.tulosta(System.out);
     }
     
-    
+    /**
+     * Käynnistyksessä jos pelaajaa ei ole luotu luodaan pelaaja
+     * @return palauttaa true, että saadaan uuden pelaajan luonti auki
+     */
+    public boolean avaa() {
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Luo pelaaja", null, golfRekisteri);
+        return true;
+    }
 }

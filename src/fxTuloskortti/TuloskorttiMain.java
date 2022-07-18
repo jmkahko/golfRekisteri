@@ -41,6 +41,7 @@ public class TuloskorttiMain extends Application {
             });
             
             primaryStage.show();
+            if (!tuloskorttiCtrl.avaa()) Platform.exit();
         } catch(Exception e) {
             e.printStackTrace();
         }

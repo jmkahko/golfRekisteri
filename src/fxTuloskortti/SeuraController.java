@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.SailoException;
 import tuloskortti.Seura;
-import tuloskortti.Tuloskortit;
 import tuloskortti.Tuloskortti;
 
 /**
