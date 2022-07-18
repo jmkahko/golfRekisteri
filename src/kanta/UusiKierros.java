@@ -44,7 +44,6 @@ public class UusiKierros {
         
         for (Tuloskortti t : tuloskortti) {
             Kierros vayla = new Kierros();
-            vayla.rekisteroi();
             vayla.taytaTestiTiedoilla(t.getTunnusNro(), 1, t.getVaylaNro(), t.getParLuku(), pelattuTee);
             luotuKierros.add(vayla);
         }
