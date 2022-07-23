@@ -108,6 +108,34 @@ public class Seura {
     }
     
     /**
+     * @return palauttaa seuran katuosoitteen
+     */
+    public String getKatuosoite() {
+        return this.katuosoite;
+    }
+    
+    /**
+     * @return palauttaa seuran postinumeron
+     */
+    public int getPostinumero() {
+        return this.postinumero;
+    }
+    
+    /**
+     * @return palauttaa seuran postitoimipaikan
+     */
+    public String getPostitoimipaikka() {
+        return this.postitoimipaikka;
+    }
+    
+    /**
+     * @return palauttaa seuran puhelinnumeron
+     */
+    public String getPuhelinnumero() {
+        return this.puhelinnumero;
+    }
+    
+    /**
      * Apumetodi, jolla saadaan täytettyä testiarvot käyttäjälle.
      * TODO: poista kun kaikki toimii
      */
