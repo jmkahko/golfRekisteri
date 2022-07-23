@@ -1,14 +1,23 @@
 package fxTuloskortti;
 
+import java.io.PrintStream;
+import java.util.List;
+
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
+import fi.jyu.mit.fxgui.TextAreaOutputStream;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Font;
+import kanta.UusiTuloskortti;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.SailoException;
 import tuloskortti.Seura;
+import tuloskortti.Tuloskortit;
 import tuloskortti.Tuloskortti;
 
 /**
@@ -21,8 +30,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
     /**
      * Golf seurojen listaus
      */
-    @FXML
-    public ListChooser<Seura> chooserSeurat;
+    @FXML public ListChooser<Seura> chooserSeurat;
     
     /**
      * Seuran tiedot rivit
@@ -36,6 +44,8 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
     /**
      * Seuran tuloskortin rivit
      */
+    @FXML private ScrollPane panelTuloskortti;
+    
     @FXML private TextField vayla1_48;
     @FXML private TextField vayla1_51;
     @FXML private TextField vayla1_55;
@@ -215,13 +225,31 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
     public void setDefault(GolfRekisteri rekisteri) {
         this.golfRekisteri = rekisteri;
         
+        // Alustetaan tässä vaiheessa tässä tiedot;
+        alusta();
+        
+        
     }
     
  // =================================================================
  // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
 
     private GolfRekisteri golfRekisteri;
+    private TextArea areaTuloskortti = new TextArea();
     
+    
+    /**
+     * Tekee tarvittavat alustukset vaihdetaan GridPanen tilalle yksi iso tekstikenttä, johon tulostetaan seuran tuloskortti
+     * Alustetaan seuralistan kuuntelija
+     */
+    protected void alusta() {
+        panelTuloskortti.setContent(areaTuloskortti);
+        areaTuloskortti.setFont(new Font("Courier New", 12));
+        panelTuloskortti.setFitToHeight(true);
+        
+        chooserSeurat.clear();
+        chooserSeurat.addSelectionListener(e -> naytaSeura());
+    }
     
     /**
      * Lisätään tuloskorttiin uusi seura
@@ -252,24 +280,70 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
             if (seura.getTunnusNro() == seuranro) index = x;
             chooserSeurat.add(seura.getSeurannimi(), seura);
         }
-        chooserSeurat.setSelectedIndex(index);
+        chooserSeurat.setSelectedIndex(index);        
     }
     
     /**
      * Luodaan uusi tulokortti seuralle. Luo uuden väylän tuloskortille
      */
     public void uusiTuloskortti() {
-        Tuloskortti uusiTuloskortti = new Tuloskortti();
-        uusiTuloskortti.rekisteroi();
-        uusiTuloskortti.taytaTestiTiedoilla(1, 1);
-        try {
-            this.golfRekisteri.lisaaTuloskortti(uusiTuloskortti);
-        } catch (SailoException e) {
-            Dialogs.showMessageDialog("Ongelmia uuden tuloskortin luonnissa: " + e.getMessage());
+        Seura seuranKohdalla = chooserSeurat.getSelectedObject();
+        
+        if (seuranKohdalla == null) {
+            return;
+        }
+
+        golfRekisteri.lisaaTuloskortti(UusiTuloskortti.luoTuloskortti(seuranKohdalla.getTunnusNro()));
+
+        Dialogs.showMessageDialog("Tuloskortti generoitu automaattisesti");
+    }
+    
+    /**
+     * Hakee seuran tiedot joka on valittuna seura listalla
+     */
+    public void naytaSeura() {
+        Seura seuranKohdalla = chooserSeurat.getSelectedObject();
+        
+        if (seuranKohdalla == null) {
+            return;
         }
         
-        Dialogs.showMessageDialog("Luotu tuloskortille väylä. Tulostyy Console lokiin tieto");
-        uusiTuloskortti.tulosta(System.out);
+        seuraTextField.setText(seuranKohdalla.getSeurannimi());
+        katuosoiteTextField.setText(seuranKohdalla.getKatuosoite());
+        postinumeroTextField.setText(String.valueOf(seuranKohdalla.getPostinumero()));
+        postiosoiteTextField.setText(seuranKohdalla.getPostitoimipaikka());
+        puhelinnumeroTextField.setText(seuranKohdalla.getPuhelinnumero());
+        naytaTuloskortti(seuranKohdalla);
     }
 
+    /**
+     * Hakee seuran tuloskortin joka on valittuna seura listalta
+     * @param seura jonka tuloskortti näytetään
+     */
+    public void naytaTuloskortti(Seura seura) {
+        if (seura == null) {
+            return;
+        }
+        
+        areaTuloskortti.setText("");
+        try (PrintStream os = TextAreaOutputStream.getTextPrintStream(areaTuloskortti)) {
+            tulosta(os, seura);
+        }
+    }
+    
+    /**
+     * Tulostetaan tuloskortin tiedot
+     * @param os PrintStream
+     * @param seura minkä tuloskortti tulostetaan
+     */
+    private void tulosta(PrintStream os, final Seura seura) {
+        os.println("-------- Pituudet --- " + seura.getSeurannimi());
+        os.println("---Väylä - 62, 55, 51, 48, PAR, HCP----");
+        List<Tuloskortti> tuloskortti = golfRekisteri.annaTuloskortti(seura);
+        
+        for (Tuloskortti t : tuloskortti) {
+            t.tulosta(os);
+        }
+        os.println("---------------------------------------");
+    }
 }
