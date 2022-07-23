@@ -172,7 +172,14 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
     @FXML private TextField vayla18_hcp;
     @FXML private TextField vayla18_par;
     
-
+    /**
+     * Yhteensä tulokset
+     */
+    @FXML private TextField parYhteensa;
+    @FXML private TextField pituusYhteensa48;
+    @FXML private TextField pituusYhteensa51;
+    @FXML private TextField pituusYhteensa55;
+    @FXML private TextField pituusYhteensa62;
    
     
     /**
