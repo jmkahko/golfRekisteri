@@ -149,12 +149,12 @@ public class GolfRekisteri {
     
     /**
      * Antaa GolfRekisterin kierroksen
-     * @param seuranId seuran id numero
-     * @param kayttajaId käyttäjän id numero
+     * @param seura seuran id numero
+     * @param kayttaja käyttäjän id numero
      * @return palautta kierrokset
      */
-    public List<Kierros> annaKierrokset(int seuranId, int kayttajaId) {
-        return this.kierrokset.annaKierrokset(seuranId, kayttajaId);
+    public List<Kierros> annaKierrokset(Seura seura, Kayttaja kayttaja) {
+        return this.kierrokset.annaKierrokset(seura.getTunnusNro(), kayttaja.getTunnusNro());
     }
     
         
