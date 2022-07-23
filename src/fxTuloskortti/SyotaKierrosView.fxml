@@ -54,6 +54,7 @@
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -74,112 +75,113 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" />
               </rowConstraints>
                <children>
-                  <Label text="Väylä" GridPane.rowIndex="2" />
-                  <Label text="1" GridPane.rowIndex="3" />
+                  <Label text="Väylä" GridPane.rowIndex="3" />
+                  <Label text="1" GridPane.rowIndex="4" />
                   <Label GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="55" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="PAR" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label text="HCP" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <Label text="Tulos" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <TextField text="4" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                  <TextField text="3" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                  <Label text="2" GridPane.rowIndex="4" />
-                  <TextField text="5" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                  <Label text="3" GridPane.rowIndex="5" />
-                  <TextField text="6" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                  <Label text="4" GridPane.rowIndex="6" />
-                  <TextField text="4" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                  <Label text="5" GridPane.rowIndex="7" />
-                  <TextField text="4" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                  <Label text="6" GridPane.rowIndex="8" />
-                  <TextField text="8" GridPane.columnIndex="4" GridPane.rowIndex="9" />
-                  <Label text="7" GridPane.rowIndex="9" />
-                  <TextField text="4" GridPane.columnIndex="4" GridPane.rowIndex="10" />
-                  <Label text="8" GridPane.rowIndex="10" />
-                  <TextField text="5" GridPane.columnIndex="4" GridPane.rowIndex="11" />
-                  <Label text="9" GridPane.rowIndex="11" />
-                  <TextField text="6" GridPane.columnIndex="4" GridPane.rowIndex="12" />
-                  <Label text="10" GridPane.rowIndex="12" />
-                  <TextField text="4" GridPane.columnIndex="4" GridPane.rowIndex="13" />
-                  <Label text="11" GridPane.rowIndex="13" />
-                  <TextField text="4" GridPane.columnIndex="4" GridPane.rowIndex="14" />
-                  <Label text="12" GridPane.rowIndex="14" />
-                  <TextField text="3" GridPane.columnIndex="4" GridPane.rowIndex="15" />
-                  <Label text="13" GridPane.rowIndex="15" />
-                  <TextField text="6" GridPane.columnIndex="4" GridPane.rowIndex="16" />
-                  <Label text="14" GridPane.rowIndex="16" />
-                  <TextField text="4" GridPane.columnIndex="4" GridPane.rowIndex="17" />
-                  <Label text="15" GridPane.rowIndex="17" />
-                  <TextField text="3" GridPane.columnIndex="4" GridPane.rowIndex="18" />
-                  <Label text="16" GridPane.rowIndex="18" />
-                  <TextField text="4" GridPane.columnIndex="4" GridPane.rowIndex="19" />
-                  <Label text="17" GridPane.rowIndex="19" />
-                  <TextField text="4" GridPane.columnIndex="4" GridPane.rowIndex="20" />
-                  <Label text="18" GridPane.rowIndex="20" />
-                  <Label GridPane.columnIndex="4" GridPane.rowIndex="21" />
-                  <Label text="OUT" GridPane.columnIndex="3" GridPane.rowIndex="21" />
-                  <Label text="72" GridPane.columnIndex="2" GridPane.rowIndex="21" />
-                  <Label text="5430" GridPane.columnIndex="1" GridPane.rowIndex="21" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="313" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <Label text="81" GridPane.columnIndex="4" GridPane.rowIndex="21" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Label text="3" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <Label text="15" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                  <Label text="5" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                  <Label text="5" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-                  <Label text="3" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="13" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="15" />
-                  <Label text="3" GridPane.columnIndex="2" GridPane.rowIndex="16" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="17" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="18" />
-                  <Label text="5" GridPane.columnIndex="2" GridPane.rowIndex="19" />
-                  <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="20" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="18" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="19" />
-                  <Label text="301" GridPane.columnIndex="1" GridPane.rowIndex="20" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="12" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="13" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="14" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="15" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="16" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="17" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="18" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="19" />
-                  <Label text="11" GridPane.columnIndex="3" GridPane.rowIndex="20" />
+                  <Label text="PAR" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label text="HCP" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Label text="Tulos" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                  <TextField fx:id="vaylaId_1" text="4" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                  <TextField fx:id="vaylaId_2" text="3" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                  <Label text="2" GridPane.rowIndex="5" />
+                  <TextField fx:id="vaylaId_3" text="5" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                  <Label text="3" GridPane.rowIndex="6" />
+                  <TextField fx:id="vaylaId_4" text="6" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                  <Label text="4" GridPane.rowIndex="7" />
+                  <TextField fx:id="vaylaId_5" text="4" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                  <Label text="5" GridPane.rowIndex="8" />
+                  <TextField fx:id="vaylaId_6" text="4" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                  <Label text="6" GridPane.rowIndex="9" />
+                  <TextField fx:id="vaylaId_7" text="8" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+                  <Label text="7" GridPane.rowIndex="10" />
+                  <TextField fx:id="vaylaId_8" text="4" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+                  <Label text="8" GridPane.rowIndex="11" />
+                  <TextField fx:id="vaylaId_9" text="5" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+                  <Label text="9" GridPane.rowIndex="12" />
+                  <TextField fx:id="vaylaId_10" text="6" GridPane.columnIndex="4" GridPane.rowIndex="13" />
+                  <Label text="10" GridPane.rowIndex="13" />
+                  <TextField fx:id="vaylaId_11" text="4" GridPane.columnIndex="4" GridPane.rowIndex="14" />
+                  <Label text="11" GridPane.rowIndex="14" />
+                  <TextField fx:id="vaylaId_12" text="4" GridPane.columnIndex="4" GridPane.rowIndex="15" />
+                  <Label text="12" GridPane.rowIndex="15" />
+                  <TextField fx:id="vaylaId_13" text="3" GridPane.columnIndex="4" GridPane.rowIndex="16" />
+                  <Label text="13" GridPane.rowIndex="16" />
+                  <TextField fx:id="vaylaId_14" text="6" GridPane.columnIndex="4" GridPane.rowIndex="17" />
+                  <Label text="14" GridPane.rowIndex="17" />
+                  <TextField fx:id="vaylaId_15" text="4" GridPane.columnIndex="4" GridPane.rowIndex="18" />
+                  <Label text="15" GridPane.rowIndex="18" />
+                  <TextField fx:id="vaylaId_16" text="3" GridPane.columnIndex="4" GridPane.rowIndex="19" />
+                  <Label text="16" GridPane.rowIndex="19" />
+                  <TextField fx:id="vaylaId_17" text="4" GridPane.columnIndex="4" GridPane.rowIndex="20" />
+                  <Label text="17" GridPane.rowIndex="20" />
+                  <TextField fx:id="vaylaId_18" text="4" GridPane.columnIndex="4" GridPane.rowIndex="21" />
+                  <Label text="18" GridPane.rowIndex="21" />
+                  <Label GridPane.columnIndex="4" GridPane.rowIndex="22" />
+                  <Label text="OUT" GridPane.columnIndex="3" GridPane.rowIndex="22" />
+                  <Label GridPane.columnIndex="1" GridPane.rowIndex="22" />
+                  <Label GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <TextField fx:id="vaylaTee1" text="331" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="vaylaTee2" layoutX="98.0" layoutY="72.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="vaylaTee3" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="vaylaTee4" layoutX="98.0" layoutY="129.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="vaylaTee5" layoutX="98.0" layoutY="159.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextField fx:id="vaylaTee6" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <TextField fx:id="vaylaTee7" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <TextField fx:id="vaylaTee8" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                  <TextField fx:id="vaylaTee9" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                  <TextField fx:id="vaylaTee10" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                  <TextField fx:id="vaylaTee11" layoutX="98.0" layoutY="324.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                  <TextField fx:id="vaylaTee12" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                  <TextField fx:id="vaylaTee13" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                  <TextField fx:id="vaylaTee14" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                  <TextField fx:id="vaylaTee15" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                  <TextField fx:id="vaylaTee16" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="19" />
+                  <TextField fx:id="vaylaTee17" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+                  <TextField fx:id="vaylaTee18" layoutX="98.0" layoutY="99.0" text="301" GridPane.columnIndex="1" GridPane.rowIndex="21" />
+                  <TextField fx:id="vaylaPar1" text="4" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <TextField fx:id="vaylaPar3" layoutX="175.0" layoutY="72.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <TextField fx:id="vaylaPar4" layoutX="175.0" layoutY="72.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <TextField fx:id="vaylaPar5" layoutX="175.0" layoutY="159.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                  <TextField fx:id="vaylaPar9" layoutX="175.0" layoutY="72.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                  <TextField fx:id="vaylaPar7" layoutX="175.0" layoutY="72.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                  <TextField fx:id="vaylaPar11" layoutX="175.0" layoutY="72.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                  <TextField fx:id="vaylaPar12" layoutX="175.0" layoutY="72.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="15" />
+                  <TextField fx:id="vaylaPar13" layoutX="175.0" layoutY="72.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="16" />
+                  <TextField fx:id="vaylaPar15" layoutX="175.0" layoutY="72.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="18" />
+                  <TextField fx:id="vaylaPar16" layoutX="175.0" layoutY="72.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="19" />
+                  <TextField fx:id="vaylaPar18" layoutX="175.0" layoutY="72.0" text="4" GridPane.columnIndex="2" GridPane.rowIndex="21" />
+                  <TextField fx:id="vaylaPar2" layoutX="175.0" layoutY="72.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <TextField fx:id="vaylaPar10" layoutX="175.0" layoutY="99.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                  <TextField fx:id="vaylaPar14" layoutX="175.0" layoutY="99.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="17" />
+                  <TextField fx:id="vaylaPar6" layoutX="175.0" layoutY="72.0" text="5" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                  <TextField fx:id="vaylaPar8" layoutX="175.0" layoutY="219.0" text="5" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                  <TextField fx:id="vaylaPar17" layoutX="175.0" layoutY="219.0" text="5" GridPane.columnIndex="2" GridPane.rowIndex="20" />
+                  <TextField fx:id="vaylaHcp1" text="15" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <TextField fx:id="vaylaHcp2" layoutX="248.0" layoutY="72.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <TextField fx:id="vaylaHcp3" layoutX="248.0" layoutY="99.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <TextField fx:id="vaylaHcp4" layoutX="248.0" layoutY="99.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <TextField fx:id="vaylaHcp5" layoutX="248.0" layoutY="159.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                  <TextField fx:id="vaylaHcp6" layoutX="248.0" layoutY="189.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                  <TextField fx:id="vaylaHcp7" layoutX="248.0" layoutY="219.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                  <TextField fx:id="vaylaHcp8" layoutX="248.0" layoutY="249.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+                  <TextField fx:id="vaylaHcp9" layoutX="248.0" layoutY="276.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+                  <TextField fx:id="vaylaHcp10" layoutX="248.0" layoutY="300.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="13" />
+                  <TextField fx:id="vaylaHcp11" layoutX="248.0" layoutY="324.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="14" />
+                  <TextField fx:id="vaylaHcp12" layoutX="248.0" layoutY="348.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="15" />
+                  <TextField fx:id="vaylaHcp13" layoutX="248.0" layoutY="372.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="16" />
+                  <TextField fx:id="vaylaHcp14" layoutX="248.0" layoutY="396.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="17" />
+                  <TextField fx:id="vaylaHcp15" layoutX="248.0" layoutY="420.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="18" />
+                  <TextField fx:id="vaylaHcp16" layoutX="248.0" layoutY="444.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="19" />
+                  <TextField fx:id="vaylaHcp17" layoutX="248.0" layoutY="468.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="20" />
+                  <TextField fx:id="vaylaHcp18" layoutX="248.0" layoutY="492.0" text="11" GridPane.columnIndex="3" GridPane.rowIndex="21" />
+                  <TextField fx:id="parYhteensa" text="72" GridPane.columnIndex="2" GridPane.rowIndex="22" />
+                  <TextField fx:id="tulosYhteensa" text="81" GridPane.columnIndex="4" GridPane.rowIndex="22" />
+                  <TextField fx:id="matkaYhteensa" text="5430" GridPane.columnIndex="1" GridPane.rowIndex="22" />
+                  <TextField fx:id="pelattuTee" text="55" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" top="10.0" />
@@ -217,9 +219,9 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
-                  <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <DatePicker onAction="#handlePaivays" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="seuraChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <ChoiceBox fx:id="teeChoiseBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="paivaPicker" onAction="#handlePaivays" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
