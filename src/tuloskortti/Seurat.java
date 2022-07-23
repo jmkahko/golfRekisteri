@@ -1,5 +1,8 @@
 package tuloskortti;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * +--------------------------------------+--------------------------------------+
  * | Luokan nimi: Seurat                  | Avustajat:                           |
@@ -88,6 +91,40 @@ public class Seurat {
     }
     
     /**
+     * Palauttaa kaikki seurat
+     * @return kaikki seurat
+     * @example
+     * <pre name="test">
+     * #import java.util.*;
+     * 
+     * Seurat seurat = new Seurat();
+     * List<Seura> loytyneet;
+     * 
+     * Seura seura1 = new Seura();
+     * seura1.rekisteroi();
+     * seura1.taytaTestiTiedoilla();
+
+     * loytyneet = seurat.annaSeurat();
+     * loytyneet.size() === 1;
+     * Seura seura2 = new Seura();
+     * seura2.rekisteroi();
+     * seura2.taytaTestiTiedoilla();
+
+     * loytyneet = seurat.annaSeurat();
+     * loytyneet.size() === 2;
+     * </pre>
+     */
+    public List<Seura> annaSeurat() {
+        List<Seura> loydetyt = new ArrayList<Seura>();
+        
+        for (int i = 0; i < this.lkm; i++) {
+            loydetyt.add(alkiot[i]);
+        }
+
+        return loydetyt;
+    }
+    
+    /**
      * @param args ei käytössä
      */
     public static void main(String[] args) {
@@ -111,9 +148,12 @@ public class Seurat {
         System.out.println("======================= Seurat testi =======================");
         for (int x = 0; x < seurat.getLkm(); x++) {
            Seura seura = seurat.annaSeura(x);
-           System.out.println("Käyttäjän indeksi: " + x);
+           System.out.println("Seuran indeksi: " + x);
            seura.tulosta(System.out);
         }
+        
+        int seuroja = seurat.annaSeurat().size();
+        System.out.println("Seurojen määrä: " + seuroja);
     }
 
 }
