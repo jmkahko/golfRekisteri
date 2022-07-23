@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import fi.jyu.mit.fxgui.Dialogs;
@@ -14,7 +15,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import kanta.UusiKierros;
 import tuloskortti.GolfRekisteri;
+import tuloskortti.Kierrokset;
 import tuloskortti.Kierros;
 import tuloskortti.SailoException;
 import tuloskortti.Seura;
@@ -31,7 +34,7 @@ public class TuloskorttiGUIController implements Initializable {
      * Kierrokset listaus
      */
     @FXML
-    private ListChooser<Seura> chooserKierrokset; // TODO muuta tämä Kierrokseksi, nyt testin aikana Seura
+    private ListChooser<Kierros> chooserKierrokset;
     
     /**
      * Käyttäjän tietokentät
@@ -61,8 +64,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handleUusiSeura() {
-        //ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoSeuraView.fxml"), "Luo seura", null, "");
-        uusiSeura();
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoSeuraView.fxml"), "Luo seura", null, golfRekisteri);
     }
        
     /**
@@ -142,7 +144,6 @@ public class TuloskorttiGUIController implements Initializable {
 // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
     
     private GolfRekisteri golfRekisteri;
-    private SeuraController seuraController;
 
     /**
      * Tarkistetaan onko tallennus tehty
@@ -180,54 +181,25 @@ public class TuloskorttiGUIController implements Initializable {
         this.golfRekisteri = golfRekisteri;
     }
     
-    
-    /**
-     * @param seuranro annetaan seuran numero
-     */
-    public void haeSeura(int seuranro) {
-        seuraController.chooserSeurat.clear();
         
-        int index = 0;
-        for (int x = 0; x < this.golfRekisteri.getSeuroja(); x++) {
-            Seura seura = this.golfRekisteri.annaSeura(x);
-            if (seura.getTunnusNro() == seuranro) index = x;
-            seuraController.chooserSeurat.add(seura.getSeurannimi(), seura);
-        }
-        seuraController.chooserSeurat.setSelectedIndex(index);
-    }
-    
-    /**
-     * Lisätään tuloskorttiin uusi seura
-     */
-    public void uusiSeura() {
-        Seura uusiSeura = new Seura();
-        uusiSeura.rekisteroi();
-        uusiSeura.taytaTestiTiedoilla();
-        
-        try {
-            this.golfRekisteri.lisaaSeura(uusiSeura);
-        } catch (SailoException e) {
-            Dialogs.showMessageDialog("Ongelmia uuden seuran luonnissa: " + e.getMessage());
-        }
-        haeSeura(uusiSeura.getTunnusNro());
-    }
-    
     /**
      * Lisätään uusi kierros
      */
     public void uusiKierros() {
-        Kierros uusiKierros = new Kierros();
-        uusiKierros.rekisteroi();
-        uusiKierros.taytaTestiTiedoilla(1, 1, 1, 4, 55);
-        
-        try {
-            this.golfRekisteri.lisaaKierros(uusiKierros);
-        } catch (SailoException e) {
-            Dialogs.showMessageDialog("Ongelmia uuden kierroksen luonnissa: " + e.getMessage());
-        }
+        Kierrokset uusiKierros = new Kierrokset();
+        uusiKierros.lisaaKierros(UusiKierros.luoKierros(1, 55));
         
         Dialogs.showMessageDialog("Luotu uusi väylä kierrokselle. Tulostyy Console lokiin tieto");
-        uusiKierros.tulosta(System.out);
+        uusiKierros.annaKierrokset(1, 1);
+        
+        List<Kierros> kierrokset2 = uusiKierros.annaKierrokset(1, 1);
+        
+        System.out.println("============= Kierrokset testi =================");
+
+        for (Kierros tulos : kierrokset2) {
+            System.out.print("SeuraId: " + tulos.getSeuraId() + " ");
+            tulos.tulosta(System.out);
+        }
     }
     
     /**
