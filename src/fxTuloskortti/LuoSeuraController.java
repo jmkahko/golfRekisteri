@@ -4,6 +4,7 @@ import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import tuloskortti.GolfRekisteri;
 
 /**
@@ -13,6 +14,13 @@ import tuloskortti.GolfRekisteri;
  */
 public class LuoSeuraController implements ModalControllerInterface<GolfRekisteri> {
 
+    @FXML private TextField katuosoiteTextField;
+    @FXML private TextField postinumeroTextField;
+    @FXML private TextField postiosoiteTextField;
+    @FXML private TextField puhelinnumeroTextField;
+    @FXML private TextField seuraTextField;
+    
+    
     /**
      * Voidaan syöttää uusi tuloskortti
      * @param event
