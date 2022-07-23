@@ -141,6 +141,15 @@ public class GolfRekisteri {
     }
     
     /**
+     * Lisätään koko kierroksen tuloskortti
+     * @param kierros taulukko
+     */
+    public void lisaaKierros(List<Kierros> kierros) {
+        this.kierrokset.lisaaKierros(kierros);
+        
+    }
+    
+    /**
      * @return palauttaa kierrosten määrän
      */
     public int getKierroksia() {
