@@ -98,13 +98,13 @@
               </rowConstraints>
                <children>
                   <Label text="Nimi:" GridPane.rowIndex="1" />
-                  <TextField prefHeight="24.0" prefWidth="94.0" text="Janne Pelaaja" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="nimiTextField" prefHeight="24.0" prefWidth="94.0" text="Janne Pelaaja" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Kotiseura:" GridPane.rowIndex="2" />
                   <Label text="Tasoitus:" GridPane.rowIndex="3" />
                   <Label text="Aloitusvuosi:" GridPane.rowIndex="4" />
-                  <TextField text="Pohjolan Golf" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField text="9" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField text="2005" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="seuraTextField" text="Pohjolan Golf" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="tasoitusTextField" text="9" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="aloitusVuosiTextField" text="2005" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="Käyttäjä" />
                </children>
                <padding>

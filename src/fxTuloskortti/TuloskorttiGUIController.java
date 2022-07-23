@@ -13,6 +13,7 @@ import fi.jyu.mit.fxgui.ModalController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.Kierros;
 import tuloskortti.SailoException;
@@ -31,6 +32,14 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML
     private ListChooser<Seura> chooserKierrokset; // TODO muuta tämä Kierrokseksi, nyt testin aikana Seura
+    
+    /**
+     * Käyttäjän tietokentät
+     */
+    @FXML private TextField nimiTextField;
+    @FXML private TextField seuraTextField;
+    @FXML private TextField tasoitusTextField;
+    @FXML private TextField aloitusVuosiTextField;
     
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
