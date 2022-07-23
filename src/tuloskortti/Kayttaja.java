@@ -3,6 +3,7 @@ package tuloskortti;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import fi.jyu.mit.ohj2.Mjonot;
 import kanta.UusiKayttaja;
 import kanta.UusiSeura;
 
@@ -49,6 +50,21 @@ public class Kayttaja {
         this.kotiseura = "";
         this.tasoitus = 54;
         this.aloitusvuosi = 0;
+    }
+    
+    /**
+     * Muodostetaan uusi käyttäjä annetuilla tiedoilla
+     * @param nimi käyttäjän nimi
+     * @param kotiseura käyttäjän kotiseura
+     * @param tasoitus käyttäjän tasoitus
+     * @param aloitusvuosi käyttäjän aloitusvuosi
+     */
+    public Kayttaja(String nimi, String kotiseura, double tasoitus, int aloitusvuosi) {
+        this.rekisteroi();
+        this.nimi = nimi;
+        this.kotiseura = kotiseura;
+        this.tasoitus = tasoitus;
+        this.aloitusvuosi = aloitusvuosi;
     }
         
     
@@ -99,6 +115,31 @@ public class Kayttaja {
         seuraavaId++;
         return this.id;
     }
+    
+    /**
+     * Tulostaa käyttäjän tiedon samassa formaatissa, kuin tiedostoon tallennus tehdään
+     * @return palauttaa käyttäjän tiedon formatoituna
+     * @example
+     * <pre name="test">
+     * Kayttaja kayttaja = new Kayttaja();
+     * 
+     */
+    @Override
+    public String toString() {
+        return this.getTunnusNro() + "|" + this.nimi + "|" + this.kotiseura + "|" + this.tasoitus + "|" + this.aloitusvuosi;
+    }
+    
+    /**
+     * Parseroidaan käyttäjän tiedot | erotellusta merkkijonosta
+     * @param rivi annetaan jäsenen rivitieto
+     */
+    public void parse(String rivi) {
+        //StringBuffer sb = new StringBuffer(rivi);
+        
+        
+    }
+    
+
 
     
     /**
@@ -130,8 +171,13 @@ public class Kayttaja {
         henkilo1.taytaTestiTiedoilla();
         henkilo2.taytaTestiTiedoilla();
         
-        henkilo1.tulosta(System.out);
         henkilo2.tulosta(System.out);
+        henkilo1.tulosta(System.out);
+        System.out.println(henkilo1.toString());
+        
+        Kayttaja henkilo3 = new Kayttaja();
+        henkilo3.parse("3  |  Hansu Hanhi    |  Rankkalinna Golf");
+        System.out.println(henkilo3.toString());
     }
 
 }
