@@ -21,7 +21,7 @@ import tuloskortti.Tuloskortit;
 import tuloskortti.Tuloskortti;
 
 /**
- * @author janne
+ * @author Janne Kähkönen
  * @version 13.6.2022
  * Seura käyttöliittymän muokkaamista varten, voidaan syöttää uusi tuloskortti tai muokata. Voidaan muokata seurantietoja
  */

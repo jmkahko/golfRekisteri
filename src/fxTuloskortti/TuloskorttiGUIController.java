@@ -24,7 +24,7 @@ import tuloskortti.Seura;
 
 /**
  * Luokka käyttöliittymän tapahtumien hoitamiseksi
- * @author janne
+ * @author Janne Kähkönen
  * @version 13.6.2022
  *
  */

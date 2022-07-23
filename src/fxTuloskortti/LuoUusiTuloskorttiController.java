@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import tuloskortti.GolfRekisteri;
 
 /**
- * @author janne
+ * @author Janne Kähkönen
  * @version 13.6.2022
  * Uuden tuloskortin luonti seuralle
  */

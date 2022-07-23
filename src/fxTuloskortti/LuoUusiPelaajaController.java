@@ -9,7 +9,7 @@ import tuloskortti.Kayttaja;
 import tuloskortti.SailoException;
 
 /**
- * @author janne
+ * @author Janne Kähkönen
  * @version 13.6.2022
  * Uuden pelaajan luonti/muokkaus controlleri
  */
