@@ -80,7 +80,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handleMuokkaaKierrosta() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa kierrosta", null, "");
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Muokkaa kierrosta", null, golfRekisteri);
     }
 
     /**
