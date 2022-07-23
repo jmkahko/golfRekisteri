@@ -92,6 +92,14 @@ public class GolfRekisteri {
     }
     
     /**
+     * Saadaan haettua kaikki golf seurat
+     * @return palauttaa kaikki seurat
+     */
+    public List<Seura> annaSeurat() {
+        return this.seurat.annaSeurat();
+    }
+    
+    /**
      * Lisätään uusi tuloskortti
      * @param tuloskortti lisättävä tuloskortti
      * @throws SailoException jos tuloskortin lisääminen ei onnistu
@@ -114,13 +122,13 @@ public class GolfRekisteri {
     public int getTuloskortteja() {
         return this.tuloskortit.getLkm();
     }
-    
+        
     /**
-     * @param i Antaa GolfRekisterin tuloskortin
-     * @return palautta tuloskortin
+     * @param seura tunnus
+     * @return palautta seuran tuloskortin
      */
-    public List<Tuloskortti> annaTuloskortti(int i) {
-        return this.tuloskortit.annaTuloskortit(i);
+    public List<Tuloskortti> annaTuloskortti(Seura seura) {
+        return tuloskortit.annaTuloskortit(seura.getTunnusNro());
     }
     
     /**
