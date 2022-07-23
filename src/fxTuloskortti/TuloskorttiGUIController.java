@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import kanta.UusiKierros;
 import tuloskortti.GolfRekisteri;
+import tuloskortti.Kayttaja;
 import tuloskortti.Kierrokset;
 import tuloskortti.Kierros;
 import tuloskortti.SailoException;
@@ -54,7 +55,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handleUusiKierros() {
-        //ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", null, "");
+        //ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", null, golfRekisteri);
         uusiKierros();
     }
     
@@ -209,5 +210,19 @@ public class TuloskorttiGUIController implements Initializable {
     public boolean avaa() {
         ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Luo pelaaja", null, golfRekisteri);
         return true;
+    }
+    
+    /**
+     * Haetaan käyttäjän tiedot tiedostosta
+     */
+    public void haeKayttajanTiedot() {
+        Kayttaja kayttaja = golfRekisteri.annaKayttaja(0);
+        
+        if (kayttaja != null) {
+            nimiTextField.setText(kayttaja.getNimi());
+            seuraTextField.setText(kayttaja.getKotiseura());
+            tasoitusTextField.setText(String.valueOf(kayttaja.getTasoitus()));
+            aloitusVuosiTextField.setText(String.valueOf(kayttaja.getAloitusvuosi()));
+        }
     }
 }

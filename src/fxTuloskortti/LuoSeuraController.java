@@ -27,7 +27,7 @@ public class LuoSeuraController implements ModalControllerInterface<GolfRekister
      */
     @FXML 
     private void handleSyotaTuloskortti() {
-        ModalController.showModal(LuoSeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", null, "");
+        ModalController.showModal(LuoSeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", null, golfRekisteri);
     }
 
     /**
