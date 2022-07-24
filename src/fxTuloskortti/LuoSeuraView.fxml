@@ -60,7 +60,6 @@
                   <TextField fx:id="katuosoiteTextField" text="Takametsä 2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="postinumeroTextField" text="71000" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="postiosoiteTextField" text="Metsälä" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Luo uusi seura" />
                   <Label text="Puhelinnumero:" GridPane.rowIndex="5" />
                   <TextField fx:id="puhelinnumeroTextField" text="045-1234567" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
