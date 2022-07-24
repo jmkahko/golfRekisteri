@@ -6,6 +6,7 @@ import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import tuloskortti.GolfRekisteri;
+import tuloskortti.Seura;
 
 /**
  * @author Janne Kähkönen
@@ -68,5 +69,6 @@ public class LuoSeuraController implements ModalControllerInterface<GolfRekister
  // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
 
     private GolfRekisteri golfRekisteri;
+
 
 }
