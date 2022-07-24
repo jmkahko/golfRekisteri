@@ -119,6 +119,22 @@ public class Kierros {
         return this.kayttajaId;
     }
     
+    /**
+     * Palauttaa käyttäjän pelaaman tee-paikan
+     * @return palauttaa käyttäjän pelaaman tee-paikan
+     */
+    public int getPelattuTee() {
+        return this.pelattuTee;
+    }
+    
+    /**
+     * Palauttaa käyttäjän pelmaan kierrospäivän
+     * @return palauttaa kierrospäivän
+     */
+    public String getPelattuPaiva() {
+        return this.kierrospaiva;
+    }
+    
     
     /**
      * Antaa kierrokselle seuraavan rekisterinumeron.

@@ -109,6 +109,25 @@ public class Kierrokset implements Iterable<Kierros> {
         }
         return loydetytKierrokset;
     }
+    
+    /**
+     * Palauttaa kierrokset jotka pelattu, näistä näytetään päiväys, kenttä ja tulos
+     * Tehdään oletus, että aina on 18 väylää kierretty ja syötetty. Joten uuden kierroksen alku löytyy paikoista 1, 19, 37...
+     * @return palauttaa yhden rivin per kierros.
+     */
+    public List<Kierros> annaKaikkiKierrokset() {
+        List<Kierros> loydetytKierrokset = new ArrayList<Kierros>();
+        
+        int laskuri = 1;
+        for (Kierros k : this.alkiot) {
+            if (k.getTunnusNro() == laskuri) {
+                loydetytKierrokset.add(k);
+                laskuri += 18;
+            }
+        }
+
+        return loydetytKierrokset;
+    }
         
     
     /**
@@ -130,6 +149,17 @@ public class Kierrokset implements Iterable<Kierros> {
         for (Kierros tulos : kierrokset2) {
             System.out.print("SeuraId: " + tulos.getSeuraId() + " ");
             tulos.tulosta(System.out);
+        }
+        
+        System.out.println("============= Yksi rivi per kierros testi =================");
+        
+        kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 48));
+        kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 62));
+        kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
+        
+        List<Kierros> kierrosYksiRivi = kierrokset.annaKaikkiKierrokset();
+        for (Kierros tulos : kierrosYksiRivi) {
+            System.out.println("KierrosId: " + tulos.getTunnusNro() + ", pelattu päivä: " + tulos.getPelattuPaiva());
         }
     }
 }
