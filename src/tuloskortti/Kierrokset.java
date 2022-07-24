@@ -82,21 +82,16 @@ public class Kierrokset implements Iterable<Kierros> {
      * @example
      * <pre name="test">
      * #import java.util.*;
+     * #import kanta.UusiKierros;
      * 
      *  Kierrokset kierrokset = new Kierrokset();
-     *  Kierros kierros1 = new Kierros();
-     *  kierros1.taytaTestiTiedoilla(1, 1, 2, 4, 55);
-     *  Kierros kierros2 = new Kierros();
-     *  kierros2.taytaTestiTiedoilla(2, 1, 2, 4, 48);
-     *  kierrokset.lisaaKierros(kierros1);
-     *  kierrokset.lisaaKierros(kierros2);
+     *  kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
      *  List<Kierros> loytyneet;
      *  loytyneet = kierrokset.annaKierrokset(1, 1);
-     *  loytyneet.size() === 0; 
-     *  loytyneet = kierrokset.annaKierrokset(2, 1);
-     *  loytyneet.get(0) == kierros1 === true;
-     *  loytyneet.get(1) == kierros2 === true;
-     *  loytyneet.size() === 1; 
+     *  loytyneet.size() === 18; 
+     *  kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
+     *  loytyneet = kierrokset.annaKierrokset(1, 1);
+     *  loytyneet.size() === 36; 
      * </pre> 
      */
     public List<Kierros> annaKierrokset(int tuloskorttiId, int kayttajaId) {
@@ -114,6 +109,20 @@ public class Kierrokset implements Iterable<Kierros> {
      * Palauttaa kierrokset jotka pelattu, näistä näytetään päiväys, kenttä ja tulos
      * Tehdään oletus, että aina on 18 väylää kierretty ja syötetty. Joten uuden kierroksen alku löytyy paikoista 1, 19, 37...
      * @return palauttaa yhden rivin per kierros.
+     * @example
+     * <pre name="test">
+     * #import java.util.*;
+     * #import kanta.UusiKierros;
+     * 
+     *  Kierrokset kierrokset = new Kierrokset();
+     *  kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
+     *  List<Kierros> loytyneet;
+     *  loytyneet = kierrokset.annaKaikkiKierrokset();
+     *  loytyneet.size() === 1; 
+     *  kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 51));
+     *  loytyneet = kierrokset.annaKaikkiKierrokset();
+     *  loytyneet.size() === 2; 
+     * </pre> 
      */
     public List<Kierros> annaKaikkiKierrokset() {
         List<Kierros> loydetytKierrokset = new ArrayList<Kierros>();
