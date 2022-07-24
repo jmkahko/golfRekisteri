@@ -187,7 +187,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
      */
     @FXML
     private void handleMuokkaaSeuraa() {
-        //ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", null, "");
+        ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", null, golfRekisteri);
         uusiSeura();
     }
     
@@ -214,6 +214,11 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
     private void handleUusiTuloskortti() {
         //ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Luo uusi tuloskortti", null, "");
         uusiTuloskortti();
+    }
+    
+    @FXML
+    void handleUusiSeura() {
+        uusiSeura();
     }
 
     @Override
