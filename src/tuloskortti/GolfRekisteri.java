@@ -1,5 +1,6 @@
 package tuloskortti;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -30,6 +31,8 @@ public class GolfRekisteri {
     private Seurat seurat;
     private Tuloskortit tuloskortit;
     private Kierrokset kierrokset;
+    
+    private String hakemisto = "golfRekisteri";
     
     
     /**
@@ -146,7 +149,6 @@ public class GolfRekisteri {
      */
     public void lisaaKierros(List<Kierros> kierros) {
         this.kierrokset.lisaaKierros(kierros);
-        
     }
     
     /**
@@ -166,7 +168,15 @@ public class GolfRekisteri {
         return this.kierrokset.annaKierrokset(seura.getTunnusNro(), kayttaja.getTunnusNro());
     }
     
-        
+    /**
+     * Palauttaa kierrokset jotka pelattu, näistä näytetään päiväys, kenttä ja tulos
+     * Tehdään oletus, että aina on 18 väylää kierretty ja syötetty. Joten uuden kierroksen alku löytyy paikoista 1, 19, 37...
+     * @return palauttaa yhden rivin per kierros.
+     */
+    public List<Kierros> annaKaikkiKierrokset() {
+        return this.kierrokset.annaKaikkiKierrokset();
+    }
+            
 
     /**
      * @param args ei käytössä
