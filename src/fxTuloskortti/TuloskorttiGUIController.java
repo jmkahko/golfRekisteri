@@ -48,6 +48,8 @@ public class TuloskorttiGUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
         chooserKierrokset.clear();
+        chooserKierrokset.addSelectionListener(e -> naytaKierros());
+        haeKierrokset();
     }
     
     /**
@@ -122,7 +124,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handleMuokkaaJasenta() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Muokkaa jäsentä", null, "");
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Muokkaa jäsentä", null, golfRekisteri);
     }
 
     /**
@@ -224,5 +226,28 @@ public class TuloskorttiGUIController implements Initializable {
             tasoitusTextField.setText(String.valueOf(kayttaja.getTasoitus()));
             aloitusVuosiTextField.setText(String.valueOf(kayttaja.getAloitusvuosi()));
         }
+    }
+    
+    /**
+     * Haetaan kierrokset rivi per kierros
+     */
+    public void haeKierrokset() {
+        
+        if (golfRekisteri != null) {
+            List<Kierros> kierrokset = golfRekisteri.annaKaikkiKierrokset();
+            
+            chooserKierrokset.add((Kierros) kierrokset);
+            naytaKierros();
+        }
+        chooserKierrokset.refresh();
+        
+    }
+    
+    /**
+     * Haetaan kieroksen tiedot
+     */
+    public void naytaKierros() {
+        Kierros kierroksenKohdalla = chooserKierrokset.getSelectedObject();
+        System.out.println("Näytettiin: " + kierroksenKohdalla.getTunnusNro());
     }
 }
