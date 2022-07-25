@@ -230,7 +230,8 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
     @Override
     public void handleShown() {
         // TODO Auto-generated method stub
-        
+
+        haeSeura(0); // Haetaan seurojen tiedot, kun tullaan Seurat näkymälle ja valitaan ensimmäisessä indeksi oleva
     }
 
     @Override
@@ -296,7 +297,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
     }
     
     /**
-     * Luodaan uusi tulokortti seuralle. Luo uuden väylän tuloskortille
+     * Luodaan uusi tulokortti seuralle
      */
     public void uusiTuloskortti() {
         Seura seuranKohdalla = chooserSeurat.getSelectedObject();
@@ -306,8 +307,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
         }
 
         golfRekisteri.lisaaTuloskortti(UusiTuloskortti.luoTuloskortti(seuranKohdalla.getTunnusNro()));
-
-        Dialogs.showMessageDialog("Tuloskortti generoitu automaattisesti");
+        naytaTuloskortti(seuranKohdalla);
     }
     
     /**
