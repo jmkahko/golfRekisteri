@@ -2,7 +2,7 @@ package kanta;
 
 /**
  * UusiSeura -luokalla saadaan luotua testidataa golf seuralle
- * @author janne
+ * @author Janne Kähkönen
  * @version 12.7.2022
  *
  */

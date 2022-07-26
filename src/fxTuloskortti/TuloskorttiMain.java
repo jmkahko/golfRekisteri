@@ -11,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 
 /**
  * Golf tuloskortti -sovelluksen käyttöliittymä tapahtumien hoitaminen
- * @author janne
+ * @author Janne Kähkönen
  * @version 13.6.2022
  * 
  */
