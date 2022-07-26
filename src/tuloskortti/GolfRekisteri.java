@@ -1,6 +1,7 @@
 package tuloskortti;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -169,14 +170,12 @@ public class GolfRekisteri {
     }
     
     /**
-     * Palauttaa kierrokset jotka pelattu, näistä näytetään päiväys, kenttä ja tulos
-     * Tehdään oletus, että aina on 18 väylää kierretty ja syötetty. Joten uuden kierroksen alku löytyy paikoista 1, 19, 37...
-     * @return palauttaa yhden rivin per kierros.
+     * Palauttaa kierrokset jotka pelattu
+     * @return palauttaa kaikki kierrokset
      */
-    public List<Kierros> annaKaikkiKierrokset() {
+    public Collection<Kierros> annaKaikkiKierrokset() {
         return this.kierrokset.annaKaikkiKierrokset();
-    }
-            
+    }   
 
     /**
      * @param args ei käytössä
