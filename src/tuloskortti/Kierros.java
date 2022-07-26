@@ -135,6 +135,14 @@ public class Kierros {
         return this.kierrospaiva;
     }
     
+    /**
+     * Palauttaa yhden kierroksen (väylän) tuloksen
+     * @return palauttaa väylän tuloksen
+     */
+    public int getTulos() {
+        return this.tulos;
+    }
+    
     
     /**
      * Antaa kierrokselle seuraavan rekisterinumeron.

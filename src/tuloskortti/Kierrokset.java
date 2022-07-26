@@ -106,9 +106,8 @@ public class Kierrokset implements Iterable<Kierros> {
     }
     
     /**
-     * Palauttaa kierrokset jotka pelattu, näistä näytetään päiväys, kenttä ja tulos
-     * Tehdään oletus, että aina on 18 väylää kierretty ja syötetty. Joten uuden kierroksen alku löytyy paikoista 1, 19, 37...
-     * @return palauttaa yhden rivin per kierros.
+     * Palauttaa kaikki pelatut väylät ja kierrokset
+     * @return palauttaa kaikki
      * @example
      * <pre name="test">
      * #import java.util.*;
@@ -116,26 +115,12 @@ public class Kierrokset implements Iterable<Kierros> {
      * 
      *  Kierrokset kierrokset = new Kierrokset();
      *  kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
-     *  List<Kierros> loytyneet;
-     *  loytyneet = kierrokset.annaKaikkiKierrokset();
-     *  loytyneet.size() === 1; 
-     *  kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 51));
-     *  loytyneet = kierrokset.annaKaikkiKierrokset();
-     *  loytyneet.size() === 2; 
+     *  Collection<Kierros> kierrosYksiRivi = kierrokset.annaKaikkiKierrokset();
+     *  kierrosYksiRivi.size() === 18;
      * </pre> 
      */
-    public List<Kierros> annaKaikkiKierrokset() {
-        List<Kierros> loydetytKierrokset = new ArrayList<Kierros>();
-        
-        int laskuri = 1;
-        for (Kierros k : this.alkiot) {
-            if (k.getTunnusNro() == laskuri) {
-                loydetytKierrokset.add(k);
-                laskuri += 18;
-            }
-        }
-
-        return loydetytKierrokset;
+    public Collection<Kierros> annaKaikkiKierrokset() {
+        return this.alkiot;
     }
         
     
@@ -166,9 +151,16 @@ public class Kierrokset implements Iterable<Kierros> {
         kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 62));
         kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
         
-        List<Kierros> kierrosYksiRivi = kierrokset.annaKaikkiKierrokset();
+        Collection<Kierros> kierrosYksiRivi = kierrokset.annaKaikkiKierrokset();
+        int kierrosLaskuri = 18;
+        int tulosLaskuri = 0;
         for (Kierros tulos : kierrosYksiRivi) {
-            System.out.println("KierrosId: " + tulos.getTunnusNro() + ", pelattu päivä: " + tulos.getPelattuPaiva());
+            tulosLaskuri += tulos.getTulos();
+            if (kierrosLaskuri == tulos.getTunnusNro()) {
+                System.out.println("KierrosId: " + tulos.getSeuraId() + ", pelattu päivä: " + tulos.getPelattuPaiva() + ", tulos: " + tulosLaskuri);
+                kierrosLaskuri += 18;
+                tulosLaskuri = 0;
+            }
         }
     }
 }
