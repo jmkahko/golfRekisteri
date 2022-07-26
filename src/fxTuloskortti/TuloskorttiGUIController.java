@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -49,7 +50,6 @@ public class TuloskorttiGUIController implements Initializable {
     public void initialize(URL url, ResourceBundle bundle) {
         chooserKierrokset.clear();
         chooserKierrokset.addSelectionListener(e -> naytaKierros());
-        haeKierrokset();
     }
     
     /**
@@ -142,11 +142,13 @@ public class TuloskorttiGUIController implements Initializable {
     private void handleTietoja() {
         tietojaSovelluksesta();
     }
+    
       
 // =================================================================
 // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
     
     private GolfRekisteri golfRekisteri;
+    private Kierrokset uusiKierros = new Kierrokset();
 
     /**
      * Tarkistetaan onko tallennus tehty
@@ -189,10 +191,10 @@ public class TuloskorttiGUIController implements Initializable {
      * Lisätään uusi kierros
      */
     public void uusiKierros() {
-        Kierrokset uusiKierros = new Kierrokset();
         uusiKierros.lisaaKierros(UusiKierros.luoKierros(1, 55));
         
-        Dialogs.showMessageDialog("Luotu uusi väylä kierrokselle. Tulostyy Console lokiin tieto");
+        Dialogs.showMessageDialog("Luotu uusi väylä kierrokselle. Tulostuu Console lokiin tieto");
+        
         uusiKierros.annaKierrokset(1, 1);
         
         List<Kierros> kierrokset2 = uusiKierros.annaKierrokset(1, 1);
@@ -203,6 +205,7 @@ public class TuloskorttiGUIController implements Initializable {
             System.out.print("SeuraId: " + tulos.getSeuraId() + " ");
             tulos.tulosta(System.out);
         }
+        haeKierrokset();
     }
     
     /**
@@ -232,15 +235,20 @@ public class TuloskorttiGUIController implements Initializable {
      * Haetaan kierrokset rivi per kierros
      */
     public void haeKierrokset() {
-        
-        if (golfRekisteri != null) {
-            List<Kierros> kierrokset = golfRekisteri.annaKaikkiKierrokset();
-            
-            chooserKierrokset.add((Kierros) kierrokset);
-            naytaKierros();
+        chooserKierrokset.clear();
+
+        Collection<Kierros> kaikkiKierrokset = uusiKierros.annaKaikkiKierrokset();
+        int kierrosLaskuri = 18;
+        int tulosLaskuri = 0;
+        for (Kierros tulos : kaikkiKierrokset) {
+            tulosLaskuri += tulos.getTulos();
+            if (kierrosLaskuri == tulos.getTunnusNro()) {
+                String seuranNimi = this.golfRekisteri.annaSeura(tulos.getSeuraId()-1).getSeurannimi();
+                chooserKierrokset.add(tulos.getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), tulos);
+                kierrosLaskuri += 18;
+                tulosLaskuri = 0;
+            }
         }
-        chooserKierrokset.refresh();
-        
     }
     
     /**
