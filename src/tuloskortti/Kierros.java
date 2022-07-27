@@ -3,6 +3,7 @@ package tuloskortti;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import fi.jyu.mit.ohj2.Mjonot;
 import kanta.UusiKierros;
 
 /**
@@ -83,6 +84,12 @@ public class Kierros {
                 "|" + this.vayla + "|" + this.tulos);
     }
     
+    @Override
+    public String toString() {
+        return this.id + "|" + this.seuraId + "|" + this.kayttajaId + "|" + this.kierrospaiva + "|" + this.pelattuTee + 
+                    "|" + this.vayla + "|" + this.tulos;
+    }
+    
     
     /**
      * Tulostetaan tuloskortin tiedot
@@ -101,7 +108,17 @@ public class Kierros {
         return this.id;
     }
     
-
+    /**
+     * Asettaa id numeron ja samalla varmistetaan, että seuraavaId numero on aina suurempi kuin nykyinen id numero
+     * @param idNro joka asetetaan
+     */
+    public void setTunnusNro(int idNro) {
+        this.id = idNro;
+        if (this.id >= seuraavaId) {
+            seuraavaId = this.id + 1;
+        }
+    }
+    
     /**
      * Palauttaa seuran id:n
      * @return palauttaa id:n
@@ -163,6 +180,33 @@ public class Kierros {
         this.id = seuraavaId;
         seuraavaId++;
         return this.id;
+    }
+    
+    /**
+     * Selvittää kierroksen tiedot | putkella erotellusta merkkijonosta
+     * Tarkistaa, että seuraavaId on suurempi kuin tuleva Id numero
+     * @param merkkijono josta seuran tiedot saadaan
+     * @example
+     * <pre name="test">
+     * Kierros kierros = new Kierros();
+     * kierros.parse(  3  |  1  | 1  );
+     * kierros.getTunnusNro() === 3;
+     * kierros.toString().startsWith(3|1|1) === true;
+     * kierros.rekisteroi();
+     * int n = seura.getTunnusNro();
+     * kierros.parse("" + (n + 20));   // Otetaan merkkijonon alusta vain id numero ja lisätään siihen 20
+     * kierros.rekisteroi();           // Tarkistetaan tämän jälkeen, että tulee isompi numero
+     * kierros.getTunnusNro() === n + 20 + 1;
+     */
+    public void parse(String merkkijono) {
+        var sb = new StringBuilder(merkkijono);
+        this.setTunnusNro(Mjonot.erota(sb, '|', this.getTunnusNro()));      
+        this.seuraId = Mjonot.erota(sb, '|', seuraId);
+        this.kayttajaId  = Mjonot.erota(sb, '|', kayttajaId);
+        this.kierrospaiva = Mjonot.erota(sb, '|', kierrospaiva);
+        this.pelattuTee = Mjonot.erota(sb, '|', pelattuTee);
+        this.vayla = Mjonot.erota(sb, '|', vayla);
+        this.tulos = Mjonot.erota(sb, '|', tulos);
     }
     
     

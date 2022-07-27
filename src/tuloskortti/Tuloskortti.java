@@ -3,6 +3,7 @@ package tuloskortti;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import fi.jyu.mit.ohj2.Mjonot;
 import kanta.UusiTuloskortti;
 
 /**
@@ -90,6 +91,11 @@ public class Tuloskortti {
                 "|" + this.pituus51 + "|" + this.pituus48 + "|" + this.par + "|" + this.hcp);
     }
     
+    @Override
+    public String toString() {
+        return this.id + "|" + this.seuraId + "|" + this.vayla + "|" + this.pituus62 + "|" + this.pituus55 + 
+                "|" + this.pituus51 + "|" + this.pituus48 + "|" + this.par + "|" + this.hcp;
+    }
     
     /**
      * Tulostetaan tuloskortin tiedot
@@ -106,6 +112,17 @@ public class Tuloskortti {
      */
     public int getTunnusNro() {
         return this.id;
+    }
+    
+    /**
+     * Asettaa id numeron ja samalla varmistetaan, että seuraavaId numero on aina suurempi kuin nykyinen id numero
+     * @param idNro joka asetetaan
+     */
+    public void setTunnusNro(int idNro) {
+        this.id = idNro;
+        if (this.id >= seuraavaId) {
+            seuraavaId = this.id + 1;
+        }
     }
     
     /**
@@ -152,6 +169,35 @@ public class Tuloskortti {
         this.id = seuraavaId;
         seuraavaId++;
         return this.id;
+    }
+    
+    /**
+     * Selvittää tiloskortin tiedot | putkella erotellusta merkkijonosta
+     * Tarkistaa, että seuraavaId on suurempi kuin tuleva Id numero
+     * @param merkkijono josta tuloskortin tiedot saadaan
+     * @example
+     * <pre name="test">
+     * Tuloskortti tuloskortti = new Tuloskortti();
+     * tuloskortti.parse(  3  |  1  | 1  );
+     * tuloskortti.getTunnusNro() === 3;
+     * tuloskortti.toString().startsWith(3|1|1) === true;
+     * tuloskortti.rekisteroi();
+     * int n = seura.getTunnusNro();
+     * tuloskortti.parse("" + (n + 20));   // Otetaan merkkijonon alusta vain id numero ja lisätään siihen 20
+     * tuloskortti.rekisteroi();           // Tarkistetaan tämän jälkeen, että tulee isompi numero
+     * tuloskortti.getTunnusNro() === n + 20 + 1;
+     */
+    public void parse(String merkkijono) {
+        var sb = new StringBuilder(merkkijono);
+        this.setTunnusNro(Mjonot.erota(sb, '|', this.getTunnusNro()));             
+        this.seuraId = Mjonot.erota(sb, '|', seuraId);
+        this.vayla = Mjonot.erota(sb, '|', vayla);
+        this.pituus62 = Mjonot.erota(sb, '|', pituus62);
+        this.pituus55 = Mjonot.erota(sb, '|', pituus55);
+        this.pituus51 = Mjonot.erota(sb, '|', pituus51);
+        this.pituus48 = Mjonot.erota(sb, '|', pituus48);
+        this.par = Mjonot.erota(sb, '|', par);
+        this.hcp = Mjonot.erota(sb, '|', hcp);
     }
     
     

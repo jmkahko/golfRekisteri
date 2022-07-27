@@ -1,9 +1,15 @@
 package tuloskortti;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 import kanta.UusiKierros;
 
@@ -125,10 +131,68 @@ public class Kierrokset implements Iterable<Kierros> {
         
     
     /**
+     * Tallentaa kierroksen tiedostoon
+     * Tiedoston muoto:
+     * <pre>
+     * 1|1|1|01-01-2022|55|1|7
+     * 2|1|1|01-01-2022|55|2|4
+     * </pre>
+     * @param hakemisto johon tiedosto tallennetaan
+     * @throws SailoException jos talennus epäonnistuu
+     */
+    public void tallenna(String hakemisto) throws SailoException {
+        File ftiedosto = new File(hakemisto + "/kierros.dat");
+        
+        try (PrintStream fo = new PrintStream(new FileOutputStream(ftiedosto, false))) {
+
+            for (Kierros k : this) {
+                fo.println(k.toString());
+            }
+
+        } catch (FileNotFoundException e) {
+            System.err.println("Tiedosto " + ftiedosto.getAbsolutePath() + " " + e.getMessage());
+        }
+        
+    }
+    
+    /**
+     * Lukee kierroksen tiedostosta
+     * @param hakemisto josta tiedosto löytyy
+     * @throws SailoException jos lukeminen epäonnistuu
+     */
+    public void lueTiedostosta(String hakemisto) throws SailoException {
+        String hnimi = hakemisto + "/kierros.dat";
+        File ftiedosto = new File(hnimi);
+        
+        try (Scanner fi = new Scanner(new FileInputStream(ftiedosto))) {
+            while (fi.hasNext()) {
+                String merkkijono = fi.nextLine();
+                if (merkkijono == null || merkkijono.equals("") || merkkijono.charAt(0) == ';') {
+                    continue;
+                }
+                
+                Kierros kierros = new Kierros();
+                kierros.parse(merkkijono);
+                this.lisaaKierros(kierros);
+            }
+        } catch (FileNotFoundException e) {
+            throw new SailoException("Ei saa luettua tiedostoa: " + hnimi);
+        }
+    }
+        
+    
+    /**
      * @param args ei käytössä
      */
     public static void main(String[] args) {
         Kierrokset kierrokset = new Kierrokset();
+        
+        // Luetaan tiedostosta kierrokset
+        try {
+            kierrokset.lueTiedostosta("golfRekisteri");
+        }  catch (SailoException e) {
+            System.err.println(e.getMessage());
+        }
         
         kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
         
@@ -161,6 +225,13 @@ public class Kierrokset implements Iterable<Kierros> {
                 kierrosLaskuri += 18;
                 tulosLaskuri = 0;
             }
+        }
+        
+        // Tiedostoon tallennus
+        try {
+            kierrokset.tallenna("golfRekisteri");
+        } catch (SailoException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

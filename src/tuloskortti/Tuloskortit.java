@@ -1,9 +1,15 @@
 package tuloskortti;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 import kanta.UusiTuloskortti;
 
@@ -107,6 +113,56 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
         }
         return loydetyt;
     }
+    
+    /**
+     * Tallentaa tuloskortin tiedostoon
+     * Tiedoston muoto:
+     * <pre>
+     * 1|1|1|143|133|109|109|3|5
+     * 2|1|2|503|470|470|454|5|9
+     * </pre>
+     * @param hakemisto johon tiedosto tallennetaan
+     * @throws SailoException jos talennus epäonnistuu
+     */
+    public void tallenna(String hakemisto) throws SailoException {
+        File ftiedosto = new File(hakemisto + "/tuloskortti.dat");
+        
+        try (PrintStream fo = new PrintStream(new FileOutputStream(ftiedosto, false))) {
+
+            for (Tuloskortti t : this) {
+                fo.println(t.toString());
+            }
+
+        } catch (FileNotFoundException e) {
+            System.err.println("Tiedosto " + ftiedosto.getAbsolutePath() + " " + e.getMessage());
+        }
+        
+    }
+    
+    /**
+     * Lukee tuloskortin tiedostosta
+     * @param hakemisto josta tiedosto löytyy
+     * @throws SailoException jos lukeminen epäonnistuu
+     */
+    public void lueTiedostosta(String hakemisto) throws SailoException {
+        String hnimi = hakemisto + "/tuloskortti.dat";
+        File ftiedosto = new File(hnimi);
+        
+        try (Scanner fi = new Scanner(new FileInputStream(ftiedosto))) {
+            while (fi.hasNext()) {
+                String merkkijono = fi.nextLine();
+                if (merkkijono == null || merkkijono.equals("") || merkkijono.charAt(0) == ';') {
+                    continue;
+                }
+                
+                Tuloskortti tuloskortti = new Tuloskortti();
+                tuloskortti.parse(merkkijono);
+                this.lisaaTuloskortti(tuloskortti);
+            }
+        } catch (FileNotFoundException e) {
+            throw new SailoException("Ei saa luettua tiedostoa: " + hnimi);
+        }
+    }
 
     
     /**
@@ -116,6 +172,13 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
         // TODO Auto-generated method stub
 
         Tuloskortit tuloskortit = new Tuloskortit();
+        
+        // Luetaan tiedostosta kierrokset
+        try {
+            tuloskortit.lueTiedostosta("golfRekisteri");
+        }  catch (SailoException e) {
+            System.err.println(e.getMessage());
+        }
 
         // Haetaan generoitu tuloskortti ja lisätään listana  
         tuloskortit.lisaaTuloskortti(UusiTuloskortti.luoTuloskortti(1));
@@ -129,6 +192,13 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
         for (Tuloskortti tulos : tuloskortti2) {
             System.out.print("Seura: " + tulos.getSeuraNro() + " ");
             tulos.tulosta(System.out);
+        }
+        
+        // Tiedostoon tallennus
+        try {
+            tuloskortit.tallenna("golfRekisteri");
+        } catch (SailoException e) {
+            System.err.println(e.getMessage());
         }
 
     }
