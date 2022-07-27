@@ -1,5 +1,13 @@
 package tuloskortti;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Scanner;
+
 /**
  * +--------------------------------------+--------------------------------------+
  * | Luokan nimi: Kayttajat               | Avustajat:                           |
@@ -25,7 +33,7 @@ package tuloskortti;
  */
 public class Kayttajat {
     
-    private static final int MAX_KAYTTAJIA = 2;
+    private static final int MAX_KAYTTAJIA = 5;
     private int lkm = 0;
     private Kayttaja[] alkiot;
     
@@ -70,7 +78,7 @@ public class Kayttajat {
      * @return käyttäjien lukumäärän
      */
     public int getLkm() {
-        return lkm;
+        return this.lkm;
     }
     
     /**
@@ -85,6 +93,57 @@ public class Kayttajat {
         }
         return alkiot[i];
     }
+    
+    /**
+     * Tallentaa käyttäjän tiedostoon
+     * Tiedoston muoto:
+     * <pre>
+     * 1|Iines Ankka|Rankkalinna Golf|51.0|1966
+     * 2|Hupu|Ankkalinna Golf|27.0|1994
+     * </pre>
+     * @param hakemisto johon tiedosto tallennetaan
+     * @throws SailoException jos talennus epäonnistuu
+     */
+    public void tallenna(String hakemisto) throws SailoException {
+        File ftiedosto = new File(hakemisto + "/kayttaja.dat");
+        
+        try (PrintStream fo = new PrintStream(new FileOutputStream(ftiedosto, false))) {
+
+            for (int x = 0; x < this.getLkm(); x++) {
+                Kayttaja kayttaja = this.annaKayttaja(x);
+                fo.println(kayttaja.toString());
+            }
+
+        } catch (FileNotFoundException e) {
+            System.err.println("Tiedosto " + ftiedosto.getAbsolutePath() + " " + e.getMessage());
+        }
+        
+    }
+    
+    /**
+     * Lukee käyttäjät tiedostosta
+     * @param hakemisto josta tiedosto löytyy
+     * @throws SailoException jos lukeminen epäonnistuu
+     */
+    public void lueTiedostosta(String hakemisto) throws SailoException {
+        String hnimi = hakemisto + "/kayttaja.dat";
+        File ftiedosto = new File(hnimi);
+        
+        try (Scanner fi = new Scanner(new FileInputStream(ftiedosto))) {
+            while (fi.hasNext()) {
+                String merkkijono = fi.nextLine();
+                if (merkkijono == null || merkkijono.equals("") || merkkijono.charAt(0) == ';') {
+                    continue;
+                }
+                
+                Kayttaja kayttaja = new Kayttaja();
+                kayttaja.parse(merkkijono);
+                this.lisaa(kayttaja);
+            }
+        } catch (FileNotFoundException e) {
+            throw new SailoException("Ei saa luettua tiedostoa: " + hnimi);
+        }
+    }
 
     
     /**
@@ -93,6 +152,15 @@ public class Kayttajat {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         Kayttajat kayttajat = new Kayttajat();
+        
+        // Luetaan tiedostosta käyttäjät
+        try {
+            kayttajat.lueTiedostosta("golfRekisteri");
+        }  catch (SailoException e) {
+            System.err.println(e.getMessage());
+        }
+        
+
         Kayttaja henkilo1 = new Kayttaja();
         Kayttaja henkilo2 = new Kayttaja();
         
@@ -115,5 +183,15 @@ public class Kayttajat {
            System.out.println("Käyttäjän indeksi: " + x);
            kayttaja.tulosta(System.out);
         }
+        
+        // Tiedostoon tallennus
+        try {
+            kayttajat.tallenna("golfRekisteri");
+        } catch (SailoException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        
+        
     }
 }

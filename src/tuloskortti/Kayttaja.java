@@ -73,7 +73,7 @@ public class Kayttaja {
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta(PrintStream out) {
-        out.println(String.format("%03d", id) + "|" + this.nimi + "|" + this.kotiseura + "|" + this.tasoitus + "|" + this.aloitusvuosi);
+        out.println(this.id + "|" + this.nimi + "|" + this.kotiseura + "|" + this.tasoitus + "|" + this.aloitusvuosi);
     }
     
     
@@ -92,6 +92,45 @@ public class Kayttaja {
      */
     public int getTunnusNro() {
         return this.id;
+    }
+    
+    /**
+     * Asettaa id numeron ja samalla varmistetaan, että seuraavaId numero on aina suurempi kuin nykyinen id numero
+     * @param idNro joka asetetaan
+     */
+    public void setTunnusNro(int idNro) {
+        this.id = idNro;
+        if (this.id >= seuraavaId) {
+            seuraavaId = this.id + 1;
+        }
+    }
+    
+    /**
+     * @return palauttaa käyttäjän nimen
+     */
+    public String getNimi() {
+        return this.nimi;
+    }
+    
+    /**
+     * @return palauttaa käyttäjän kotiseuran
+     */
+    public String getKotiseura() {
+        return this.kotiseura;
+    }
+    
+    /**
+     * @return palauttaa käyttäjän tasoituksen
+     */
+    public double getTasoitus() {
+        return this.tasoitus;
+    }
+    
+    /**
+     * @return palauttaa käyttäjän aloitusvuoden
+     */
+    public int getAloitusvuosi() {
+        return this.aloitusvuosi;
     }
     
     
@@ -122,6 +161,8 @@ public class Kayttaja {
      * @example
      * <pre name="test">
      * Kayttaja kayttaja = new Kayttaja();
+     * kayttaja.parse("       3         |       Iines Ankka     |   Ankkalinna Golf");
+     * kayttaja.toString().startsWith("3|Iines Ankka|Ankkalinna Golf") === true;
      * 
      */
     @Override
@@ -129,18 +170,32 @@ public class Kayttaja {
         return this.getTunnusNro() + "|" + this.nimi + "|" + this.kotiseura + "|" + this.tasoitus + "|" + this.aloitusvuosi;
     }
     
+    
     /**
-     * Parseroidaan käyttäjän tiedot | erotellusta merkkijonosta
-     * @param rivi annetaan jäsenen rivitieto
+     * Selvittää käyttäjän tiedot | putkella erotellusta merkkijonosta
+     * Tarkistaa, että seuraavaId on suurempi kuin tuleva Id numero
+     * @param merkkijono josta käyttäjän tiedot saadaan
+     * @example
+     * <pre name="test">
+     * Kayttaja kayttaja = new Kayttaja();
+     * kayttaja.parse("       3         |       Iines Ankka     |   Ankkalinna Golf");
+     * kayttaja.getTunnusNro() === 3;
+     * kayttaja.toString().startsWith("3|Iines Ankka|Ankkalinna Golf") === true;
+     * kayttaja.rekisteroi();
+     * int n = kayttaja.getTunnusNro();
+     * kayttaja.parse("" + (n + 20));   // Otetaan merkkijonon alusta vain id numero ja lisätään siihen 20
+     * kayttaja.rekisteroi();           // Tarkistetaan tämän jälkeen, että tulee isompi numero
+     * kayttaja.getTunnusNro() === n + 20 + 1;
      */
-    public void parse(String rivi) {
-        //StringBuffer sb = new StringBuffer(rivi);
-        
-        
+    public void parse(String merkkijono) {
+        var sb = new StringBuilder(merkkijono);
+        this.setTunnusNro(Mjonot.erota(sb, '|', this.getTunnusNro()));
+        this.nimi = Mjonot.erota(sb, '|', nimi);
+        this.kotiseura = Mjonot.erota(sb, '|', kotiseura);
+        this.tasoitus = Mjonot.erota(sb, '|', tasoitus);
+        this.aloitusvuosi = Mjonot.erota(sb, '|', aloitusvuosi);
     }
     
-
-
     
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot käyttäjälle.
@@ -171,13 +226,8 @@ public class Kayttaja {
         henkilo1.taytaTestiTiedoilla();
         henkilo2.taytaTestiTiedoilla();
         
-        henkilo2.tulosta(System.out);
         henkilo1.tulosta(System.out);
-        System.out.println(henkilo1.toString());
-        
-        Kayttaja henkilo3 = new Kayttaja();
-        henkilo3.parse("3  |  Hansu Hanhi    |  Rankkalinna Golf");
-        System.out.println(henkilo3.toString());
+        henkilo2.tulosta(System.out);
     }
 
 }
