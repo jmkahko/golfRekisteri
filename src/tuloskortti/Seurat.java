@@ -191,7 +191,7 @@ public class Seurat {
         // TODO Auto-generated method stub
         Seurat seurat = new Seurat();
         
-        // Luetaan tiedostosta käyttäjät
+        // Luetaan tiedostosta seurat
         try {
             seurat.lueTiedostosta("golfRekisteri");
         }  catch (SailoException e) {
