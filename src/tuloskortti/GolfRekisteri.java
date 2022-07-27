@@ -191,10 +191,14 @@ public class GolfRekisteri {
         
         kayttajat = new Kayttajat();
         seurat = new Seurat();
+        kierrokset = new Kierrokset();
+        tuloskortit = new Tuloskortit();
         
         hakemisto = nimi;
         kayttajat.lueTiedostosta(nimi);
         seurat.lueTiedostosta(nimi);
+        kierrokset.lueTiedostosta(nimi);
+        tuloskortit.lueTiedostosta(nimi);
     }
     
     /**
@@ -212,6 +216,18 @@ public class GolfRekisteri {
         
         try {
             seurat.tallenna(hakemisto);
+        } catch (SailoException e) {
+            virhe += e.getMessage();
+        }
+        
+        try {
+            kierrokset.tallenna(hakemisto);
+        } catch (SailoException e) {
+            virhe += e.getMessage();
+        }
+        
+        try {
+            tuloskortit.tallenna(hakemisto);
         } catch (SailoException e) {
             virhe += e.getMessage();
         }
