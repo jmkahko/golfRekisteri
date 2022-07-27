@@ -1,8 +1,11 @@
 package tuloskortti;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * +--------------------------------------+--------------------------------------+
@@ -176,12 +179,59 @@ public class GolfRekisteri {
     public Collection<Kierros> annaKaikkiKierrokset() {
         return this.kierrokset.annaKaikkiKierrokset();
     }   
+    
+    /**
+     * Lukee golfRekisterin tiedot tiedostosta
+     * @param nimi käytetään tiedoston lukemiseen
+     * @throws SailoException jos lukeminen epäonnistuu
+     */
+    public void lueTiedostosta(String nimi) throws SailoException {
+        File file = new File(nimi);
+        file.mkdir();
+        
+        kayttajat = new Kayttajat();
+        seurat = new Seurat();
+        
+        hakemisto = nimi;
+        kayttajat.lueTiedostosta(nimi);
+        seurat.lueTiedostosta(nimi);
+    }
+    
+    /**
+     * Tallentaan golfRekisterin tiedot tiedostoon
+     * @throws SailoException jos tallennuksessa tulee ongelmaa
+     */
+    public void tallenna() throws SailoException {
+        String virhe = "";
+        
+        try {
+            kayttajat.tallenna(hakemisto);
+        } catch (SailoException e) {
+            virhe = e.getMessage();
+        }
+        
+        try {
+            seurat.tallenna(hakemisto);
+        } catch (SailoException e) {
+            virhe += e.getMessage();
+        }
+        
+        if (!"".equals(virhe)) {
+            throw new SailoException(virhe);
+        }
+    }
 
     /**
      * @param args ei käytössä
      */
     public static void main(String[] args) {
         GolfRekisteri golfRekisteri = new GolfRekisteri();
+        
+        try {
+            golfRekisteri.lueTiedostosta("koegolfRekisteri");
+        }  catch (SailoException e) {
+            System.err.println(e.getMessage());
+        }
         
         // Käyttäjien tiedot
         Kayttaja henkilo1 = new Kayttaja();
@@ -206,6 +256,8 @@ public class GolfRekisteri {
             golfRekisteri.lisaaKayttaja(henkilo2);
             golfRekisteri.lisaaSeura(seura1);
             golfRekisteri.lisaaSeura(seura2);
+            
+            golfRekisteri.tallenna();
         } catch (SailoException e) {
             System.err.println(e.getMessage());
         }
