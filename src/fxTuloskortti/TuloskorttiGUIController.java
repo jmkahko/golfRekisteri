@@ -148,7 +148,6 @@ public class TuloskorttiGUIController implements Initializable {
 // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
     
     private GolfRekisteri golfRekisteri;
-    private Kierrokset uusiKierros = new Kierrokset();
 
     /**
      * Tarkistetaan onko tallennus tehty
@@ -163,7 +162,11 @@ public class TuloskorttiGUIController implements Initializable {
      * Tietojen tallennus
      */
     private void tallenna() {
-        Dialogs.showMessageDialog("Tallennetetaan! Mutta ei toimi vielä");
+        try {
+            golfRekisteri.tallenna();
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog(e.getMessage());
+        }
     }
     
     private void tietojaSovelluksesta() {
@@ -191,13 +194,14 @@ public class TuloskorttiGUIController implements Initializable {
      * Lisätään uusi kierros
      */
     public void uusiKierros() {
-        uusiKierros.lisaaKierros(UusiKierros.luoKierros(1, 55));
+        golfRekisteri.lisaaKierros(UusiKierros.luoKierros(1, 55));
         
         Dialogs.showMessageDialog("Luotu uusi väylä kierrokselle. Tulostuu Console lokiin tieto");
         
-        uusiKierros.annaKierrokset(1, 1);
+        golfRekisteri.annaKierrokset(golfRekisteri.annaSeura(0), golfRekisteri.annaKayttaja(0));
         
-        List<Kierros> kierrokset2 = uusiKierros.annaKierrokset(1, 1);
+        
+        List<Kierros> kierrokset2 = golfRekisteri.annaKierrokset(golfRekisteri.annaSeura(0), golfRekisteri.annaKayttaja(0));
         
         System.out.println("============= Kierrokset testi =================");
 
@@ -214,6 +218,8 @@ public class TuloskorttiGUIController implements Initializable {
      */
     public boolean avaa() {
         ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Luo pelaaja", null, golfRekisteri);
+        lueTiedostosta();
+        haeKierrokset();
         return true;
     }
     
@@ -237,7 +243,7 @@ public class TuloskorttiGUIController implements Initializable {
     public void haeKierrokset() {
         chooserKierrokset.clear();
 
-        Collection<Kierros> kaikkiKierrokset = uusiKierros.annaKaikkiKierrokset();
+        Collection<Kierros> kaikkiKierrokset = golfRekisteri.annaKaikkiKierrokset();
         int kierrosLaskuri = 18;
         int tulosLaskuri = 0;
         for (Kierros tulos : kaikkiKierrokset) {
@@ -257,5 +263,19 @@ public class TuloskorttiGUIController implements Initializable {
     public void naytaKierros() {
         Kierros kierroksenKohdalla = chooserKierrokset.getSelectedObject();
         System.out.println("Näytettiin: " + kierroksenKohdalla.getTunnusNro());
+    }
+    
+    /**
+     * Alustetaan Golf Rekisteri lukemalla valitun niminen tiedosto
+     * @param nimi golfRekisterin tiedot luetaan täältä
+     */
+    private void lueTiedostosta() {
+        
+        try {
+            golfRekisteri.lueTiedostosta("golfRekisteri");
+            haeKayttajanTiedot();
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog(e.getMessage());
+        }
     }
 }
