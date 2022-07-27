@@ -3,6 +3,7 @@ package tuloskortti;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import fi.jyu.mit.ohj2.Mjonot;
 import kanta.UusiKayttaja;
 import kanta.UusiSeura;
 
@@ -78,6 +79,17 @@ public class Seura {
         return this.id;
     }
     
+    /**
+     * Asettaa id numeron ja samalla varmistetaan, että seuraavaId numero on aina suurempi kuin nykyinen id numero
+     * @param idNro joka asetetaan
+     */
+    public void setTunnusNro(int idNro) {
+        this.id = idNro;
+        if (this.id >= seuraavaId) {
+            seuraavaId = this.id + 1;
+        }
+    }
+    
     
     /**
      * Antaa Seuralle seuraavan rekisterinumeron.
@@ -135,6 +147,12 @@ public class Seura {
         return this.puhelinnumero;
     }
     
+    @Override
+    public String toString() {
+        return this.id + "|" + this.seurannimi + "|" + this.katuosoite + "|" + this.postinumero + 
+                "|" + this.postitoimipaikka + "|" + this.puhelinnumero;
+    }
+    
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot käyttäjälle.
      * TODO: poista kun kaikki toimii
@@ -145,6 +163,32 @@ public class Seura {
         this.postinumero = UusiSeura.arvoPostinumero();
         this.postitoimipaikka = UusiSeura.arvoPostitoimipaikka();
         this.puhelinnumero = UusiSeura.arvoPuhelinnumero();
+    }
+    
+    /**
+     * Selvittää seuran tiedot | putkella erotellusta merkkijonosta
+     * Tarkistaa, että seuraavaId on suurempi kuin tuleva Id numero
+     * @param merkkijono josta seuran tiedot saadaan
+     * @example
+     * <pre name="test">
+     * Seura seura = new Seura();
+     * seura.parse("  3  | Fyrkkala Golf    |   Fyrkkalankatu 24  ");
+     * seura.getTunnusNro() === 3;
+     * seura.toString().startsWith("3|Fyrkkala Golf|Fyrkkalankatu 24") === true;
+     * seura.rekisteroi();
+     * int n = seura.getTunnusNro();
+     * seura.parse("" + (n + 20));   // Otetaan merkkijonon alusta vain id numero ja lisätään siihen 20
+     * seura.rekisteroi();           // Tarkistetaan tämän jälkeen, että tulee isompi numero
+     * seura.getTunnusNro() === n + 20 + 1;
+     */
+    public void parse(String merkkijono) {
+        var sb = new StringBuilder(merkkijono);
+        this.setTunnusNro(Mjonot.erota(sb, '|', this.getTunnusNro()));
+        this.seurannimi = Mjonot.erota(sb, '|', seurannimi);
+        this.katuosoite = Mjonot.erota(sb, '|', katuosoite);
+        this.postinumero = Mjonot.erota(sb, '|', postinumero);
+        this.postitoimipaikka = Mjonot.erota(sb, '|', postitoimipaikka);
+        this.puhelinnumero = Mjonot.erota(sb, '|', puhelinnumero);
     }
     
     /**
