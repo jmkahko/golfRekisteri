@@ -180,9 +180,9 @@ public class Tuloskortti {
      * Tuloskortti tuloskortti = new Tuloskortti();
      * tuloskortti.parse(  3  |  1  | 1  );
      * tuloskortti.getTunnusNro() === 3;
-     * tuloskortti.toString().startsWith(3|1|1) === true;
+     * tuloskortti.toString().startsWith("3|1|1") === true;
      * tuloskortti.rekisteroi();
-     * int n = seura.getTunnusNro();
+     * int n = tuloskortti.getTunnusNro();
      * tuloskortti.parse("" + (n + 20));   // Otetaan merkkijonon alusta vain id numero ja lisätään siihen 20
      * tuloskortti.rekisteroi();           // Tarkistetaan tämän jälkeen, että tulee isompi numero
      * tuloskortti.getTunnusNro() === n + 20 + 1;

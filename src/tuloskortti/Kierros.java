@@ -185,15 +185,15 @@ public class Kierros {
     /**
      * Selvittää kierroksen tiedot | putkella erotellusta merkkijonosta
      * Tarkistaa, että seuraavaId on suurempi kuin tuleva Id numero
-     * @param merkkijono josta seuran tiedot saadaan
+     * @param merkkijono josta kierroksen tiedot saadaan
      * @example
      * <pre name="test">
      * Kierros kierros = new Kierros();
      * kierros.parse(  3  |  1  | 1  );
      * kierros.getTunnusNro() === 3;
-     * kierros.toString().startsWith(3|1|1) === true;
+     * kierros.toString().startsWith("3|1|1") === true;
      * kierros.rekisteroi();
-     * int n = seura.getTunnusNro();
+     * int n = kierros.getTunnusNro();
      * kierros.parse("" + (n + 20));   // Otetaan merkkijonon alusta vain id numero ja lisätään siihen 20
      * kierros.rekisteroi();           // Tarkistetaan tämän jälkeen, että tulee isompi numero
      * kierros.getTunnusNro() === n + 20 + 1;
