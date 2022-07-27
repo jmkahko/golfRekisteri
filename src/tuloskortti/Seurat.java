@@ -49,7 +49,7 @@ public class Seurat {
     /**
      * Lisätään uusi Seura Seura[] tietorakenteesen. Ottaa seuran omistukseensa.
      * @param seura annetaan seura
-     * @throws SailoException jos Kayttaja[] taulukko täynnä
+     * @throws SailoException jos Seurat[] taulukko täynnä
      * @example
      * <pre name="test">
      * #THROWS SailoException

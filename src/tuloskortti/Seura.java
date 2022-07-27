@@ -4,7 +4,6 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 import fi.jyu.mit.ohj2.Mjonot;
-import kanta.UusiKayttaja;
 import kanta.UusiSeura;
 
 /**
@@ -38,7 +37,7 @@ public class Seura {
     private String postitoimipaikka;
     private String puhelinnumero;
     
-    // Luo jokaiselle kayttajalle oman "globaalin" seuraan id-numeron
+    // Luo jokaiselle seuralle oman "globaalin" seuraan id-numeron
     private static int seuraavaId = 1;
     
     /**
