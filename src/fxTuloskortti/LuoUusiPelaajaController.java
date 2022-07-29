@@ -2,6 +2,7 @@ package fxTuloskortti;
 
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import tuloskortti.GolfRekisteri;
@@ -26,8 +27,8 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
      */
     @FXML 
     private void handlePeruuta() {
-        //Dialogs.showMessageDialog("Ei vielä osata tehdä");
-        luoTestiPelaaja();
+        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        //luoTestiPelaaja();
     }
 
     /**
@@ -37,7 +38,8 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     @FXML
     private  void handleTallenna() {
         //Dialogs.showMessageDialog("Ei vielä osata tehdä");
-        luoPelaaja();
+        //luoPelaaja();
+        tallennaPelaaja();
     }
 
     @Override
@@ -49,7 +51,7 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     @Override
     public void handleShown() {
         // TODO Auto-generated method stub
-        
+        //haePelaajanTiedot();
     }
 
     @Override
@@ -95,4 +97,37 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
         Dialogs.showMessageDialog("Uusi käyttäjä luotu. Tulostuu Console lokiin tieto");
         uusiPelaaja.tulosta(System.out);
     }
- }
+    
+    /**
+     * Tallennetaan pelaajan tiedot näytöltä
+     */
+    public void tallennaPelaaja() {
+        Kayttaja uusiKayttaja = new Kayttaja(nimiTextField.getText(), seuraTextField.getText(), Double.valueOf(tasoitusTextField.getText()), Integer.valueOf(aloitusVuosiTextField.getText()));
+    
+        try {
+            this.golfRekisteri.lisaaKayttaja(uusiKayttaja);
+            this.golfRekisteri.tallenna();
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog("Ongelmia uuden käyttäjän luonnissa: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Luetaan tiedostosta pelaajan tiedot
+     */
+    public void haePelaajanTiedot() {       
+        Kayttaja uusiKayttaja = this.golfRekisteri.annaKayttaja(0);
+        
+        if (uusiKayttaja == null) {
+                nimiTextField.setText("");
+                seuraTextField.setText("");
+                tasoitusTextField.setText(String.valueOf(0.0));
+                aloitusVuosiTextField.setText(String.valueOf(0));
+        } else {
+                nimiTextField.setText(uusiKayttaja.getNimi());
+                seuraTextField.setText(uusiKayttaja.getKotiseura());
+                tasoitusTextField.setText(String.valueOf(uusiKayttaja.getTasoitus()));
+                aloitusVuosiTextField.setText(String.valueOf(uusiKayttaja.getAloitusvuosi()));
+            }
+    }
+}
