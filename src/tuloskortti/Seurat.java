@@ -57,6 +57,9 @@ public class Seurat {
      * Seura seura1 = new Seura();
      * Seura seura2 = new Seura();
      * Seura seura3 = new Seura();
+     * Seura seura4 = new Seura();
+     * Seura seura5 = new Seura();
+     * Seura seura6 = new Seura();
      * seurat.getLkm() === 0;
      * seurat.lisaa(seura1); seurat.getLkm() === 1;
      * seurat.lisaa(seura2); seurat.getLkm() === 2;
@@ -64,17 +67,39 @@ public class Seurat {
      * seurat.annaSeura(1) === seura2;
      * seurat.annaSeura(0) == seura2 === false;
      * seurat.annaSeura(0) == seura1 === true;
-     * seurat.annaSeura(5) === seura1; #THROWS IndexOutOfBoundsException
      * seurat.lisaa(seura3);
      * seurat.lisaa(seura3);
      * seurat.lisaa(seura3);
-     * seurat.lisaa(seura3); #THROWS SailoException
+     * seurat.lisaa(seura4);
+     * seurat.lisaa(seura5);
+     * seurat.lisaa(seura6);
+     * seurat.getLkm() === 8;
      * </pre> 
      */
     public void lisaa(Seura seura) throws SailoException {
-        if (this.lkm >= this.alkiot.length) throw new SailoException("Liikaa alkioita, ei voida listätä");
+        if (this.lkm >= this.alkiot.length) {
+            kasvataTaulukonKokoa();
+        }
+            
         this.alkiot[this.lkm] = seura;
         lkm++;
+    }
+    
+    /**
+     * Tuplataan private Seura[] alkiot = new Seura[MAX_SEUROJA]; taulukon koon, kun taulukko tulee täyteen.
+     * Haetaan uuden taulukon koko nykyinen taulukko * 2
+     * Luodaan uusi taulukko uudella koolla esim. ennen oli 5 niin on 10
+     * Käydään vanha taulukko for-silmukassa läpi ja kopioidaan rivit uuteen taulukkoon
+     * Muutetaan, että uusi taulukko on vanha taulukko
+     */
+    public void kasvataTaulukonKokoa() {
+        int uusiTaulukonKoko = this.alkiot.length * 2;
+        Seura[] alkiotUusi = new Seura[uusiTaulukonKoko];
+        for (int x = 0; x < this.alkiot.length; x++) {
+            alkiotUusi[x] = this.alkiot[x];
+        }
+        
+        this.alkiot = alkiotUusi;
     }
     
     /**
