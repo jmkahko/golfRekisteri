@@ -49,7 +49,6 @@ public class Seurat {
     /**
      * Lisätään uusi Seura Seura[] tietorakenteesen. Ottaa seuran omistukseensa.
      * @param seura annetaan seura
-     * @throws SailoException jos Seurat[] taulukko täynnä
      * @example
      * <pre name="test">
      * #THROWS SailoException
@@ -76,7 +75,7 @@ public class Seurat {
      * seurat.getLkm() === 8;
      * </pre> 
      */
-    public void lisaa(Seura seura) throws SailoException {
+    public void lisaa(Seura seura) {
         if (this.lkm >= this.alkiot.length) {
             kasvataTaulukonKokoa();
         }
@@ -232,12 +231,8 @@ public class Seurat {
         seura2.rekisteroi();
         seura2.taytaTestiTiedoilla();
         
-        try {
-            seurat.lisaa(seura1);
-            seurat.lisaa(seura2);
-        } catch (SailoException e) {
-            System.err.println(e.getMessage());
-        }
+        seurat.lisaa(seura1);
+        seurat.lisaa(seura2);
 
         System.out.println("======================= Seurat testi =======================");
         for (int x = 0; x < seurat.getLkm(); x++) {
