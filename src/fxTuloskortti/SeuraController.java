@@ -1,23 +1,22 @@
 package fxTuloskortti;
 
 import java.io.PrintStream;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
-import fi.jyu.mit.fxgui.TextAreaOutputStream;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Font;
 import kanta.UusiTuloskortti;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.SailoException;
 import tuloskortti.Seura;
-import tuloskortti.Tuloskortit;
 import tuloskortti.Tuloskortti;
 
 /**
@@ -25,7 +24,7 @@ import tuloskortti.Tuloskortti;
  * @version 13.6.2022
  * Seura käyttöliittymän muokkaamista varten, voidaan syöttää uusi tuloskortti tai muokata. Voidaan muokata seurantietoja
  */
-public class SeuraController implements ModalControllerInterface<GolfRekisteri> {
+public class SeuraController implements ModalControllerInterface<GolfRekisteri>, Initializable {
    
     /**
      * Golf seurojen listaus
@@ -41,10 +40,6 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
     @FXML private TextField puhelinnumeroTextField;
     @FXML private TextField seuraTextField;
     
-    /**
-     * Seuran tuloskortin rivit
-     */
-    @FXML private ScrollPane panelTuloskortti;
     
     @FXML private TextField vayla1_48;
     @FXML private TextField vayla1_51;
@@ -171,6 +166,14 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
     @FXML private TextField vayla18_62;
     @FXML private TextField vayla18_hcp;
     @FXML private TextField vayla18_par;
+
+    
+    /**
+     * Seuran tuloskortin rivit
+     */
+    @FXML private ScrollPane panelTuloskortti;
+    
+
     
     /**
      * Yhteensä tulokset
@@ -187,8 +190,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
      */
     @FXML
     private void handleMuokkaaSeuraa() {
-        ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", null, golfRekisteri);
-        uusiSeura();
+        muokkaaSeuraa();
     }
     
     /**
@@ -226,7 +228,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
         // TODO Auto-generated method stub
         return null;
     }
-
+    
     @Override
     public void handleShown() {
         // TODO Auto-generated method stub
@@ -240,7 +242,11 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
         
         // Alustetaan tässä vaiheessa tässä tiedot;
         alusta();
-        
+    }
+    
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        // TODO Auto-generated method stub
         
     }
     
@@ -248,20 +254,126 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
  // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
 
     private GolfRekisteri golfRekisteri;
-    private TextArea areaTuloskortti = new TextArea();
+    private TextField[] tuloskorttiEdits;
     
     
     /**
-     * Tekee tarvittavat alustukset vaihdetaan GridPanen tilalle yksi iso tekstikenttä, johon tulostetaan seuran tuloskortti
      * Alustetaan seuralistan kuuntelija
      */
     protected void alusta() {
-        panelTuloskortti.setContent(areaTuloskortti);
-        areaTuloskortti.setFont(new Font("Courier New", 12));
         panelTuloskortti.setFitToHeight(true);
-        
         chooserSeurat.clear();
         chooserSeurat.addSelectionListener(e -> naytaSeura());
+        TextField[] tuloskorttiEdits = {
+                vayla1_48,
+                vayla1_51,
+                vayla1_55,
+                vayla1_62,
+                vayla1_hcp,
+                vayla1_par,
+                vayla2_48,
+                vayla2_51,
+                vayla2_55,
+                vayla2_62,
+                vayla2_hcp,
+                vayla2_par,
+                vayla3_48,
+                vayla3_51,
+                vayla3_55,
+                vayla3_62,
+                vayla3_hcp,
+                vayla3_par,
+                vayla4_48,
+                vayla4_51,
+                vayla4_55,
+                vayla4_62,
+                vayla4_hcp,
+                vayla4_par,
+                vayla5_48,
+                vayla5_51,
+                vayla5_55,
+                vayla5_62,
+                vayla5_hcp,
+                vayla5_par,
+                vayla6_48,
+                vayla6_51,
+                vayla6_55,
+                vayla6_62,
+                vayla6_hcp,
+                vayla6_par,
+                vayla7_48,
+                vayla7_51,
+                vayla7_55,
+                vayla7_62,
+                vayla7_hcp,
+                vayla7_par,
+                vayla8_48,
+                vayla8_51,
+                vayla8_55,
+                vayla8_62,
+                vayla8_hcp,
+                vayla8_par,
+                vayla9_48,
+                vayla9_51,
+                vayla9_55,
+                vayla9_62,
+                vayla9_hcp,
+                vayla9_par,
+                vayla10_48,
+                vayla10_51,
+                vayla10_55,
+                vayla10_62,
+                vayla10_hcp,
+                vayla10_par,
+                vayla11_48,
+                vayla11_51,
+                vayla11_55,
+                vayla11_62,
+                vayla11_hcp,
+                vayla11_par,
+                vayla12_48,
+                vayla12_51,
+                vayla12_55,
+                vayla12_62,
+                vayla12_hcp,
+                vayla12_par,
+                vayla13_48,
+                vayla13_51,
+                vayla13_55,
+                vayla13_62,
+                vayla13_hcp,
+                vayla13_par,
+                vayla14_48,
+                vayla14_51,
+                vayla14_55,
+                vayla14_62,
+                vayla14_hcp,
+                vayla14_par,
+                vayla15_48,
+                vayla15_51,
+                vayla15_55,
+                vayla15_62,
+                vayla15_hcp,
+                vayla15_par,
+                vayla16_48,
+                vayla16_51,
+                vayla16_55,
+                vayla16_62,
+                vayla16_hcp,
+                vayla16_par,
+                vayla17_48,
+                vayla17_51,
+                vayla17_55,
+                vayla17_62,
+                vayla17_hcp,
+                vayla17_par,
+                vayla18_48,
+                vayla18_51,
+                vayla18_55,
+                vayla18_62,
+                vayla18_hcp,
+                vayla18_par};
+        this.tuloskorttiEdits = tuloskorttiEdits;
     }
     
     /**
@@ -307,7 +419,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
         }
 
         golfRekisteri.lisaaTuloskortti(UusiTuloskortti.luoTuloskortti(seuranKohdalla.getTunnusNro()));
-        naytaTuloskortti(seuranKohdalla);
+        naytaTuloskortti(tuloskorttiEdits, seuranKohdalla);
     }
     
     /**
@@ -325,21 +437,36 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
         postinumeroTextField.setText(String.valueOf(seuranKohdalla.getPostinumero()));
         postiosoiteTextField.setText(seuranKohdalla.getPostitoimipaikka());
         puhelinnumeroTextField.setText(seuranKohdalla.getPuhelinnumero());
-        naytaTuloskortti(seuranKohdalla);
+        naytaTuloskortti(tuloskorttiEdits, seuranKohdalla);
     }
 
     /**
      * Hakee seuran tuloskortin joka on valittuna seura listalta
+     * @param edits viedään näytettävät kentät
      * @param seura jonka tuloskortti näytetään
      */
-    public void naytaTuloskortti(Seura seura) {
+    public void naytaTuloskortti(TextField[] edits, Seura seura) {
         if (seura == null) {
             return;
         }
         
-        areaTuloskortti.setText("");
-        try (PrintStream os = TextAreaOutputStream.getTextPrintStream(areaTuloskortti)) {
-            tulosta(os, seura);
+        List<Tuloskortti> tuloskortti = golfRekisteri.annaTuloskortti(seura);
+
+        int x = 0;
+        for (Tuloskortti t : tuloskortti) {
+            // Lisätään textField sarakkeisiin tuloskortin tiedot
+            edits[x].setText(String.valueOf(t.getPituus48()));
+            x++;
+            edits[x].setText(String.valueOf(t.getPituus51()));
+            x++;
+            edits[x].setText(String.valueOf(t.getPituus55()));
+            x++;
+            edits[x].setText(String.valueOf(t.getPituus62()));
+            x++;
+            edits[x].setText(String.valueOf(t.getHcp()));
+            x++;
+            edits[x].setText(String.valueOf(t.getPar()));
+            x++;
         }
     }
     
@@ -348,6 +475,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
      * @param os PrintStream
      * @param seura minkä tuloskortti tulostetaan
      */
+    @SuppressWarnings("unused") // TODO: poistetaan kun käytetään
     private void tulosta(PrintStream os, final Seura seura) {
         os.println("-------- Pituudet --- " + seura.getSeurannimi());
         os.println("---Väylä - 62, 55, 51, 48, PAR, HCP----");
@@ -357,5 +485,13 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri> 
             t.tulosta(os);
         }
         os.println("---------------------------------------");
+    }
+    
+    private void muokkaaSeuraa() {
+        Seura seuranKohdalla = chooserSeurat.getSelectedObject();
+        if (seuranKohdalla == null) {
+            return;
+        }
+        LuoSeuraController.kysySeura(null, seuranKohdalla);
     }
 }
