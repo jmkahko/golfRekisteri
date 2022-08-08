@@ -113,6 +113,49 @@ public class Tuloskortti {
     public int getTunnusNro() {
         return this.id;
     }
+        
+    /**
+     * @return pituus62
+     */
+    public int getPituus62() {
+        return this.pituus62;
+    }
+    
+    /**
+     * @return pituus55
+     */
+    public int getPituus55() {
+        return this.pituus55;
+    }
+    
+    /**
+     * @return pituus51
+     */
+    public int getPituus51() {
+        return this.pituus51;
+    }
+    
+    /**
+     * @return pituus48
+     */
+    public int getPituus48() {
+        return this.pituus48;
+    }
+    
+    /**
+     * @return par-luku
+     */
+    public int getPar() {
+        return this.par;
+    }
+    
+    /**
+     * @return hcp-luku
+     */
+    public int getHcp() {
+        return this.hcp;
+    }
+    
     
     /**
      * Asettaa id numeron ja samalla varmistetaan, että seuraavaId numero on aina suurempi kuin nykyinen id numero
