@@ -1,10 +1,15 @@
 package fxTuloskortti;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.Seura;
 
@@ -13,7 +18,7 @@ import tuloskortti.Seura;
  * @version 13.6.2022
  * LuoSeura käyttöliittymän controllerit
  */
-public class LuoSeuraController implements ModalControllerInterface<GolfRekisteri> {
+public class LuoSeuraController implements ModalControllerInterface<Seura>, Initializable {
 
     @FXML private TextField katuosoiteTextField;
     @FXML private TextField postinumeroTextField;
@@ -40,8 +45,6 @@ public class LuoSeuraController implements ModalControllerInterface<GolfRekister
         Dialogs.showMessageDialog("Ei vielä osata tehdä");
     }
 
-
-
     @Override
     public void handleShown() {
         // TODO Auto-generated method stub
@@ -49,26 +52,53 @@ public class LuoSeuraController implements ModalControllerInterface<GolfRekister
     }    
 
     @Override
-    public GolfRekisteri getResult() {
-        // TODO Auto-generated method stub
-        return null;
+    public void setDefault(Seura oletus) {
+        this.seuraKohdalla = oletus;
+        naytaSeura(seuraKohdalla);
     }
 
-
-    
     @Override
-    public void setDefault(GolfRekisteri rekisteri) {
-        this.golfRekisteri = rekisteri;
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        // TODO Auto-generated method stub
         
-        // Alustetaan tässä vaiheessa tässä tiedot;
-        
-        
+    }
+
+    @Override
+    public Seura getResult() {
+        // TODO Auto-generated method stub
+        return null;
     }
     
  // =================================================================
  // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
 
     private GolfRekisteri golfRekisteri;
+    private Seura seuraKohdalla;
 
+    
+    /**
+     * Laitetaan seuran tiedot näkymälle
+     * @param seura viedään seuran tiedot
+     */
+    private void naytaSeura(Seura seura) {
+        if (seura == null) {
+            return;
+        }
+        katuosoiteTextField.setText(seura.getKatuosoite());
+        postinumeroTextField.setText(String.valueOf(seura.getPostinumero()));
+        postiosoiteTextField.setText(seura.getPostitoimipaikka());
+        puhelinnumeroTextField.setText(seura.getPuhelinnumero());
+        seuraTextField.setText(seura.getSeurannimi());
+    }
+    
+    /**
+     * Luodaan seuran muokkaus dialogi ja palautetaan sama tietue muutettuna tai null arvo
+     * @param modalityStage mille ollaan modaalisia, null = sovellukselle
+     * @param seura mitä dataa näytetään oletuksena, kun muokataan seuraa, niin olemassa olevan seuran tiedot
+     * @return null jos painetaan Peruuta, muuten täytetään tietue
+     */
+    public static Seura kysySeura(Stage modalityStage, Seura seura) {
+        return ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", modalityStage, seura);
+    }
 
 }
