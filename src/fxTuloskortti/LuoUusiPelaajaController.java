@@ -1,9 +1,14 @@
 package fxTuloskortti;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import fi.jyu.mit.fxgui.Dialogs;
+import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.Kayttaja;
@@ -14,7 +19,7 @@ import tuloskortti.SailoException;
  * @version 13.6.2022
  * Uuden pelaajan luonti/muokkaus controlleri
  */
-public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRekisteri> {
+public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRekisteri>, Initializable {
 
     @FXML private TextField nimiTextField;
     @FXML private TextField seuraTextField;
@@ -27,8 +32,9 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
      */
     @FXML 
     private void handlePeruuta() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        //Dialogs.showMessageDialog("Ei vielä osata tehdä");
         //luoTestiPelaaja();
+        ModalController.closeStage(nimiTextField); // Kun painetaan Peruuta nappia, niin tällä saadaan suljettua ikkuna
     }
 
     /**
@@ -36,7 +42,7 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
      * @param event
      */
     @FXML
-    private  void handleTallenna() {
+    private void handleTallenna() {
         //Dialogs.showMessageDialog("Ei vielä osata tehdä");
         //luoPelaaja();
         tallennaPelaaja();
@@ -57,6 +63,12 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     @Override
     public void setDefault(GolfRekisteri golfRekisteri) {
         this.golfRekisteri = golfRekisteri;
+        
+    }
+    
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        // TODO Auto-generated method stub
         
     }
     
