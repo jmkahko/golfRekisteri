@@ -120,11 +120,11 @@ public class TuloskorttiGUIController implements Initializable {
     }
 
     /**
-     * Muokkaa tallennettua jäsentä
+     * Muokkaa tallennettua jäsentä/käyttäjää
      */
     @FXML 
     private void handleMuokkaaJasenta() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Muokkaa jäsentä", null, golfRekisteri);
+        muokkaaKayttajaa();
     }
 
     /**
@@ -277,5 +277,10 @@ public class TuloskorttiGUIController implements Initializable {
         } catch (SailoException e) {
             Dialogs.showMessageDialog(e.getMessage());
         }
+    }
+    
+    private void muokkaaKayttajaa() {
+        Kayttaja kayttaja = golfRekisteri.annaKayttaja(0);
+        LuoUusiPelaajaController.kysyKayttaja(null, kayttaja);
     }
 }
