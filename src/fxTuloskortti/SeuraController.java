@@ -206,7 +206,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
      */
     @FXML
     private void handleMuokkaaTuloskortti() {
-        ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", null, golfRekisteri);
+        muokkaaTuloskorttia();
     }
 
     /**
@@ -452,22 +452,39 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         
         List<Tuloskortti> tuloskortti = golfRekisteri.annaTuloskortti(seura);
 
+        int pituus48 = 0;
+        int pituus51 = 0;
+        int pituus55 = 0;
+        int pituus62 = 0;
+        int par = 0;
+        
         int x = 0;
         for (Tuloskortti t : tuloskortti) {
             // Lisätään textField sarakkeisiin tuloskortin tiedot
             edits[x].setText(String.valueOf(t.getPituus48()));
+            pituus48 += t.getPituus48();
             x++;
             edits[x].setText(String.valueOf(t.getPituus51()));
+            pituus51 += t.getPituus51();
             x++;
             edits[x].setText(String.valueOf(t.getPituus55()));
+            pituus55 += t.getPituus55();
             x++;
             edits[x].setText(String.valueOf(t.getPituus62()));
+            pituus62 += t.getPituus62();
             x++;
             edits[x].setText(String.valueOf(t.getHcp()));
             x++;
             edits[x].setText(String.valueOf(t.getPar()));
+            par += t.getPar();
             x++;
         }
+        
+        pituusYhteensa48.setText(String.valueOf(pituus48));
+        pituusYhteensa51.setText(String.valueOf(pituus51));
+        pituusYhteensa55.setText(String.valueOf(pituus55));
+        pituusYhteensa62.setText(String.valueOf(pituus62));
+        parYhteensa.setText(String.valueOf(par));
     }
     
     /**
@@ -487,6 +504,9 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         os.println("---------------------------------------");
     }
     
+    /**
+     * Muokataan seuran tietoja
+     */
     private void muokkaaSeuraa() {
         Seura seuranKohdalla = chooserSeurat.getSelectedObject();
         if (seuranKohdalla == null) {
@@ -498,5 +518,20 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
             return;
         }
         haeSeura(seura.getTunnusNro());
+    }
+    
+    /**
+     * Muokataan tuloskortin tietoja
+     */
+    private void muokkaaTuloskorttia() {
+        Seura seuranKohdalla = chooserSeurat.getSelectedObject();
+        
+        if (seuranKohdalla == null) {
+            return;
+        }
+        
+        //Seura seura = LuoUusiTuloskorttiController.kysyTuloskortti(null, seuranKohdalla);
+        
+        ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", null, golfRekisteri);
     }
 }
