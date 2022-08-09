@@ -1,5 +1,7 @@
 package fxTuloskortti;
 
+import java.util.List;
+
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
@@ -7,6 +9,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import tuloskortti.GolfRekisteri;
+import tuloskortti.Seura;
+import tuloskortti.Tuloskortti;
 
 /**
  * @author Janne Kähkönen
@@ -161,13 +165,43 @@ public class SyotaKierrosController implements ModalControllerInterface<GolfReki
     @Override
     public void setDefault(GolfRekisteri rekisteri) {
         this.golfRekisteri = rekisteri;
-
-        
+        alusta();
     }
     
     // =================================================================
     // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
     
     private GolfRekisteri golfRekisteri;
+    private TextField[] kierrosEdits;
+    
+    /**
+     * Alustetaan kierroslistan kuuntelijat
+     */
+    protected void alusta() {
 
+        TextField[] kierrosEdits = {
+                vaylaTee1, vaylaPar1, vaylaHcp1, vaylaId_1,
+                vaylaTee2, vaylaPar2, vaylaHcp2, vaylaId_2,
+                vaylaTee3, vaylaPar3, vaylaHcp3, vaylaId_3,
+                vaylaTee4, vaylaPar4, vaylaHcp4, vaylaId_4,
+                vaylaTee5, vaylaPar5, vaylaHcp5, vaylaId_5,
+                vaylaTee6, vaylaPar6, vaylaHcp6, vaylaId_6,
+                vaylaTee7, vaylaPar7, vaylaHcp7, vaylaId_7,
+                vaylaTee8, vaylaPar8, vaylaHcp8, vaylaId_8,
+                vaylaTee9, vaylaPar9, vaylaHcp9, vaylaId_9,
+                vaylaTee10, vaylaPar10, vaylaHcp10, vaylaId_10,
+                vaylaTee11, vaylaPar11, vaylaHcp11, vaylaId_11,
+                vaylaTee12, vaylaPar12, vaylaHcp12, vaylaId_12,
+                vaylaTee13, vaylaPar13, vaylaHcp13, vaylaId_13,
+                vaylaTee14, vaylaPar14, vaylaHcp14, vaylaId_14,
+                vaylaTee15, vaylaPar15, vaylaHcp15, vaylaId_15,
+                vaylaTee16, vaylaPar16, vaylaHcp16, vaylaId_16,
+                vaylaTee17, vaylaPar17, vaylaHcp17, vaylaId_17,
+                vaylaTee18, vaylaPar18, vaylaHcp18, vaylaId_18
+        };
+        this.kierrosEdits = kierrosEdits;
+    }
+    
+
+    
 }
