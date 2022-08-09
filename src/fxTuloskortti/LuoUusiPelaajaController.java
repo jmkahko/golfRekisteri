@@ -10,9 +10,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.Kayttaja;
 import tuloskortti.SailoException;
+import tuloskortti.Seura;
 
 /**
  * @author Janne Kähkönen
@@ -141,5 +143,14 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
                 tasoitusTextField.setText(String.valueOf(uusiKayttaja.getTasoitus()));
                 aloitusVuosiTextField.setText(String.valueOf(uusiKayttaja.getAloitusvuosi()));
             }
+    }
+    
+    /**
+     * @param modalityStage modalityStage mille ollaan modaalisia, null = sovellukselle
+     * @param kayttaja mitä dataa näytetään oletuksena, kun muokataan käyttäjää, niin olemassa olevan käyttäjän tiedot
+     * @return null jos painetaan Peruuta, muuten täytetään tietue
+     */
+    public static Kayttaja kysyKayttaja(Stage modalityStage, Kayttaja kayttaja) {
+        return ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Muokkaa jäsentä", modalityStage, kayttaja);
     }
 }
