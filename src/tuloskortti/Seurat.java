@@ -208,6 +208,26 @@ public class Seurat {
         }
     }
     
+    
+    /**
+     * Lisää uuden seuran tai muuttaa olemassa olevan seuran tietoja.
+     * Etsii samalla seura -tunnuksella olevaa seuraa, jos ei löydy niin luo uuden seuran
+     * @param seura lisättävän tai muutettavan seuran tieto
+     * @throws SailoException jos ei onnistu
+     */
+    public void lisaaTaiMuutaSeura(Seura seura) throws SailoException {
+        int id = seura.getTunnusNro();
+        
+        // Etsitään löytyykö tulevan seuran id -numeroa, jos ei löydy niin lisätään seura
+        for (int x = 0; x < this.lkm; x++) {
+            if (this.alkiot[x].getTunnusNro() == id) {
+                this.alkiot[x] = seura;
+                return;
+            }
+        }
+        this.lisaa(seura);
+    }
+    
     /**
      * @param args ei käytössä
      */

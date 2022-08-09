@@ -492,6 +492,11 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         if (seuranKohdalla == null) {
             return;
         }
-        LuoSeuraController.kysySeura(null, seuranKohdalla);
+        Seura seura = LuoSeuraController.kysySeura(null, seuranKohdalla);
+        
+        if (seura == null) {
+            return;
+        }
+        haeSeura(seura.getTunnusNro());
     }
 }

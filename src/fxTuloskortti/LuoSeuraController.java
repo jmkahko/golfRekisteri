@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import tuloskortti.GolfRekisteri;
+import tuloskortti.SailoException;
 import tuloskortti.Seura;
 
 /**
@@ -42,7 +43,8 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
      */
     @FXML 
     private void handleTallenna() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        //Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        tallenna();
     }
 
     @Override
@@ -99,6 +101,14 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
      */
     public static Seura kysySeura(Stage modalityStage, Seura seura) {
         return ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", modalityStage, seura);
+    }
+    
+    /**
+     * Tallennetaan seuran tiedot
+     */
+    public void tallenna() {
+
+        // TODO tänne tallennus metodi
     }
 
 }

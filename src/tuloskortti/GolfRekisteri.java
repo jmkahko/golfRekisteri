@@ -77,10 +77,19 @@ public class GolfRekisteri {
     /**
      * Lisätään uusi seura
      * @param seura lisättävä seura
-     * @throws SailoException jos käyttäjän lisääminen ei onnistu
+     * @throws SailoException jos seuran lisääminen ei onnistu
      */
     public void lisaaSeura(Seura seura) throws SailoException {
         this.seurat.lisaa(seura);
+    }
+    
+    /**
+     * Lisätään uusi seura tai muutetaan olemassa olevaa seuraa
+     * @param seura muutettavan tai lisättävän seuran tieto
+     * @throws SailoException jos seuran lisääminen ei onnistu
+     */
+    public void lisaaTaiMuutaSeura(Seura seura) throws SailoException {
+        this.seurat.lisaaTaiMuutaSeura(seura);
     }
     
     /**
