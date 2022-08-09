@@ -57,8 +57,8 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handleUusiKierros() {
-        //ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", null, golfRekisteri);
         uusiKierros();
+        //kierroksenTiedot();
     }
     
     
@@ -216,9 +216,15 @@ public class TuloskorttiGUIController implements Initializable {
      * Käynnistyksessä jos pelaajaa ei ole luotu luodaan pelaaja
      * @return palauttaa true, että saadaan uuden pelaajan luonti auki
      */
-    public boolean avaa() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Luo pelaaja", null, golfRekisteri);
+    public boolean avaa() {     
         lueTiedostosta();
+        
+        System.out.println("tietoa: " + this.golfRekisteri.getKayttajia());
+        
+        if (this.golfRekisteri == null || this.golfRekisteri.getKayttajia() == 0) {
+            ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Luo pelaaja", null, golfRekisteri);
+            return false;
+        }
         haeKierrokset();
         return true;
     }
@@ -270,7 +276,6 @@ public class TuloskorttiGUIController implements Initializable {
      * @param nimi golfRekisterin tiedot luetaan täältä
      */
     private void lueTiedostosta() {
-        
         try {
             golfRekisteri.lueTiedostosta("golfRekisteri");
             haeKayttajanTiedot();
@@ -282,5 +287,9 @@ public class TuloskorttiGUIController implements Initializable {
     private void muokkaaKayttajaa() {
         Kayttaja kayttaja = golfRekisteri.annaKayttaja(0);
         LuoUusiPelaajaController.kysyKayttaja(null, kayttaja);
+    }
+    
+    private void kierroksenTiedot() {
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", null, golfRekisteri);
     }
 }
