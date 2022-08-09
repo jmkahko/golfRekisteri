@@ -530,7 +530,12 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
             return;
         }
         
-        //Seura seura = LuoUusiTuloskorttiController.kysyTuloskortti(null, seuranKohdalla);
+//        Seura seura = LuoUusiTuloskorttiController.kysyTuloskortti(null, seuranKohdalla);
+//        
+//        if (seura == null) {
+//            return;
+//        }
+//        haeSeura(seura.getTunnusNro());
         
         ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", null, golfRekisteri);
     }
