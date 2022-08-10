@@ -218,9 +218,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     public boolean avaa() {     
         lueTiedostosta();
-        
-        System.out.println("tietoa: " + this.golfRekisteri.getKayttajia());
-        
+               
         if (this.golfRekisteri == null || this.golfRekisteri.getKayttajia() == 0) {
             ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Luo pelaaja", null, golfRekisteri);
             return false;
@@ -285,8 +283,7 @@ public class TuloskorttiGUIController implements Initializable {
     }
     
     private void muokkaaKayttajaa() {
-        Kayttaja kayttaja = golfRekisteri.annaKayttaja(0);
-        LuoUusiPelaajaController.kysyKayttaja(null, kayttaja);
+        LuoUusiPelaajaController.kysyKayttaja(null, golfRekisteri);
     }
     
     private void kierroksenTiedot() {

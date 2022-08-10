@@ -51,21 +51,20 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     }
 
     @Override
+    public void handleShown() {
+        // TODO Auto-generated method stub
+        haePelaajanTiedot();
+    }
+
+    @Override
     public GolfRekisteri getResult() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void handleShown() {
-        // TODO Auto-generated method stub
-        //haePelaajanTiedot();
-    }
-
-    @Override
     public void setDefault(GolfRekisteri golfRekisteri) {
         this.golfRekisteri = golfRekisteri;
-        
     }
     
     @Override
@@ -78,6 +77,7 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
     
     private GolfRekisteri golfRekisteri;
+    private Kayttaja kayttaja;
     
     /**
      * Luodaan pelaaja tuloskortille
@@ -116,6 +116,7 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
      * Tallennetaan pelaajan tiedot näytöltä
      */
     public void tallennaPelaaja() {
+        
         Kayttaja uusiKayttaja = new Kayttaja(nimiTextField.getText(), seuraTextField.getText(), Double.valueOf(tasoitusTextField.getText()), Integer.valueOf(aloitusVuosiTextField.getText()));
     
         try {
@@ -142,15 +143,15 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
                 seuraTextField.setText(uusiKayttaja.getKotiseura());
                 tasoitusTextField.setText(String.valueOf(uusiKayttaja.getTasoitus()));
                 aloitusVuosiTextField.setText(String.valueOf(uusiKayttaja.getAloitusvuosi()));
-            }
+        }
     }
     
     /**
      * @param modalityStage modalityStage mille ollaan modaalisia, null = sovellukselle
-     * @param kayttaja mitä dataa näytetään oletuksena, kun muokataan käyttäjää, niin olemassa olevan käyttäjän tiedot
+     * @param golfRekisteri mitä dataa näytetään oletuksena, kun muokataan käyttäjää, niin olemassa olevan käyttäjän tiedot
      * @return null jos painetaan Peruuta, muuten täytetään tietue
      */
-    public static Kayttaja kysyKayttaja(Stage modalityStage, Kayttaja kayttaja) {
-        return ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Muokkaa jäsentä", modalityStage, kayttaja);
+    public static GolfRekisteri kysyKayttaja(Stage modalityStage, GolfRekisteri golfRekisteri) {
+        return ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Muokkaa jäsentä", modalityStage, golfRekisteri);
     }
 }
