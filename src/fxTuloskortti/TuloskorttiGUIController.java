@@ -266,7 +266,12 @@ public class TuloskorttiGUIController implements Initializable {
      */
     public void naytaKierros() {
         Kierros kierroksenKohdalla = chooserKierrokset.getSelectedObject();
-        System.out.println("Näytettiin: " + kierroksenKohdalla.getTunnusNro());
+        Object[] vietavatieto = {kierroksenKohdalla, golfRekisteri};
+                
+        Object[] tulos = SyotaKierrosController.kysyKierros(null, vietavatieto);
+        if (tulos == null) {
+            return;
+        }
     }
     
     /**
@@ -284,9 +289,5 @@ public class TuloskorttiGUIController implements Initializable {
     
     private void muokkaaKayttajaa() {
         LuoUusiPelaajaController.kysyKayttaja(null, golfRekisteri);
-    }
-    
-    private void kierroksenTiedot() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", null, golfRekisteri);
     }
 }
