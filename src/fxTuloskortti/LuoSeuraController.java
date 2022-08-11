@@ -104,11 +104,30 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
     }
     
     /**
-     * Tallennetaan seuran tiedot
+     * Tallennetaan seuran tiedot tai lisätään uusi seura
      */
     public void tallenna() {
-
-        // TODO tänne tallennus metodi
+        
+        if (seuraKohdalla == null) {
+            Seura seura = new Seura();
+            seura.setSeurannimi(seuraTextField.getText());
+            seura.setKatuosoite(katuosoiteTextField.getText());
+            seura.setPostinumero(Integer.valueOf(postinumeroTextField.getText()));
+            seura.setPostitoimipaikka(postiosoiteTextField.getText());
+            seura.setPuhelinnumero(puhelinnumeroTextField.getText());
+            seura.rekisteroi();
+            try {
+                this.golfRekisteri.lisaaSeura(seura);
+            } catch (SailoException e) {
+                // TODO Auto-generated catch block
+                Dialogs.showMessageDialog("Seuran lisääminen epäonnistui: " + e.getMessage());
+            }
+        } else {
+            //this.golfRekisteri.lisaaTaiMuutaSeura(seura);
+        }
+        
+        
+        
     }
 
 }
