@@ -8,8 +8,6 @@ import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import tuloskortti.GolfRekisteri;
-import tuloskortti.Seura;
 import tuloskortti.Tuloskortti;
 
 /**
@@ -17,7 +15,7 @@ import tuloskortti.Tuloskortti;
  * @version 13.6.2022
  * Uuden tuloskortin luonti seuralle
  */
-public class LuoUusiTuloskorttiController implements ModalControllerInterface<GolfRekisteri> {
+public class LuoUusiTuloskorttiController implements ModalControllerInterface<List<Tuloskortti>> {
     
     @FXML private TextField vayla1_48;
     @FXML private TextField vayla1_51;
@@ -176,19 +174,21 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Go
     @Override
     public void handleShown() {
         // TODO Auto-generated method stub
-        naytaTuloskortti(tuloskorttiEdits, this.golfRekisteri.annaSeura(0));
+        naytaTuloskortti(tuloskorttiEdits, tuloskorttiLista);
         
     }  
     
+    
     @Override
-    public GolfRekisteri getResult() {
+    public List<Tuloskortti> getResult() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void setDefault(GolfRekisteri golfRekisteri) {
-        this.golfRekisteri = golfRekisteri;
+    public void setDefault(List<Tuloskortti> lista) {
+        // TODO Auto-generated method stub
+        this.tuloskorttiLista = lista;
         alusta();
     }
 
@@ -197,10 +197,8 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Go
     // =================================================================
     // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
     
-    private GolfRekisteri golfRekisteri;
+    private List<Tuloskortti> tuloskorttiLista;
     private TextField[] tuloskorttiEdits;
-    private Seura seura;
-    
     
     /**
      * Alustetaan tuloskortin tiedot
@@ -231,24 +229,22 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Go
     /**
      * Luodaan tuloskortin muokkaus dialogi ja palautetaan sama tietue muutettuna tai null arvo
      * @param modalityStage mille ollaan modaalisia, null = sovellukselle
-     * @param seura mitä dataa näytetään oletuksena, kun muokataan tuloskorttia, niin olemassa olevan tuloskortin tiedot
+     * @param tuloskortti mitä dataa näytetään oletuksena, kun muokataan tuloskorttia, niin olemassa olevan tuloskortin tiedot
      * @return null jos painetaan Peruuta, muuten täytetään tietue
      */
-    public static Seura kysyTuloskortti(Stage modalityStage, Seura seura) {
-        return ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", modalityStage, seura);
+    public static List<Tuloskortti> kysyTuloskortti(Stage modalityStage, List<Tuloskortti> tuloskortti) {
+        return ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", modalityStage, tuloskortti);
     }
     
     /**
      * Hakee seuran tuloskortin joka on valittuna seura listalta
      * @param edits viedään näytettävät kentät
-     * @param s jonka tuloskortti näytetään
+     * @param lista jonka tuloskortti näytetään
      */
-    public void naytaTuloskortti(TextField[] edits, Seura s) {
-        if (s == null) {
+    public void naytaTuloskortti(TextField[] edits, List<Tuloskortti> lista) {
+        if (lista == null) {
             return;
         }
-        
-        List<Tuloskortti> tuloskortti = golfRekisteri.annaTuloskortti(s);
         
         int pituus48 = 0;
         int pituus51 = 0;
@@ -257,7 +253,7 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Go
         int par = 0;
 
         int x = 0;
-        for (Tuloskortti t : tuloskortti) {
+        for (Tuloskortti t : lista) {
             // Lisätään textField sarakkeisiin tuloskortin tiedot
             edits[x].setText(String.valueOf(t.getPituus48()));
             pituus48 += t.getPituus48();
@@ -283,5 +279,5 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Go
         pituusYhteensa55.setText(String.valueOf(pituus55));
         pituusYhteensa62.setText(String.valueOf(pituus62));
         parYhteensa.setText(String.valueOf(par));
-    }    
+    }
 }
