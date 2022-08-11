@@ -146,6 +146,46 @@ public class Seura {
         return this.puhelinnumero;
     }
     
+    /**
+     * Asetataan seurannimi
+     * @param seurannimi asetettava seurannimi
+     */
+    public void setSeurannimi(String seurannimi) {
+        this.seurannimi = seurannimi;
+    }
+    
+    /**
+     * Asetataan katuosoite
+     * @param katuosoite tieto
+     */
+    public void setKatuosoite(String katuosoite) {
+        this.katuosoite = katuosoite;
+    }
+    
+    /**
+     * Asetataan postinuero
+     * @param postinumero tieto
+     */
+    public void setPostinumero(int postinumero) {
+        this.postinumero = postinumero;
+    }
+    
+    /**
+     * Asetataan postitoimipaikka
+     * @param postitoimipaikka tieto
+     */
+    public void setPostitoimipaikka(String postitoimipaikka) {
+        this.postitoimipaikka = postitoimipaikka;
+    }
+    
+    /**
+     * Asetataan puhelinnumero
+     * @param puhelinnumero tieto
+     */
+    public void setPuhelinnumero(String puhelinnumero) {
+        this.puhelinnumero = puhelinnumero;
+    }
+
     @Override
     public String toString() {
         return this.id + "|" + this.seurannimi + "|" + this.katuosoite + "|" + this.postinumero + 
