@@ -157,7 +157,12 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     @Override
     public void handleShown() {
         // TODO Auto-generated method stub
-        naytaKierros(kierrosEdits, objectLista);
+        boolean naytettavaKierros = (boolean) this.objectLista[2];
+        if (!naytettavaKierros) {
+            naytaKierros(kierrosEdits, objectLista);
+        } else {
+            syotaUusiKierros(kierrosEdits, objectLista);
+        }
     }
 
 
@@ -293,4 +298,14 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         teeChoiseBox.setValue(String.valueOf(kierroksenKohdalla.getPelattuTee()));
         seuraChoiceBox.setValue(seura.getSeurannimi());
     }
-}
+    
+    /**
+     * Syötetään uudet kierroksen tiedot
+     * @param edits näyttää kierroksen kentät
+     * @param object taulukko
+     */
+    private void syotaUusiKierros(TextField[] edits, Object[] object) {
+        //
+    }
+    
+ }
