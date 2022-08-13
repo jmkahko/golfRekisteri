@@ -134,6 +134,37 @@ public class Kayttaja implements Cloneable {
     }
     
     
+    
+    
+    /**
+     * @param nimi asettaa käyttäjän nimen
+     */
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+    
+    /**
+     * @param kotiseura asettaa käyttäjän kotiseuran
+     */
+    public void setKotiseura(String kotiseura) {
+        this.kotiseura = kotiseura;
+    }
+    
+    /**
+     * @param tasoitus asettaa käyttäjän tasoituksen
+     */
+    public void setTasoitus(double tasoitus) {
+        this.tasoitus = tasoitus;
+    }
+    
+    /**
+     * @param aloitusvuosi asettaa käyttäjän aloitusvuoden
+     */
+    public void setAloitusvuosi(int aloitusvuosi) {
+        this.aloitusvuosi = aloitusvuosi;
+    }
+    
+    
     /**
      * Antaa käyttäjälle seuraavan rekisterinumeron.
      * @return käyttäjän uusi id
