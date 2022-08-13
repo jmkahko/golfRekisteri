@@ -220,7 +220,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     
     @FXML
     void handleUusiSeura() {
-        ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Luo uusi seura", null, golfRekisteri);
+        ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Luo uusi seura", null, seura);
         //uusiSeura();
     }
 
@@ -256,6 +256,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
 
     private GolfRekisteri golfRekisteri;
     private TextField[] tuloskorttiEdits;
+    private Seura seura;
     
     
     /**
@@ -513,12 +514,19 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         if (seuranKohdalla == null) {
             return;
         }
-        Seura seura = LuoSeuraController.kysySeura(null, seuranKohdalla);
         
-        if (seura == null) {
-            return;
+        try {
+            Seura saatiinSeura = LuoSeuraController.kysySeura(null, seuranKohdalla.clone());
+            
+            if (saatiinSeura == null) {
+                System.out.println("nulli tuli");
+                return;
+            }
+            golfRekisteri.lisaaTaiMuutaSeura(saatiinSeura);
+            haeSeura(saatiinSeura.getTunnusNro());
+        } catch (CloneNotSupportedException | SailoException e) {
+            Dialogs.showMessageDialog("Seuran muokkaus ei onnistunut: " + e.getMessage());
         }
-        haeSeura(seura.getTunnusNro());
     }
     
     /**
@@ -531,10 +539,11 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
             return;
         }
 
-       List<Tuloskortti> tuloskorttia = LuoUusiTuloskorttiController.kysyTuloskortti(null, this.golfRekisteri.annaTuloskortti(seuranKohdalla));
+        List<Tuloskortti> tuloskorttia = LuoUusiTuloskorttiController.kysyTuloskortti(null, this.golfRekisteri.annaTuloskortti(seuranKohdalla));
         
         if (tuloskorttia == null) {
             return;
         }
+        haeSeura(seuranKohdalla.getTunnusNro());
     }
 }

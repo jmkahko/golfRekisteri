@@ -30,7 +30,6 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
     
     /**
      * Voidaan syöttää uusi tuloskortti
-     * @param event
      */
     @FXML 
     private void handleSyotaTuloskortti() {
@@ -39,12 +38,10 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
 
     /**
      * Voidaan tallentaa seurantiedot
-     * @param event
      */
     @FXML 
     private void handleTallenna() {
-        //Dialogs.showMessageDialog("Ei vielä osata tehdä");
-        tallenna();
+        ModalController.closeStage(seuraTextField);
     }
 
     @Override
@@ -61,14 +58,16 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        // TODO Auto-generated method stub
-        
+        seuraTextField.setOnKeyReleased(e -> kasitteleSeuraMuutos(1, seuraTextField));
+        katuosoiteTextField.setOnKeyReleased(e -> kasitteleSeuraMuutos(2, katuosoiteTextField));
+        postinumeroTextField.setOnKeyReleased(e -> kasitteleSeuraMuutos(3, postinumeroTextField));
+        postiosoiteTextField.setOnKeyReleased(e -> kasitteleSeuraMuutos(4, postiosoiteTextField));
+        puhelinnumeroTextField.setOnKeyReleased(e -> kasitteleSeuraMuutos(5, puhelinnumeroTextField));
     }
 
     @Override
     public Seura getResult() {
-        // TODO Auto-generated method stub
-        return null;
+        return seuraKohdalla;
     }
     
  // =================================================================
@@ -76,7 +75,24 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
 
     private GolfRekisteri golfRekisteri;
     private Seura seuraKohdalla;
-
+ 
+    private void kasitteleSeuraMuutos(int k, TextField edit) {
+        if (seuraKohdalla == null) {
+            return;
+        }
+        
+        String s = edit.getText();
+        
+        switch (k) {
+            case 1: seuraKohdalla.setSeurannimi(s); break;
+            case 2: seuraKohdalla.setKatuosoite(s); break;
+            case 3: seuraKohdalla.setPostinumero(Integer.valueOf(s)); break;
+            case 4: seuraKohdalla.setPostitoimipaikka(s); break;
+            case 5: seuraKohdalla.setPuhelinnumero(s); break;
+        default:
+            break;
+        }
+    }
     
     /**
      * Laitetaan seuran tiedot näkymälle
@@ -84,13 +100,18 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
      */
     private void naytaSeura(Seura seura) {
         if (seura == null) {
-            return;
+            katuosoiteTextField.setText("");
+            postinumeroTextField.setText("");
+            postiosoiteTextField.setText("");
+            puhelinnumeroTextField.setText("");
+            seuraTextField.setText("");
+        } else {
+            katuosoiteTextField.setText(seura.getKatuosoite());
+            postinumeroTextField.setText(String.valueOf(seura.getPostinumero()));
+            postiosoiteTextField.setText(seura.getPostitoimipaikka());
+            puhelinnumeroTextField.setText(seura.getPuhelinnumero());
+            seuraTextField.setText(seura.getSeurannimi());
         }
-        katuosoiteTextField.setText(seura.getKatuosoite());
-        postinumeroTextField.setText(String.valueOf(seura.getPostinumero()));
-        postiosoiteTextField.setText(seura.getPostitoimipaikka());
-        puhelinnumeroTextField.setText(seura.getPuhelinnumero());
-        seuraTextField.setText(seura.getSeurannimi());
     }
     
     /**
@@ -102,32 +123,4 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
     public static Seura kysySeura(Stage modalityStage, Seura seura) {
         return ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", modalityStage, seura);
     }
-    
-    /**
-     * Tallennetaan seuran tiedot tai lisätään uusi seura
-     */
-    public void tallenna() {
-        
-        if (seuraKohdalla == null) {
-            Seura seura = new Seura();
-            seura.setSeurannimi(seuraTextField.getText());
-            seura.setKatuosoite(katuosoiteTextField.getText());
-            seura.setPostinumero(Integer.valueOf(postinumeroTextField.getText()));
-            seura.setPostitoimipaikka(postiosoiteTextField.getText());
-            seura.setPuhelinnumero(puhelinnumeroTextField.getText());
-            seura.rekisteroi();
-            try {
-                this.golfRekisteri.lisaaSeura(seura);
-            } catch (SailoException e) {
-                // TODO Auto-generated catch block
-                Dialogs.showMessageDialog("Seuran lisääminen epäonnistui: " + e.getMessage());
-            }
-        } else {
-            //this.golfRekisteri.lisaaTaiMuutaSeura(seura);
-        }
-        
-        
-        
-    }
-
 }
