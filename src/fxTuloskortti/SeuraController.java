@@ -226,7 +226,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     @Override
     public GolfRekisteri getResult() {
         // TODO Auto-generated method stub
-        return null;
+        return this.golfRekisteri;
     }
     
     @Override
