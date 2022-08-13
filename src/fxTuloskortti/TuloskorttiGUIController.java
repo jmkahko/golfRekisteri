@@ -71,7 +71,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handleUusiSeura() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoSeuraView.fxml"), "Luo seura", null, seura);
+        uusiSeura();
     }
        
     /**
@@ -307,6 +307,20 @@ public class TuloskorttiGUIController implements Initializable {
         Object[] tulos = SyotaKierrosController.kysyKierros(null, vietavaTieto);
         if (tulos == null) {
             return;
+        }
+    }
+    
+    /**
+     * Lisätään tuloskorttiin uusi seura
+     */
+    public void uusiSeura() {
+        Seura uusiSeura = new Seura();
+        LuoSeuraController.kysySeura(null, uusiSeura);
+               
+        try {
+            this.golfRekisteri.lisaaSeura(uusiSeura);
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog("Ongelmia uuden seuran luonnissa: " + e.getMessage());
         }
     }
 }
