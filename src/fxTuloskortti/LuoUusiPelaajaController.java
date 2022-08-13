@@ -34,8 +34,6 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
      */
     @FXML 
     private void handlePeruuta() {
-        //Dialogs.showMessageDialog("Ei vielä osata tehdä");
-        //luoTestiPelaaja();
         ModalController.closeStage(nimiTextField); // Kun painetaan Peruuta nappia, niin tällä saadaan suljettua ikkuna
     }
 
@@ -58,8 +56,7 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
 
     @Override
     public GolfRekisteri getResult() {
-        // TODO Auto-generated method stub
-        return null;
+        return golfRekisteri;
     }
 
     @Override
@@ -68,16 +65,35 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     }
     
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        // TODO Auto-generated method stub
-        
+    public void initialize(URL arg0, ResourceBundle arg1) {      
+        nimiTextField.setOnKeyReleased(e -> kasitteleKayttajaMuutos(1, nimiTextField));
+        seuraTextField.setOnKeyReleased(e -> kasitteleKayttajaMuutos(2, seuraTextField));
+        tasoitusTextField.setOnKeyReleased(e -> kasitteleKayttajaMuutos(3, tasoitusTextField));
+        aloitusVuosiTextField.setOnKeyReleased(e -> kasitteleKayttajaMuutos(4, aloitusVuosiTextField));
     }
     
     // =================================================================
     // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
     
     private GolfRekisteri golfRekisteri;
-    private Kayttaja kayttaja;
+    
+    private void kasitteleKayttajaMuutos(int k, TextField edit) {
+        Kayttaja kayttaja = this.golfRekisteri.annaKayttaja(0);
+        if (kayttaja == null) {
+            return;
+        }
+        
+        String s = edit.getText();
+        
+        switch (k) {
+            case 1: kayttaja.setNimi(s); break;
+            case 2: kayttaja.setKotiseura(s); break;
+            case 3: kayttaja.setTasoitus(Double.valueOf(s)); break;
+            case 4: kayttaja.setAloitusvuosi(Integer.valueOf(s)); break;
+        default:
+            break;
+        }
+    }
     
     /**
      * Luodaan pelaaja tuloskortille
@@ -116,33 +132,36 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
      * Tallennetaan pelaajan tiedot näytöltä
      */
     public void tallennaPelaaja() {
-        
-        Kayttaja uusiKayttaja = new Kayttaja(nimiTextField.getText(), seuraTextField.getText(), Double.valueOf(tasoitusTextField.getText()), Integer.valueOf(aloitusVuosiTextField.getText()));
-    
-        try {
-            this.golfRekisteri.lisaaKayttaja(uusiKayttaja);
-            this.golfRekisteri.tallenna();
-        } catch (SailoException e) {
-            Dialogs.showMessageDialog("Ongelmia uuden käyttäjän luonnissa: " + e.getMessage());
+        if (this.golfRekisteri.annaKayttaja(0) != null) {
+            ModalController.closeStage(seuraTextField);
+        } else {
+            Kayttaja uusiKayttaja = new Kayttaja(nimiTextField.getText(), seuraTextField.getText(), Double.valueOf(tasoitusTextField.getText()), Integer.valueOf(aloitusVuosiTextField.getText()));
+            
+            try {
+                this.golfRekisteri.lisaaKayttaja(uusiKayttaja);
+                this.golfRekisteri.tallenna();
+            } catch (SailoException e) {
+                Dialogs.showMessageDialog("Ongelmia uuden käyttäjän luonnissa: " + e.getMessage());
+            }
         }
     }
     
     /**
      * Luetaan tiedostosta pelaajan tiedot
      */
-    public void haePelaajanTiedot() {       
-        Kayttaja uusiKayttaja = this.golfRekisteri.annaKayttaja(0);
-        
-        if (uusiKayttaja == null) {
-                nimiTextField.setText("");
-                seuraTextField.setText("");
-                tasoitusTextField.setText(String.valueOf(0.0));
-                aloitusVuosiTextField.setText(String.valueOf(0));
+    public void haePelaajanTiedot() {
+        if (this.golfRekisteri != null) {
+            Kayttaja uusiKayttaja = this.golfRekisteri.annaKayttaja(0);
+            
+            nimiTextField.setText(uusiKayttaja.getNimi());
+            seuraTextField.setText(uusiKayttaja.getKotiseura());
+            tasoitusTextField.setText(String.valueOf(uusiKayttaja.getTasoitus()));
+            aloitusVuosiTextField.setText(String.valueOf(uusiKayttaja.getAloitusvuosi()));
         } else {
-                nimiTextField.setText(uusiKayttaja.getNimi());
-                seuraTextField.setText(uusiKayttaja.getKotiseura());
-                tasoitusTextField.setText(String.valueOf(uusiKayttaja.getTasoitus()));
-                aloitusVuosiTextField.setText(String.valueOf(uusiKayttaja.getAloitusvuosi()));
+            nimiTextField.setText("");
+            seuraTextField.setText("");
+            tasoitusTextField.setText(String.valueOf(0.0));
+            aloitusVuosiTextField.setText(String.valueOf(0));
         }
     }
     

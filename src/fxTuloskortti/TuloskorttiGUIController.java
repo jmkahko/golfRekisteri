@@ -152,7 +152,6 @@ public class TuloskorttiGUIController implements Initializable {
 // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
     
     private GolfRekisteri golfRekisteri;
-    private Seura seura;
     private Object[] vietavaTieto = new Object[3];
     private Kierros kierroksenKohdalla;
 
@@ -298,6 +297,7 @@ public class TuloskorttiGUIController implements Initializable {
     
     private void muokkaaKayttajaa() {
         LuoUusiPelaajaController.kysyKayttaja(null, golfRekisteri);
+        haeKayttajanTiedot();
     }
     
     private void uusiKierros() {
