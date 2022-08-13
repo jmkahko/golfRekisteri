@@ -299,7 +299,6 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         }
         uusiSeura.rekisteroi();
         
-        System.out.println("saatiin " + saatiinSeura.getSeurannimi());
         try {
             this.golfRekisteri.lisaaSeura(uusiSeura);
         } catch (SailoException e) {
