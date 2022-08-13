@@ -1,15 +1,21 @@
 package fxTuloskortti;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -24,7 +30,7 @@ import tuloskortti.Tuloskortti;
  * @version 13.6.2022
  * Pelatun kierroksen tuloksen syöttäminen
  */
-public class SyotaKierrosController implements ModalControllerInterface<Object[]> {
+public class SyotaKierrosController implements ModalControllerInterface<Object[]>, Initializable {
 
     /**
      * Golf seuran, pelatun teen, päiväyksen valinta ja yhteensä tulokset
@@ -151,8 +157,7 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     private void handlePaivays() {
         //Dialogs.showMessageDialog("Ei vielä osata tehdä");
     }
-
-
+    
 
     @Override
     public void handleShown() {
@@ -161,11 +166,28 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         if (!naytettavaKierros) {
             naytaKierros(kierrosEdits, objectLista);
         } else {
-            syotaUusiKierros(kierrosEdits, objectLista);
+            alustaSeuraNakyma(objectLista);
         }
     }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle bundle) {
+        // TODO Auto-generated method stub
+        
 
 
+//        teeChoiseBox.getSelectionModel().selectedIndexProperty().addListener((InvalidationListener) new ChangeListener<String>() {
+//
+//            @Override
+//            public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+//                // TODO Auto-generated method stub
+//                System.out.println("muuttuiko");
+//            }
+//
+//        });
+        
+
+    }
 
     @Override
     public Object[] getResult() {
@@ -299,13 +321,38 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         seuraChoiceBox.setValue(seura.getSeurannimi());
     }
     
+    
     /**
-     * Syötetään uudet kierroksen tiedot
-     * @param edits näyttää kierroksen kentät
-     * @param object taulukko
+     * Alustetaan uuden kierroksen seuran näyttäminen. Tuodaan seuran tiedot ja tee paikat
+     * @param object
      */
-    private void syotaUusiKierros(TextField[] edits, Object[] object) {
-        //
+    private void alustaSeuraNakyma(Object[] object) {
+        GolfRekisteri golfRekisteri = (GolfRekisteri) object[1];
+        List<Seura> seura = golfRekisteri.annaSeurat();
+        
+        // Tietojen asettaminen bokseihin
+        for (Seura s: seura) {
+            seuraChoiceBox.getItems().add(s.getSeurannimi());
+        }
+        
+        teeChoiseBox.getItems().add(String.valueOf(62));
+        teeChoiseBox.getItems().add(String.valueOf(55));
+        teeChoiseBox.getItems().add(String.valueOf(51));
+        teeChoiseBox.getItems().add(String.valueOf(48));
+        
+        // Asetataan oletusarvot
+        paivaPicker.setValue(LocalDate.now());
+        seuraChoiceBox.setValue(golfRekisteri.annaSeura(0).getSeurannimi());
+        teeChoiseBox.setValue(String.valueOf(55));
+        alustaTulosKorttiNakyma();
+    }
+    
+    /**
+     * Alustetaan uuden kierroksen tuloskortti näkymä. Tuodaan tuloskortin tiedot
+     */
+    private void alustaTulosKorttiNakyma() {
+        System.out.println("valittu seura: " + seuraChoiceBox.getValue());
+        System.out.println("valittu tee " + teeChoiseBox.getValue());
     }
     
  }
