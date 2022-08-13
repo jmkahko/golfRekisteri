@@ -49,7 +49,11 @@ public class TuloskorttiGUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
         chooserKierrokset.clear();
-        chooserKierrokset.addSelectionListener(e -> naytaKierros());
+        chooserKierrokset.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                naytaKierros();
+            }
+        });
     }
     
     /**
@@ -67,7 +71,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handleUusiSeura() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoSeuraView.fxml"), "Luo seura", null, golfRekisteri);
+        ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoSeuraView.fxml"), "Luo seura", null, seura);
     }
        
     /**
@@ -83,7 +87,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handleMuokkaaKierrosta() {
-        ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Muokkaa kierrosta", null, golfRekisteri);
+        naytaKierros();
     }
 
     /**
@@ -148,6 +152,9 @@ public class TuloskorttiGUIController implements Initializable {
 // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
     
     private GolfRekisteri golfRekisteri;
+    private Seura seura;
+    private Object[] vietavaTieto = new Object[3];
+    private Kierros kierroksenKohdalla;
 
     /**
      * Tarkistetaan onko tallennus tehty
@@ -191,9 +198,9 @@ public class TuloskorttiGUIController implements Initializable {
     
         
     /**
-     * Lisätään uusi kierros
+     * Lisätään uusi generoitu kierros
      */
-    public void uusiKierros() {
+    public void uusiKierrosGeneroitu() {
         golfRekisteri.lisaaKierros(UusiKierros.luoKierros(1, 55));
         
         Dialogs.showMessageDialog("Luotu uusi väylä kierrokselle. Tulostuu Console lokiin tieto");
@@ -265,10 +272,12 @@ public class TuloskorttiGUIController implements Initializable {
      * Haetaan kieroksen tiedot
      */
     public void naytaKierros() {
-        Kierros kierroksenKohdalla = chooserKierrokset.getSelectedObject();
-        Object[] vietavatieto = {kierroksenKohdalla, golfRekisteri};
+        kierroksenKohdalla = chooserKierrokset.getSelectedObject();
+        this.vietavaTieto[0] = kierroksenKohdalla;
+        this.vietavaTieto[1] = golfRekisteri;
+        this.vietavaTieto[2] = false; // Muuttuja tieto, että onko kyseessä Uusi kierros vai vanha. False jos vanha
                 
-        Object[] tulos = SyotaKierrosController.kysyKierros(null, vietavatieto);
+        Object[] tulos = SyotaKierrosController.kysyKierros(null, vietavaTieto);
         if (tulos == null) {
             return;
         }
@@ -289,5 +298,15 @@ public class TuloskorttiGUIController implements Initializable {
     
     private void muokkaaKayttajaa() {
         LuoUusiPelaajaController.kysyKayttaja(null, golfRekisteri);
+    }
+    
+    private void uusiKierros() {
+        this.vietavaTieto[1] = golfRekisteri;
+        this.vietavaTieto[2] = true;
+        
+        Object[] tulos = SyotaKierrosController.kysyKierros(null, vietavaTieto);
+        if (tulos == null) {
+            return;
+        }
     }
 }
