@@ -28,7 +28,7 @@ import kanta.UusiKierros;
  * @author Janne Kähkönen
  * @version 13.7.2022
  */
-public class Kierros {
+public class Kierros implements Cloneable {
 
     private int id;
     private int seuraId;
@@ -207,6 +207,17 @@ public class Kierros {
         this.pelattuTee = Mjonot.erota(sb, '|', pelattuTee);
         this.vayla = Mjonot.erota(sb, '|', vayla);
         this.tulos = Mjonot.erota(sb, '|', tulos);
+    }
+    
+    /**
+     * Cloonataan kierros
+     * @thorws CloneNotSupportedException otetaan poikkeus jos tulee
+     */
+    @Override
+    public Kierros clone() throws CloneNotSupportedException {
+        Kierros uusiKierros;
+        uusiKierros = (Kierros) super.clone();
+        return uusiKierros;
     }
     
     

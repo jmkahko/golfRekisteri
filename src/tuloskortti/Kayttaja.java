@@ -30,7 +30,7 @@ import kanta.UusiSeura;
  * @version 11.7.2022
  *
  */
-public class Kayttaja {
+public class Kayttaja implements Cloneable {
     
     private int id;
     private String nimi;
@@ -194,6 +194,17 @@ public class Kayttaja {
         this.kotiseura = Mjonot.erota(sb, '|', kotiseura);
         this.tasoitus = Mjonot.erota(sb, '|', tasoitus);
         this.aloitusvuosi = Mjonot.erota(sb, '|', aloitusvuosi);
+    }
+    
+    /**
+     * Cloonataan kayttaja
+     * @thorws CloneNotSupportedException otetaan poikkeus jos tulee
+     */
+    @Override
+    public Kayttaja clone() throws CloneNotSupportedException {
+        Kayttaja uusiKayttaja;
+        uusiKayttaja = (Kayttaja) super.clone();
+        return uusiKayttaja;
     }
     
     

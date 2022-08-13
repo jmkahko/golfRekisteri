@@ -28,7 +28,7 @@ import kanta.UusiSeura;
  * @author Janne Kähkönen
  * @version 12.7.2022
  */
-public class Seura {
+public class Seura implements Cloneable {
 
     private int id;
     private String seurannimi;
@@ -190,6 +190,17 @@ public class Seura {
     public String toString() {
         return this.id + "|" + this.seurannimi + "|" + this.katuosoite + "|" + this.postinumero + 
                 "|" + this.postitoimipaikka + "|" + this.puhelinnumero;
+    }
+    
+    /**
+     * Cloonataan seura
+     * @thorws CloneNotSupportedException otetaan poikkeus jos tulee
+     */
+    @Override
+    public Seura clone() throws CloneNotSupportedException {
+        Seura uusiSeura;
+        uusiSeura = (Seura) super.clone();
+        return uusiSeura;
     }
     
     /**

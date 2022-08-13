@@ -28,7 +28,7 @@ import kanta.UusiTuloskortti;
  * @author Janne Kähkönen
  * @version 13.7.2022
  */
-public class Tuloskortti {
+public class Tuloskortti implements Cloneable {
 
     private int id;
     private int seuraId;
@@ -241,6 +241,17 @@ public class Tuloskortti {
         this.pituus48 = Mjonot.erota(sb, '|', pituus48);
         this.par = Mjonot.erota(sb, '|', par);
         this.hcp = Mjonot.erota(sb, '|', hcp);
+    }
+    
+    /**
+     * Cloonataan tuloskortti
+     * @thorws CloneNotSupportedException otetaan poikkeus jos tulee
+     */
+    @Override
+    public Tuloskortti clone() throws CloneNotSupportedException {
+        Tuloskortti uusiTuloskortti;
+        uusiTuloskortti = (Tuloskortti) super.clone();
+        return uusiTuloskortti;
     }
     
     
