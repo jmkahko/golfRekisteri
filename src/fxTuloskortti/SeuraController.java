@@ -294,7 +294,6 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         Seura saatiinSeura = LuoSeuraController.kysySeura(null, uusiSeura);
         
         if (saatiinSeura == null) {
-            System.out.println("nulli");
             return;
         }
         uusiSeura.rekisteroi();
