@@ -74,6 +74,25 @@ public class Kayttajat {
     }
     
     /**
+     * Lisää uuden kayttajan tai muuttaa olemassa olevan kayttajan tietoja.
+     * Etsii samalla kayttaja -tunnuksella olevaa käyttäjän, jos ei löydy niin luo uuden käyttäjän
+     * @param kayttaja lisättävän tai muutettavan seuran tieto
+     * @throws SailoException jos ei onnistu
+     */
+    public void lisaaTaiMuutaKayttaja(Kayttaja kayttaja) throws SailoException {
+        int id = kayttaja.getTunnusNro();
+        
+        // Etsitään löytyykö tulevan seuran id -numeroa, jos ei löydy niin lisätään seura
+        for (int x = 0; x < this.lkm; x++) {
+            if (this.alkiot[x].getTunnusNro() == id) {
+                this.alkiot[x] = kayttaja;
+                return;
+            }
+        }
+        this.lisaa(kayttaja);
+    }
+    
+    /**
      * Palauttaa käyttäjien käyttäjien lukumäärän
      * @return käyttäjien lukumäärän
      */
