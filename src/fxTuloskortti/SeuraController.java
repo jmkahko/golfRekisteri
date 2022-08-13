@@ -220,8 +220,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     
     @FXML
     void handleUusiSeura() {
-        ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Luo uusi seura", null, seura);
-        //uusiSeura();
+        uusiSeura();
     }
 
     @Override
@@ -255,9 +254,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
  // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
 
     private GolfRekisteri golfRekisteri;
-    private TextField[] tuloskorttiEdits;
-    private Seura seura;
-    
+    private TextField[] tuloskorttiEdits;   
     
     /**
      * Alustetaan seuralistan kuuntelija
@@ -267,114 +264,24 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         chooserSeurat.clear();
         chooserSeurat.addSelectionListener(e -> naytaSeura());
         TextField[] tuloskorttiEdits = {
-                vayla1_48,
-                vayla1_51,
-                vayla1_55,
-                vayla1_62,
-                vayla1_hcp,
-                vayla1_par,
-                vayla2_48,
-                vayla2_51,
-                vayla2_55,
-                vayla2_62,
-                vayla2_hcp,
-                vayla2_par,
-                vayla3_48,
-                vayla3_51,
-                vayla3_55,
-                vayla3_62,
-                vayla3_hcp,
-                vayla3_par,
-                vayla4_48,
-                vayla4_51,
-                vayla4_55,
-                vayla4_62,
-                vayla4_hcp,
-                vayla4_par,
-                vayla5_48,
-                vayla5_51,
-                vayla5_55,
-                vayla5_62,
-                vayla5_hcp,
-                vayla5_par,
-                vayla6_48,
-                vayla6_51,
-                vayla6_55,
-                vayla6_62,
-                vayla6_hcp,
-                vayla6_par,
-                vayla7_48,
-                vayla7_51,
-                vayla7_55,
-                vayla7_62,
-                vayla7_hcp,
-                vayla7_par,
-                vayla8_48,
-                vayla8_51,
-                vayla8_55,
-                vayla8_62,
-                vayla8_hcp,
-                vayla8_par,
-                vayla9_48,
-                vayla9_51,
-                vayla9_55,
-                vayla9_62,
-                vayla9_hcp,
-                vayla9_par,
-                vayla10_48,
-                vayla10_51,
-                vayla10_55,
-                vayla10_62,
-                vayla10_hcp,
-                vayla10_par,
-                vayla11_48,
-                vayla11_51,
-                vayla11_55,
-                vayla11_62,
-                vayla11_hcp,
-                vayla11_par,
-                vayla12_48,
-                vayla12_51,
-                vayla12_55,
-                vayla12_62,
-                vayla12_hcp,
-                vayla12_par,
-                vayla13_48,
-                vayla13_51,
-                vayla13_55,
-                vayla13_62,
-                vayla13_hcp,
-                vayla13_par,
-                vayla14_48,
-                vayla14_51,
-                vayla14_55,
-                vayla14_62,
-                vayla14_hcp,
-                vayla14_par,
-                vayla15_48,
-                vayla15_51,
-                vayla15_55,
-                vayla15_62,
-                vayla15_hcp,
-                vayla15_par,
-                vayla16_48,
-                vayla16_51,
-                vayla16_55,
-                vayla16_62,
-                vayla16_hcp,
-                vayla16_par,
-                vayla17_48,
-                vayla17_51,
-                vayla17_55,
-                vayla17_62,
-                vayla17_hcp,
-                vayla17_par,
-                vayla18_48,
-                vayla18_51,
-                vayla18_55,
-                vayla18_62,
-                vayla18_hcp,
-                vayla18_par};
+                vayla1_48, vayla1_51, vayla1_55, vayla1_62, vayla1_hcp, vayla1_par,
+                vayla2_48, vayla2_51, vayla2_55, vayla2_62, vayla2_hcp, vayla2_par,
+                vayla3_48, vayla3_51, vayla3_55, vayla3_62, vayla3_hcp, vayla3_par,
+                vayla4_48, vayla4_51, vayla4_55, vayla4_62, vayla4_hcp, vayla4_par,
+                vayla5_48, vayla5_51, vayla5_55, vayla5_62, vayla5_hcp, vayla5_par,
+                vayla6_48, vayla6_51, vayla6_55, vayla6_62, vayla6_hcp, vayla6_par,
+                vayla7_48, vayla7_51, vayla7_55, vayla7_62, vayla7_hcp, vayla7_par,
+                vayla8_48, vayla8_51, vayla8_55, vayla8_62, vayla8_hcp, vayla8_par,
+                vayla9_48, vayla9_51, vayla9_55, vayla9_62, vayla9_hcp, vayla9_par,
+                vayla10_48, vayla10_51, vayla10_55, vayla10_62, vayla10_hcp, vayla10_par,
+                vayla11_48, vayla11_51, vayla11_55, vayla11_62, vayla11_hcp, vayla11_par,
+                vayla12_48, vayla12_51, vayla12_55, vayla12_62, vayla12_hcp, vayla12_par,
+                vayla13_48, vayla13_51, vayla13_55, vayla13_62, vayla13_hcp, vayla13_par,
+                vayla14_48, vayla14_51, vayla14_55, vayla14_62, vayla14_hcp, vayla14_par,
+                vayla15_48, vayla15_51, vayla15_55, vayla15_62, vayla15_hcp, vayla15_par,
+                vayla16_48, vayla16_51, vayla16_55, vayla16_62, vayla16_hcp, vayla16_par,
+                vayla17_48, vayla17_51, vayla17_55, vayla17_62, vayla17_hcp, vayla17_par,
+                vayla18_48, vayla18_51, vayla18_55, vayla18_62, vayla18_hcp, vayla18_par};
         this.tuloskorttiEdits = tuloskorttiEdits;
     }
     
@@ -383,9 +290,16 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
      */
     public void uusiSeura() {
         Seura uusiSeura = new Seura();
-        uusiSeura.rekisteroi();
-        uusiSeura.taytaTestiTiedoilla();
         
+        Seura saatiinSeura = LuoSeuraController.kysySeura(null, uusiSeura);
+        
+        if (saatiinSeura == null) {
+            System.out.println("nulli");
+            return;
+        }
+        uusiSeura.rekisteroi();
+        
+        System.out.println("saatiin " + saatiinSeura.getSeurannimi());
         try {
             this.golfRekisteri.lisaaSeura(uusiSeura);
         } catch (SailoException e) {
@@ -403,9 +317,9 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         
         int index = 0;
         for (int x = 0; x < this.golfRekisteri.getSeuroja(); x++) {
-            Seura seura = this.golfRekisteri.annaSeura(x);
-            if (seura.getTunnusNro() == seuranro) index = x;
-            chooserSeurat.add(seura.getSeurannimi(), seura);
+            Seura haeSeura = this.golfRekisteri.annaSeura(x);
+            if (haeSeura.getTunnusNro() == seuranro) index = x;
+            chooserSeurat.add(haeSeura.getSeurannimi(), haeSeura);
         }
         chooserSeurat.setSelectedIndex(index);        
     }
@@ -519,9 +433,9 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
             Seura saatiinSeura = LuoSeuraController.kysySeura(null, seuranKohdalla.clone());
             
             if (saatiinSeura == null) {
-                System.out.println("nulli tuli");
                 return;
             }
+            
             golfRekisteri.lisaaTaiMuutaSeura(saatiinSeura);
             haeSeura(saatiinSeura.getTunnusNro());
         } catch (CloneNotSupportedException | SailoException e) {
