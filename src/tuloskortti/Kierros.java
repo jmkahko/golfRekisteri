@@ -160,6 +160,12 @@ public class Kierros implements Cloneable {
         return this.tulos;
     }
     
+    /**
+     * @param tulos asettaa tuloksen
+     */
+    public void setTulos(int tulos) {
+        this.tulos = tulos;
+    }
     
     /**
      * Antaa kierrokselle seuraavan rekisterinumeron.
