@@ -69,17 +69,6 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
      * @throws SailoException jos ei onnistu
      */
     public void lisaaTaiMuutaTuloskorttia(List<Tuloskortti> tuloskorttiLista) throws SailoException {
-        
-        int id = tuloskorttiLista.get(0).getTunnusNro();
-        
-        // Etsitään onko tuloskortti jo olemassa
-        for (Tuloskortti t : this.alkiot) {
-            if (t.getTunnusNro() == id) {
-                // TODO: tähän tehdä vielä tallennus, jos löytyy
-                return;
-            }
-        }
-
         this.lisaaTuloskortti(tuloskorttiLista);
     }
     
