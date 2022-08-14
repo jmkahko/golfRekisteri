@@ -379,6 +379,12 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         }
         
         List<Tuloskortti> tuloskortti = golfRekisteri.annaTuloskortti(seura);
+        
+        if (tuloskortti.size() == 0) {
+            for (int x = 0; x < this.tuloskorttiEdits.length; x++) {
+                this.tuloskorttiEdits[x].setText(String.valueOf(0));
+            }
+        }
 
         int pituus48 = 0;
         int pituus51 = 0;
@@ -462,6 +468,14 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         Seura seuranKohdalla = chooserSeurat.getSelectedObject();
         
         if (seuranKohdalla == null) {
+            return;
+        }
+        
+        // Tarkistetaan onko seuralla jo tuloskortti
+        List<Tuloskortti> tuloskortinKoko = this.golfRekisteri.annaTuloskortti(seuranKohdalla);
+        
+        if (tuloskortinKoko.size() == 0) {
+            Dialogs.showMessageDialog("Seuralla " + seuranKohdalla.getSeurannimi() + " ei ole vielä tuloskorttia");
             return;
         }
 

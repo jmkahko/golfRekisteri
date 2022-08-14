@@ -1,11 +1,12 @@
 package fxTuloskortti;
 
+import java.net.URL;
 import java.util.List;
-
-import fi.jyu.mit.fxgui.Dialogs;
+import java.util.ResourceBundle;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import tuloskortti.Tuloskortti;
@@ -15,7 +16,7 @@ import tuloskortti.Tuloskortti;
  * @version 13.6.2022
  * Uuden tuloskortin luonti seuralle
  */
-public class LuoUusiTuloskorttiController implements ModalControllerInterface<List<Tuloskortti>> {
+public class LuoUusiTuloskorttiController implements ModalControllerInterface<List<Tuloskortti>>, Initializable {
     
     @FXML private TextField vayla1_48;
     @FXML private TextField vayla1_51;
@@ -158,7 +159,7 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
      */
     @FXML
     private void handlePeruuta() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        ModalController.closeStage(parYhteensa);
     }
 
     /**
@@ -167,31 +168,41 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
      */
     @FXML
     private void handleTallenna() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        ModalController.closeStage(parYhteensa);
     }
 
 
     @Override
     public void handleShown() {
         // TODO Auto-generated method stub
+        if (this.tuloskorttiLista.size() == 0) {
+            tyhjennaTuloskortti();
+        }
         naytaTuloskortti(tuloskorttiEdits, tuloskorttiLista);
-        
     }  
     
     
     @Override
     public List<Tuloskortti> getResult() {
-        // TODO Auto-generated method stub
-        return null;
+        return tuloskorttiLista;
     }
 
     @Override
     public void setDefault(List<Tuloskortti> lista) {
-        // TODO Auto-generated method stub
         this.tuloskorttiLista = lista;
         alusta();
     }
 
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        // TODO Auto-generated method stubthis.tuloskorttiEdits[x]
+        
+//        int x = 0;
+//        for (TextField t : this.tuloskorttiEdits) {
+//            x++;
+//            this.tuloskorttiEdits[x].setOnKeyReleased(e -> kasitteleTuloskorttiMuutos(x, this.tuloskorttiEdits[x]));
+//        }
+    }
 
     
     // =================================================================
@@ -199,6 +210,25 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
     
     private List<Tuloskortti> tuloskorttiLista;
     private TextField[] tuloskorttiEdits;
+    
+    
+//    private void kasitteleTuloskorttiMuutos(int k, TextField edit) {
+//        if (this.tuloskorttiLista == null || this.tuloskorttiLista.size() == 0) {
+//            return;
+//        }
+//        
+//        String s = edit.getText();
+//        
+//        switch (k) {
+//            case 1: seuraKohdalla.setSeurannimi(s); break;
+//            case 2: seuraKohdalla.setKatuosoite(s); break;
+//            case 3: seuraKohdalla.setPostinumero(Integer.valueOf(s)); break;
+//            case 4: seuraKohdalla.setPostitoimipaikka(s); break;
+//            case 5: seuraKohdalla.setPuhelinnumero(s); break;
+//        default:
+//            break;
+//        }
+//    }
     
     /**
      * Alustetaan tuloskortin tiedot
@@ -230,10 +260,20 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
      * Luodaan tuloskortin muokkaus dialogi ja palautetaan sama tietue muutettuna tai null arvo
      * @param modalityStage mille ollaan modaalisia, null = sovellukselle
      * @param tuloskortti mitä dataa näytetään oletuksena, kun muokataan tuloskorttia, niin olemassa olevan tuloskortin tiedot
+     * @param mitaTehdaan muokataanko vai luodaanko uutta
      * @return null jos painetaan Peruuta, muuten täytetään tietue
      */
-    public static List<Tuloskortti> kysyTuloskortti(Stage modalityStage, List<Tuloskortti> tuloskortti) {
-        return ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", modalityStage, tuloskortti);
+    public static List<Tuloskortti> kysyTuloskortti(String mitaTehdaan, Stage modalityStage, List<Tuloskortti> tuloskortti) {
+        return ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), mitaTehdaan, modalityStage, tuloskortti);
+    }
+    
+    /**
+     * Alustetaan / tyhjennetään tuloskortti
+     */
+    public void tyhjennaTuloskortti() {
+        for (int x = 0; x < this.tuloskorttiEdits.length; x++) {
+            this.tuloskorttiEdits[x].setText("");
+        }
     }
     
     /**
