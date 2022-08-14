@@ -156,6 +156,47 @@ public class Tuloskortti implements Cloneable {
         return this.hcp;
     }
     
+    /**
+     * @param luku Asettaa pituus62
+     */
+    public void setPituus62(int luku) {
+        this.pituus62 = luku;
+    }
+    
+    /**
+     * @param luku Asettaa pituus55
+     */
+    public void setPituus55(int luku) {
+        this.pituus55 = luku;
+    }
+    
+    /**
+     * @param luku Asettaa pituus51
+     */
+    public void setPituus51(int luku) {
+        this.pituus51 = luku;
+    }
+    
+    /**
+     * @param luku Asettaa pituus48
+     */
+    public void setPituus48(int luku) {
+        this.pituus48 = luku;
+    }
+    
+    /**
+     * @param luku Asettaa par-luku
+     */
+    public void setPar(int luku) {
+        this.par = luku;
+    }
+    
+    /**
+     * @param luku Asettaa hcp-luku
+     */
+    public void setHcp(int luku) {
+        this.hcp = luku;
+    }
     
     /**
      * Asettaa id numeron ja samalla varmistetaan, että seuraavaId numero on aina suurempi kuin nykyinen id numero
