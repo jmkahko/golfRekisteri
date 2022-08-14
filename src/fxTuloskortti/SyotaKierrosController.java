@@ -137,7 +137,7 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
      */
     @FXML
     private void handlePeruuta() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        ModalController.closeStage(parYhteensa);
     }
 
     /**
@@ -146,7 +146,7 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
      */
     @FXML
     private void handleTallenna() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        ModalController.closeStage(parYhteensa);
     }
     
     /**
@@ -187,6 +187,24 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
 //        });
         
 
+        vaylaId_1.setOnKeyReleased(e -> kasitteleKierrosMuutos(1, vaylaId_1));
+        vaylaId_2.setOnKeyReleased(e -> kasitteleKierrosMuutos(2, vaylaId_2));
+        vaylaId_3.setOnKeyReleased(e -> kasitteleKierrosMuutos(3, vaylaId_3));
+        vaylaId_4.setOnKeyReleased(e -> kasitteleKierrosMuutos(4, vaylaId_4));
+        vaylaId_5.setOnKeyReleased(e -> kasitteleKierrosMuutos(5, vaylaId_5));
+        vaylaId_6.setOnKeyReleased(e -> kasitteleKierrosMuutos(6, vaylaId_6));
+        vaylaId_7.setOnKeyReleased(e -> kasitteleKierrosMuutos(7, vaylaId_7));
+        vaylaId_8.setOnKeyReleased(e -> kasitteleKierrosMuutos(8, vaylaId_8));
+        vaylaId_9.setOnKeyReleased(e -> kasitteleKierrosMuutos(9, vaylaId_9));
+        vaylaId_10.setOnKeyReleased(e -> kasitteleKierrosMuutos(10, vaylaId_10));
+        vaylaId_11.setOnKeyReleased(e -> kasitteleKierrosMuutos(11, vaylaId_11));
+        vaylaId_12.setOnKeyReleased(e -> kasitteleKierrosMuutos(12, vaylaId_12));
+        vaylaId_13.setOnKeyReleased(e -> kasitteleKierrosMuutos(13, vaylaId_13));
+        vaylaId_14.setOnKeyReleased(e -> kasitteleKierrosMuutos(14, vaylaId_14));
+        vaylaId_15.setOnKeyReleased(e -> kasitteleKierrosMuutos(15, vaylaId_15));
+        vaylaId_16.setOnKeyReleased(e -> kasitteleKierrosMuutos(16, vaylaId_16));
+        vaylaId_17.setOnKeyReleased(e -> kasitteleKierrosMuutos(17, vaylaId_17));
+        vaylaId_18.setOnKeyReleased(e -> kasitteleKierrosMuutos(18, vaylaId_18));
     }
 
     @Override
@@ -206,6 +224,23 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     
     private Object[] objectLista;
     private TextField[] kierrosEdits;
+    
+    private void kasitteleKierrosMuutos(int k, TextField edit) {
+        Kierros kierroksenKohdalla = (Kierros) objectLista[0];
+
+        if (kierroksenKohdalla == null) {
+            return;
+        }
+        
+        String s = edit.getText();
+        System.out.println(s);
+        for (int x = 0; x < 18; x++) {
+            if (x == k) {
+                // TODO: muokata, että halutun väylän tulosta voidaan muokata, nyt muokkautuu viimeinen
+                kierroksenKohdalla.setTulos(Integer.valueOf(s));
+            }
+        }
+    }
     
     /**
      * Alustetaan kierroslistan kuuntelijat
