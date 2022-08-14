@@ -2,6 +2,7 @@ package fxTuloskortti;
 
 import java.io.PrintStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -214,7 +215,6 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
      */
     @FXML
     private void handleUusiTuloskortti() {
-        //ModalController.showModal(SeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Luo uusi tuloskortti", null, "");
         uusiTuloskortti();
     }
     
@@ -247,7 +247,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
-        
+
     }
     
  // =================================================================
@@ -331,8 +331,22 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         if (seuranKohdalla == null) {
             return;
         }
+        
+        // Tarkistetaan onko seuralla jo tuloskortti
+        List<Tuloskortti> tuloskortinKoko = this.golfRekisteri.annaTuloskortti(seuranKohdalla);
+        
+        if (tuloskortinKoko.size() > 1) {
+            Dialogs.showMessageDialog("Seuralla " + seuranKohdalla.getSeurannimi() + " on jo tuloskortti");
+            return;
+        }
+        
+        List<Tuloskortti> uusiTuloskortti = LuoUusiTuloskorttiController.kysyTuloskortti("Luo uusi tuloskortti", null, new ArrayList<Tuloskortti>());
+        
+        if (uusiTuloskortti == null) {
+            return;
+        }
 
-        golfRekisteri.lisaaTuloskortti(UusiTuloskortti.luoTuloskortti(seuranKohdalla.getTunnusNro()));
+        this.golfRekisteri.lisaaTuloskortti(uusiTuloskortti);
         naytaTuloskortti(tuloskorttiEdits, seuranKohdalla);
     }
     
@@ -451,7 +465,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
             return;
         }
 
-        List<Tuloskortti> tuloskorttia = LuoUusiTuloskorttiController.kysyTuloskortti(null, this.golfRekisteri.annaTuloskortti(seuranKohdalla));
+        List<Tuloskortti> tuloskorttia = LuoUusiTuloskorttiController.kysyTuloskortti("Muokkaa tuloskorttia", null, this.golfRekisteri.annaTuloskortti(seuranKohdalla));
         
         if (tuloskorttia == null) {
             return;
