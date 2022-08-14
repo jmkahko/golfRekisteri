@@ -315,7 +315,11 @@ public class TuloskorttiGUIController implements Initializable {
      */
     public void uusiSeura() {
         Seura uusiSeura = new Seura();
-        LuoSeuraController.kysySeura(null, uusiSeura);
+        Seura saatiinSeura = LuoSeuraController.kysySeura(null, uusiSeura);
+        
+        if (saatiinSeura == null) {
+            return;
+        }
                
         try {
             this.golfRekisteri.lisaaSeura(uusiSeura);

@@ -342,7 +342,8 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         
         List<Tuloskortti> uusiTuloskortti = LuoUusiTuloskorttiController.kysyTuloskortti("Luo uusi tuloskortti", null, new ArrayList<Tuloskortti>());
         
-        if (uusiTuloskortti == null) {
+        if (uusiTuloskortti == null || uusiTuloskortti.size() == 0) {
+            System.out.println("nulli tuli");
             return;
         }
 
