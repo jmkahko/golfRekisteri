@@ -27,15 +27,6 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
     @FXML private TextField puhelinnumeroTextField;
     @FXML private TextField seuraTextField;
     
-    
-    /**
-     * Voidaan syöttää uusi tuloskortti
-     */
-    @FXML 
-    private void handleSyotaTuloskortti() {
-        ModalController.showModal(LuoSeuraController.class.getResource("LuoUusiTuloskorttiView.fxml"), "Muokkaa tuloskorttia", null, golfRekisteri);
-    }
-
     /**
      * Voidaan tallentaa seurantiedot
      */
@@ -43,11 +34,18 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
     private void handleTallenna() {
         ModalController.closeStage(seuraTextField);
     }
+    
+    /**
+     * Voidaan peruuttaa muutokset
+     */
+    @FXML 
+    private void handlePeruuta() {
+        ModalController.closeStage(seuraTextField);
+    }
 
     @Override
     public void handleShown() {
-        // TODO Auto-generated method stub
-        
+        // Ei toimintoa
     }    
 
     @Override
@@ -73,7 +71,6 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
  // =================================================================
  // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
 
-    private GolfRekisteri golfRekisteri;
     private Seura seuraKohdalla;
  
     private void kasitteleSeuraMuutos(int k, TextField edit) {
