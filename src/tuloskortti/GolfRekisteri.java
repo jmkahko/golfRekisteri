@@ -133,6 +133,15 @@ public class GolfRekisteri {
     }
     
     /**
+     * Lisätään uusi tuloskortti tai muutetaan olemassa olevaa tuloskorttia
+     * @param tuloskortti muutettavan tai lisättävän tuloskortin tieto
+     * @throws SailoException jos seuran lisääminen ei onnistu
+     */
+    public void lisaaTaiMuutaTuloskorttia(List<Tuloskortti> tuloskortti) throws SailoException {
+        this.tuloskortit.lisaaTaiMuutaTuloskorttia(tuloskortti);
+    }
+    
+    /**
      * @return palauttaa tuloskorttien määrän
      */
     public int getTuloskortteja() {

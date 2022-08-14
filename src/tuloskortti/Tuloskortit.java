@@ -63,6 +63,27 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
     }
     
     /**
+     * Lisää uuden tuloskortin tai muuttaa olemassa olevan tuloskortin tietoja.
+     * Etsii samalla tuloskortin -tunnuksella olevaa tuloskortin, jos ei löydy niin luo uuden tuloskortin
+     * @param tuloskorttiLista lisättävän tai muutettavan seuran tieto
+     * @throws SailoException jos ei onnistu
+     */
+    public void lisaaTaiMuutaTuloskorttia(List<Tuloskortti> tuloskorttiLista) throws SailoException {
+        
+        int id = tuloskorttiLista.get(0).getTunnusNro();
+        
+        // Etsitään onko tuloskortti jo olemassa
+        for (Tuloskortti t : this.alkiot) {
+            if (t.getTunnusNro() == id) {
+                // TODO: tähän tehdä vielä tallennus, jos löytyy
+                return;
+            }
+        }
+
+        this.lisaaTuloskortti(tuloskorttiLista);
+    }
+    
+    /**
      * Iteraattori kaikkien tuloskorttien läpikäyntiin
      * @return tuloskortti iteraattorin
      */
