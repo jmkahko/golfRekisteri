@@ -237,12 +237,13 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
 
     /**
      * Luodaan kierroksen muokkaus dialogi ja palautetaan sama tietue muutettuna tai null arvo
+     * @param otsikkotieto tuodaan otsikko näkymälle
      * @param modalityStage mille ollaan modaalisia, null = sovellukselle
      * @param object taulukossa tuodaan pelattu kierros ja golfRekisteri, jotta saadaan tuloskortti ja seuratiedot myös
      * @return null jos painetaan Peruuta, muuten täytetään tietue
      */
-    public static Object[] kysyKierros(Stage modalityStage, Object[] object) {
-        return ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), "Syötä uuden kierroksen tulos", modalityStage, object);
+    public static Object[] kysyKierros(String otsikkotieto, Stage modalityStage, Object[] object) {
+        return ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), otsikkotieto, modalityStage, object);
     }
     
     /**

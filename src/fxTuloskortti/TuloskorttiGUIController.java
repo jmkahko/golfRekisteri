@@ -276,7 +276,7 @@ public class TuloskorttiGUIController implements Initializable {
         this.vietavaTieto[1] = golfRekisteri;
         this.vietavaTieto[2] = false; // Muuttuja tieto, että onko kyseessä Uusi kierros vai vanha. False jos vanha
                 
-        Object[] tulos = SyotaKierrosController.kysyKierros(null, vietavaTieto);
+        Object[] tulos = SyotaKierrosController.kysyKierros("Kierroksen muokkaus", null, vietavaTieto);
         if (tulos == null) {
             return;
         }
@@ -295,16 +295,22 @@ public class TuloskorttiGUIController implements Initializable {
         }
     }
     
+    /**
+     * Voidaan muokata käyttäjää
+     */
     private void muokkaaKayttajaa() {
         LuoUusiPelaajaController.kysyKayttaja(null, golfRekisteri);
         haeKayttajanTiedot();
     }
     
+    /**
+     * Uuden kierroksen syöttäminen
+     */
     private void uusiKierros() {
         this.vietavaTieto[1] = golfRekisteri;
         this.vietavaTieto[2] = true;
         
-        Object[] tulos = SyotaKierrosController.kysyKierros(null, vietavaTieto);
+        Object[] tulos = SyotaKierrosController.kysyKierros("Syötä uusi kierros", null, vietavaTieto);
         if (tulos == null) {
             return;
         }
