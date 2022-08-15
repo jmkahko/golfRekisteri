@@ -338,7 +338,6 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
         
         String s = edit.getText();
 
-        System.out.println(s);
         int rivi = 1;
         for (Tuloskortti t : tuloskorttiLista) {
             if (rivi == vayla) {

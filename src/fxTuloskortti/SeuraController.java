@@ -340,10 +340,16 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
             return;
         }
         
-        List<Tuloskortti> uusiTuloskortti = LuoUusiTuloskorttiController.kysyTuloskortti("Luo uusi tuloskortti", null, new ArrayList<Tuloskortti>());
+        List<Tuloskortti> tyhjaTuloskortti = new ArrayList<Tuloskortti>();
+        
+        for (int x = 0; x < 18; x++) {
+            Tuloskortti tuloskortti = new Tuloskortti(seuranKohdalla.getTunnusNro(), x+1, 0, 0, 0, 0, 0, 0);
+            tyhjaTuloskortti.add(tuloskortti);
+        }
+        
+        List<Tuloskortti> uusiTuloskortti = LuoUusiTuloskorttiController.kysyTuloskortti("Luo uusi tuloskortti", null, tyhjaTuloskortti);
         
         if (uusiTuloskortti == null || uusiTuloskortti.size() == 0) {
-            System.out.println("nulli tuli");
             return;
         }
 
@@ -383,7 +389,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         
         if (tuloskortti.size() == 0) {
             for (int x = 0; x < this.tuloskorttiEdits.length; x++) {
-                this.tuloskorttiEdits[x].setText(String.valueOf(0));
+                this.tuloskorttiEdits[x].setText("");
             }
         }
 
