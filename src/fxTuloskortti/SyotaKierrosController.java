@@ -174,11 +174,25 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
-        // TODO Auto-generated method stub
+
+        // Kuuntelijat seura ja tee-paikka bokseille
+        seuraChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> arg0,
+                    Number arg1, Number arg2) {
+                alustaTulosKorttiNakyma(kierrosEdits, seuraChoiceBox.getValue(), Integer.valueOf(teeChoiseBox.getValue()));
+            }
+        });
         
-        //teeChoiseBox
-        //seuraChoiceBox
-        //paivaPicker
+        teeChoiseBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> arg0,
+                    Number arg1, Number arg2) {
+                alustaTulosKorttiNakyma(kierrosEdits, seuraChoiceBox.getValue(), Integer.valueOf(teeChoiseBox.getValue()));
+            }
+        });
 
         vaylaId_1.setOnKeyReleased(e -> kasitteleKierrosMuutos(1, vaylaId_1));
         vaylaId_2.setOnKeyReleased(e -> kasitteleKierrosMuutos(2, vaylaId_2));
