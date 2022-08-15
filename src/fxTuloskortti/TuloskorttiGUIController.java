@@ -319,6 +319,7 @@ public class TuloskorttiGUIController implements Initializable {
         
         Object[] tulos = SyotaKierrosController.kysyKierros("Syötä uusi kierros", null, vietavaTieto);
         if (tulos == null) {
+            System.out.println("nullii tuli");
             return;
         }
     }
