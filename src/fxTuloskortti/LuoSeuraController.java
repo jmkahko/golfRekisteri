@@ -113,11 +113,12 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
     
     /**
      * Luodaan seuran muokkaus dialogi ja palautetaan sama tietue muutettuna tai null arvo
+     * @param otsikko näytettävä otsikko näkymällä
      * @param modalityStage mille ollaan modaalisia, null = sovellukselle
      * @param seura mitä dataa näytetään oletuksena, kun muokataan seuraa, niin olemassa olevan seuran tiedot
      * @return null jos painetaan Peruuta, muuten täytetään tietue
      */
-    public static Seura kysySeura(Stage modalityStage, Seura seura) {
-        return ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), "Muokkaa seuraa", modalityStage, seura);
+    public static Seura kysySeura(String otsikko, Stage modalityStage, Seura seura) {
+        return ModalController.showModal(SeuraController.class.getResource("LuoSeuraView.fxml"), otsikko, modalityStage, seura);
     }
 }

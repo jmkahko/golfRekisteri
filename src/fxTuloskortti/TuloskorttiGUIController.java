@@ -321,9 +321,9 @@ public class TuloskorttiGUIController implements Initializable {
      */
     public void uusiSeura() {
         Seura uusiSeura = new Seura();
-        Seura saatiinSeura = LuoSeuraController.kysySeura(null, uusiSeura);
+        Seura saatiinSeura = LuoSeuraController.kysySeura("Luo uusi seura", null, uusiSeura);
         
-        if (saatiinSeura == null) {
+        if (saatiinSeura == null || (saatiinSeura.getKatuosoite().equals("") && saatiinSeura.getSeurannimi().equals("") && saatiinSeura.getPuhelinnumero().equals(""))) {
             return;
         }
                

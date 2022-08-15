@@ -291,9 +291,9 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     public void uusiSeura() {
         Seura uusiSeura = new Seura();
         
-        Seura saatiinSeura = LuoSeuraController.kysySeura(null, uusiSeura);
+        Seura saatiinSeura = LuoSeuraController.kysySeura("Luo uusi seura", null, uusiSeura);
         
-        if (saatiinSeura == null) {
+        if (saatiinSeura == null || (saatiinSeura.getKatuosoite().equals("") && saatiinSeura.getSeurannimi().equals("") && saatiinSeura.getPuhelinnumero().equals(""))) {
             return;
         }
         uusiSeura.rekisteroi();
@@ -449,7 +449,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         }
         
         try {
-            Seura saatiinSeura = LuoSeuraController.kysySeura(null, seuranKohdalla.clone());
+            Seura saatiinSeura = LuoSeuraController.kysySeura("Muokkaa seuraa", null, seuranKohdalla.clone());
             
             if (saatiinSeura == null) {
                 return;
