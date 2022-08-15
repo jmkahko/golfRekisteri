@@ -354,7 +354,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         }
 
         this.golfRekisteri.lisaaTuloskortti(uusiTuloskortti);
-        naytaTuloskortti(tuloskorttiEdits, seuranKohdalla);
+        haeSeura(seuranKohdalla.getTunnusNro());
     }
     
     /**
