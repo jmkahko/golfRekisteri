@@ -3,12 +3,15 @@ package fxTuloskortti;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import tuloskortti.SailoException;
 import tuloskortti.Tuloskortti;
 
 /**
@@ -336,18 +339,25 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
             return;
         }
         
-        String s = edit.getText();
+        int numero = 0;
+        
+        try {
+            numero = Integer.parseInt(edit.getText());
+        } catch (NumberFormatException e) {
+            Dialogs.showMessageDialog("Kenttään ei voi syöttää kirjaimia");
+        }
+
 
         int rivi = 1;
         for (Tuloskortti t : tuloskorttiLista) {
             if (rivi == vayla) {
                 switch (k) {
-                    case 1: t.setPituus48(Integer.valueOf(s)); break;
-                    case 2: t.setPituus51(Integer.valueOf(s)); break;
-                    case 3: t.setPituus55(Integer.valueOf(s)); break;
-                    case 4: t.setPituus62(Integer.valueOf(s)); break;
-                    case 5: t.setHcp(Integer.valueOf(s)); break;
-                    case 6: t.setPar(Integer.valueOf(s)); break;
+                    case 1: t.setPituus48(numero); break;
+                    case 2: t.setPituus51(numero); break;
+                    case 3: t.setPituus55(numero); break;
+                    case 4: t.setPituus62(numero); break;
+                    case 5: t.setHcp(numero); break;
+                    case 6: t.setPar(numero); break;
                 default:
                     break;
                 }
