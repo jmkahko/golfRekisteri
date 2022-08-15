@@ -166,11 +166,31 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     }
     
     /**
+     * Käyttäjä jota halutaan muokata
+     * @param otsikko näytetään otsikkoteksti
      * @param modalityStage modalityStage mille ollaan modaalisia, null = sovellukselle
      * @param golfRekisteri mitä dataa näytetään oletuksena, kun muokataan käyttäjää, niin olemassa olevan käyttäjän tiedot
      * @return null jos painetaan Peruuta, muuten täytetään tietue
      */
-    public static GolfRekisteri kysyKayttaja(Stage modalityStage, GolfRekisteri golfRekisteri) {
-        return ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), "Muokkaa jäsentä", modalityStage, golfRekisteri);
+    public static GolfRekisteri kysyKayttaja(String otsikko, Stage modalityStage, GolfRekisteri golfRekisteri) {
+        return ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), otsikko, modalityStage, golfRekisteri);
+    }
+    
+    /**
+     * Lisätään uusi käyttäjä
+     * @param otsikko näytetään otsikkoteksti
+     * @param modalityStage modalityStage mille ollaan modaalisia, null = sovellukselle
+     * @param golfRekisteri mitä dataa näytetään oletuksena, kun muokataan käyttäjää, niin olemassa olevan käyttäjän tiedot
+     * @return null jos painetaan Peruuta, muuten täytetään tietue
+     */
+    public static GolfRekisteri luoKayttaja(String otsikko, Stage modalityStage, GolfRekisteri golfRekisteri) {
+        Kayttaja uusiKayttaja = new Kayttaja();
+        uusiKayttaja.rekisteroi();
+        try {
+            golfRekisteri.lisaaKayttaja(uusiKayttaja);
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog("Ongelmia uuden käyttäjän luonnissa: " + e.getMessage());
+        }
+        return ModalController.showModal(TuloskorttiGUIController.class.getResource("LuoUusiPelaajaView.fxml"), otsikko, modalityStage, golfRekisteri);
     }
 }
