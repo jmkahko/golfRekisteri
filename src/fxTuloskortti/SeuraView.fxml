@@ -300,6 +300,13 @@
                </BorderPane.margin>
             </ListChooser>
          </center>
+         <bottom>
+            <TextField fx:id="etsiSeuraTextField" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="10.0" top="5.0" />
+               </BorderPane.margin>
+            </TextField>
+         </bottom>
       </BorderPane>
    </center>
    <padding>

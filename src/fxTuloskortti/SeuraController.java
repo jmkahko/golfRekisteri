@@ -40,6 +40,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     @FXML private TextField postiosoiteTextField;
     @FXML private TextField puhelinnumeroTextField;
     @FXML private TextField seuraTextField;
+    @FXML private TextField etsiSeuraTextField;
     
     
     @FXML private TextField vayla1_48;
@@ -168,13 +169,10 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     @FXML private TextField vayla18_hcp;
     @FXML private TextField vayla18_par;
 
-    
     /**
      * Seuran tuloskortin rivit
      */
     @FXML private ScrollPane panelTuloskortti;
-    
-
     
     /**
      * Yhteensä tulokset
@@ -186,6 +184,13 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     @FXML private TextField pituusYhteensa62;
    
     
+    /**
+     * Voidaan etsiä seura
+     */
+    @FXML
+    private void handleEtsiSeura() {
+        etsiSeura();
+    }
     /**
      * Voidaan muokata seurantietoja
      */
@@ -283,6 +288,8 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
                 vayla17_48, vayla17_51, vayla17_55, vayla17_62, vayla17_hcp, vayla17_par,
                 vayla18_48, vayla18_51, vayla18_55, vayla18_62, vayla18_hcp, vayla18_par};
         this.tuloskorttiEdits = tuloskorttiEdits;
+        etsiSeuraTextField.setText("Etsi seura..");
+        
     }
     
     /**
@@ -492,5 +499,12 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
             return;
         }
         haeSeura(seuranKohdalla.getTunnusNro());
+    }
+    
+    /**
+     * Seuran etsiminen
+     */
+    private void etsiSeura() {
+        // TODO: tänne etsintä
     }
 }
