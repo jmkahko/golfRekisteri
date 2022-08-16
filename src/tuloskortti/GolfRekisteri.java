@@ -174,6 +174,15 @@ public class GolfRekisteri {
     }
     
     /**
+     * Lisätään uusi kierros tai muutetaan olemassa olevaa kierrosta
+     * @param kierros muutettavan tai lisättävän kierroksen tieto
+     * @throws SailoException jos seuran lisääminen ei onnistu
+     */
+    public void lisaaTaiMuutaKierrosta(List<Kierros> kierros) throws SailoException {
+        this.kierrokset.lisaaTaiMuutaKierros(kierros);
+    }
+    
+    /**
      * @return palauttaa kierrosten määrän
      */
     public int getKierroksia() {

@@ -72,6 +72,16 @@ public class Kierrokset implements Iterable<Kierros> {
     }
     
     /**
+     * Lisää uuden kierroksen tai muuttaa olemassa olevan kierroksen tietoja.
+     * Etsii samalla kierroksen -tunnuksella olevaa kierroksen, jos ei löydy niin luo uuden kierroksen
+     * @param kierros lisättävän tai muutettavan seuran tieto
+     * @throws SailoException jos ei onnistu
+     */
+    public void lisaaTaiMuutaKierros(List<Kierros> kierros) throws SailoException {
+        this.lisaaKierros(kierros);
+    }
+    
+    /**
      * Iteraattori kaikkien kierroksien läpikäyntiin
      * @return kierros iteraattorin
      */
