@@ -301,7 +301,7 @@
             </ListChooser>
          </center>
          <bottom>
-            <TextField fx:id="etsiSeuraTextField" BorderPane.alignment="CENTER">
+            <TextField fx:id="etsiSeuraTextField" onKeyReleased="#handleEtsiSeura" promptText="Etsi seura.." BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="10.0" top="5.0" />
                </BorderPane.margin>
