@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -38,6 +39,9 @@ public class TuloskorttiGUIController implements Initializable {
     @FXML
     private ListChooser<Kierros> chooserKierrokset;
     
+    @FXML
+    private TextField etsiKierrosTextField;
+    
     /**
      * Käyttäjän tietokentät
      */
@@ -54,6 +58,14 @@ public class TuloskorttiGUIController implements Initializable {
                 naytaKierros();
             }
         });
+    }
+    
+    /**
+     * Käsitellään kierroksen etsintä syöte
+     */
+    @FXML
+    void handleEtsiKierros() {
+        etsiKierros();
     }
     
     /**
@@ -340,5 +352,34 @@ public class TuloskorttiGUIController implements Initializable {
         } catch (SailoException e) {
             Dialogs.showMessageDialog("Ongelmia uuden seuran luonnissa: " + e.getMessage());
         }
+    }
+    
+    /**
+     * Etsitään haluttu kierros
+     */
+    private void etsiKierros() {
+                
+        chooserKierrokset.clear();
+        
+        int index = 0;
+        String ehto = etsiKierrosTextField.getText();
+
+        Collection<Kierros> kaikkiKierrokset = golfRekisteri.annaKaikkiKierrokset();
+        int kierrosLaskuri = 18;
+        int tulosLaskuri = 0;
+        for (Kierros tulos : kaikkiKierrokset) {
+            tulosLaskuri += tulos.getTulos();
+            if (kierrosLaskuri == tulos.getTunnusNro()) {
+                String seuranNimi = this.golfRekisteri.annaSeura(tulos.getSeuraId()-1).getSeurannimi();
+                if (!seuranNimi.contains(ehto)) {
+                    chooserKierrokset.add(tulos.getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), tulos);
+                    continue;
+                }
+                kierrosLaskuri += 18;
+                tulosLaskuri = 0;
+            }
+        }
+        chooserKierrokset.setSelectedIndex(index); 
+
     }
 }
