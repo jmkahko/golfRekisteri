@@ -344,33 +344,18 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         }
         
         Collection<Seura> seurat;
-        
         seurat = this.golfRekisteri.etsiSeura(ehto);
         
+        int lisatty = 0;
         for (Seura s : seurat) {
             chooserSeurat.add(s.getSeurannimi(), s);
+            lisatty++;
         }
-        chooserSeurat.setSelectedIndex(index);  
-    }
-    
-    /**
-     * Etsitään haluttu seura
-     */
-    private void etsiSeuraold() {
-        chooserSeurat.clear();
+        chooserSeurat.setSelectedIndex(index);
         
-        int index = 0;
-        String ehto = etsiSeuraTextField.getText();
-        for (int x = 0; x < this.golfRekisteri.getSeuroja(); x++) {
-            Seura haeSeura = this.golfRekisteri.annaSeura(x);
-            
-            if (!haeSeura.getSeurannimi().contains(ehto)) {
-                continue;
-            }
-
-            chooserSeurat.add(haeSeura.getSeurannimi(), haeSeura);
+        if (lisatty == 0) {
+            Dialogs.showMessageDialog("Hakuehdolla ei löydy seuroja, muuta hakuehtoa");
         }
-        chooserSeurat.setSelectedIndex(index);        
     }
     
     /**
