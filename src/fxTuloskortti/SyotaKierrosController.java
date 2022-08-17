@@ -232,21 +232,51 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     private Object[] objectLista;
     private TextField[] kierrosEdits;
     
+    /**
+     * Käsitellään muutokset halutulle kierrokselle
+     * @param k sarake/kenttä jota halutaan muuttaa
+     * @param edit kentät joista löytyy tulos
+     */
     private void kasitteleKierrosMuutos(int k, TextField edit) {
         Kierros kierroksenKohdalla = (Kierros) objectLista[0];
+        GolfRekisteri golfRekisteri = (GolfRekisteri) objectLista[1];
 
         if (kierroksenKohdalla == null) {
             return;
         }
+              
+        Collection<Kierros> vaylat = golfRekisteri.annaKaikkiKierrokset();
         
-        String s = edit.getText();
-        System.out.println(s);
-        for (int x = 0; x < 18; x++) {
-            if (x == k) {
-                // TODO: muokata, että halutun väylän tulosta voidaan muokata, nyt muokkautuu viimeinen
-                kierroksenKohdalla.setTulos(Integer.valueOf(s));
+        // Tiedot joista paristaan näyttönäkymä
+        List<Kierros> halututKierrokset = new ArrayList<Kierros>();
+        int kierrosLaskuri = kierroksenKohdalla.getTunnusNro()-17; // Tulee kierroksen viimeisin kohta, tästä pitää mennä 17 pykällää taaksepäin
+        
+        // Otetaan kierrokset yhden tuloskortin kokoiseksi eli 18 väylää
+        for (Kierros kierros : vaylat) {
+            if (kierrosLaskuri > kierroksenKohdalla.getTunnusNro()) {
+                break;
             }
+            if (kierros.getTunnusNro() == kierrosLaskuri) {
+                halututKierrokset.add(kierros);
+                kierrosLaskuri++;
+            }
+        }   
+        
+        int numero = -1;
+        try {
+            numero = Integer.parseInt(edit.getText());
+        } catch (NumberFormatException e) {
+            Dialogs.showMessageDialog("Kenttään ei voi syöttää kirjaimia");
         }
+
+        int muutettavaK = k + kierroksenKohdalla.getTunnusNro()-18; // Tulee kierroksen viimeisin kohta, tästä pitää mennä 18 pykällää taaksepäin
+       
+        for (Kierros kierros : halututKierrokset) {
+            if (kierros.getTunnusNro() == muutettavaK) {
+                kierros.setTulos(Integer.valueOf(numero));
+            }
+            System.out.println("ki " + kierros.toString());
+        }   
     }
     
     /**
