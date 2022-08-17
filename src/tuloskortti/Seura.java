@@ -2,6 +2,7 @@ package tuloskortti;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Comparator;
 
 import fi.jyu.mit.ohj2.Mjonot;
 import kanta.UusiSeura;
@@ -239,6 +240,18 @@ public class Seura implements Cloneable {
         this.postinumero = Mjonot.erota(sb, '|', postinumero);
         this.postitoimipaikka = Mjonot.erota(sb, '|', postitoimipaikka);
         this.puhelinnumero = Mjonot.erota(sb, '|', puhelinnumero);
+    }
+    
+    /**
+     * Vertailijaa käytetään kahden eri seuran vertailussa, jotta seurat saadaan haluttuun järjestykseen
+     * @author Janne Kähkönen
+     * @version 17.8.2022
+     */
+    public static class Vertailija implements Comparator<Seura> {
+        @Override
+        public int compare(Seura seura1, Seura seura2) {
+            return seura1.getSeurannimi().compareTo(seura2.getSeurannimi());
+        }
     }
     
     /**

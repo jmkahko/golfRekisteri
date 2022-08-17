@@ -313,7 +313,6 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         haeSeura(uusiSeura.getTunnusNro());
     }
     
-    
     /**
      * @param seuranro annetaan seuran numero
      */
@@ -329,7 +328,6 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         chooserSeurat.setSelectedIndex(index);        
     }
     
-
     /**
      * Etsitään haluttu seura
      */

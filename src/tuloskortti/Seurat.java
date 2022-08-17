@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -236,7 +238,7 @@ public class Seurat {
      * @return palautetaan lista seuroista jotka löytyivät
      */
     public Collection<Seura> etsiSeura(String ehto) {
-        Collection<Seura> loytyneet = new ArrayList<Seura>();
+        List<Seura> loytyneet = new ArrayList<Seura>();
         
         for (int x = 0; x < this.getLkm(); x++) {
             Seura seura = this.annaSeura(x);
@@ -245,6 +247,8 @@ public class Seurat {
                 loytyneet.add(seura);
             }
         }
+        
+        Collections.sort(loytyneet, new Seura.Vertailija());
         return loytyneet;
     }
     
