@@ -3,6 +3,7 @@ package fxTuloskortti;
 import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -333,6 +334,29 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
      * Etsitään haluttu seura
      */
     private void etsiSeura() {
+        chooserSeurat.clear();
+        
+        int index = 0;
+        String ehto = etsiSeuraTextField.getText();
+        
+        if (ehto.indexOf('*') < 0) {
+            ehto = "*" + ehto + "*";
+        }
+        
+        Collection<Seura> seurat;
+        
+        seurat = this.golfRekisteri.etsiSeura(ehto);
+        
+        for (Seura s : seurat) {
+            chooserSeurat.add(s.getSeurannimi(), s);
+        }
+        chooserSeurat.setSelectedIndex(index);  
+    }
+    
+    /**
+     * Etsitään haluttu seura
+     */
+    private void etsiSeuraold() {
         chooserSeurat.clear();
         
         int index = 0;

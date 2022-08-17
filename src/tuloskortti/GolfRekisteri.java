@@ -116,6 +116,15 @@ public class GolfRekisteri {
     }
     
     /**
+     * Etsitään seuroja
+     * @param hakuEhto jolla etsitään
+     * @return palautetaan löytyneet seurat
+     */
+    public Collection<Seura> etsiSeura(String hakuEhto) {
+        return this.seurat.etsiSeura(hakuEhto);
+    }
+    
+    /**
      * Lisätään uusi tuloskortti
      * @param tuloskortti lisättävä tuloskortti
      * @throws SailoException jos tuloskortin lisääminen ei onnistu

@@ -6,10 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
 import fi.jyu.mit.ohj2.Mjonot;
+import fi.jyu.mit.ohj2.WildChars;
 
 /**
  * +--------------------------------------+--------------------------------------+
@@ -226,6 +228,24 @@ public class Seurat {
             }
         }
         this.lisaa(seura);
+    }
+    
+    /**
+     * Etsitään seuroja hakuehdolla
+     * @param ehto hakuehto jolla etsitään
+     * @return palautetaan lista seuroista jotka löytyivät
+     */
+    public Collection<Seura> etsiSeura(String ehto) {
+        Collection<Seura> loytyneet = new ArrayList<Seura>();
+        
+        for (int x = 0; x < this.getLkm(); x++) {
+            Seura seura = this.annaSeura(x);
+            String sisalto = seura.getSeurannimi();
+            if (WildChars.onkoSamat(sisalto, ehto)) {
+                loytyneet.add(seura);
+            }
+        }
+        return loytyneet;
     }
     
     /**
