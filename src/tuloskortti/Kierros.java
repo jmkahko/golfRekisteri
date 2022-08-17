@@ -127,6 +127,12 @@ public class Kierros implements Cloneable {
         return this.seuraId;
     }
     
+    /**
+     * @param seura asetettava seuratieto
+     */
+    public void setSeuraId(int seura) {
+        this.seuraId = seura;
+    }
     
     /**
      * Palauttaa käyttäjän id:n
@@ -145,11 +151,25 @@ public class Kierros implements Cloneable {
     }
     
     /**
+     * @param tee paikka jolta pelattu
+     */
+    public void setPelattuTee(int tee) {
+        this.pelattuTee = tee;
+    }
+    
+    /**
      * Palauttaa käyttäjän pelmaan kierrospäivän
      * @return palauttaa kierrospäivän
      */
     public String getPelattuPaiva() {
         return this.kierrospaiva;
+    }
+    
+    /**
+     * @param paiva joka asetetaan kierrokselle
+     */
+    public void setPelattuPaiva(String paiva) {
+        this.kierrospaiva = paiva;
     }
     
     /**
