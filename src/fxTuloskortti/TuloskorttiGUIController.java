@@ -291,6 +291,7 @@ public class TuloskorttiGUIController implements Initializable {
         if (tulos == null) {
             return;
         }
+        haeKierrokset();
     }
     
     /**
