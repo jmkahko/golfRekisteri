@@ -40,7 +40,6 @@ public class Kierrokset implements Iterable<Kierros> {
 
     private Collection<Kierros> alkiot;
     
-    
     /**
      * Kierrosten alustaminen
      */
@@ -90,7 +89,6 @@ public class Kierrokset implements Iterable<Kierros> {
         return this.alkiot.iterator();
     }
         
-    
     /**
      * @param tuloskorttiId viedään tuloskorttiId numero, että minkä tuloskortin kierros kyseessä
      * @param kayttajaId viedään kayttajaId numero, että minkä käyttäjän kierros on kyseessä
@@ -157,8 +155,20 @@ public class Kierrokset implements Iterable<Kierros> {
         
         return n;
     }
-        
     
+    /**
+     * Poistetaan haluttu kierros
+     * @param poistettavaKierros taulukkona kierroksen väylät jotka poistetaan
+     * @return palautetaan true kun tehty
+     */
+    public boolean poistaKierros(List<Kierros> poistettavaKierros) {        
+        for (Kierros k : poistettavaKierros) {
+            this.alkiot.remove(k);
+        }
+        
+        return true;
+    }
+        
     /**
      * Tallentaa kierroksen tiedostoon
      * Tiedoston muoto:
@@ -181,7 +191,6 @@ public class Kierrokset implements Iterable<Kierros> {
         } catch (FileNotFoundException e) {
             System.err.println("Tiedosto " + ftiedosto.getAbsolutePath() + " " + e.getMessage());
         }
-        
     }
     
     /**
@@ -209,7 +218,6 @@ public class Kierrokset implements Iterable<Kierros> {
         }
     }
         
-    
     /**
      * @param args ei käytössä
      */

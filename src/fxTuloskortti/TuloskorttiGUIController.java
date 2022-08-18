@@ -147,7 +147,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     @FXML 
     private void handlePoistaKierros() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        poistaKierros();
     }
 
     /**
@@ -386,5 +386,42 @@ public class TuloskorttiGUIController implements Initializable {
         if (ehto.length() == 0) {
             haeKierrokset();
         }
+    }
+    
+    /**
+     * Poistaa halutun kierroksen
+     */
+    private void poistaKierros() {
+        kierroksenKohdalla = chooserKierrokset.getSelectedObject();
+        
+        if (kierroksenKohdalla == null) {
+            return;
+        }
+        
+        if (!Dialogs.showQuestionDialog("Poisto", "Haluatko poistaa kierroksen: " + kierroksenKohdalla.getPelattuPaiva() + " " + this.golfRekisteri.annaSeura(kierroksenKohdalla.getSeuraId()).getSeurannimi(), "Kyllä", "Ei")) {
+            return;
+        }
+        
+        Collection<Kierros> vaylat = this.golfRekisteri.annaKaikkiKierrokset();
+        List<Kierros> poistettavaKierros = new ArrayList<Kierros>();
+        
+        int kierrosLaskuri = kierroksenKohdalla.getTunnusNro()-17; // Tulee kierroksen viimeisin kohta, tästä pitää mennä 17 pykällää taaksepäin
+        
+        // Otetaan kierrokset yhden tuloskortin kokoiseksi eli 18 väylää
+        for (Kierros kierros : vaylat) {
+            if (kierrosLaskuri > kierroksenKohdalla.getTunnusNro()) {
+                break;
+            }
+            if (kierros.getTunnusNro() == kierrosLaskuri) {
+                poistettavaKierros.add(kierros);
+                kierrosLaskuri++;
+            }
+        }   
+        
+        this.golfRekisteri.poistaKierros(poistettavaKierros);
+        
+        int index = chooserKierrokset.getSelectedIndex();
+        haeKierrokset();
+        chooserKierrokset.setSelectedIndex(index);
     }
 }

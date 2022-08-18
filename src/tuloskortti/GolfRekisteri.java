@@ -246,6 +246,15 @@ public class GolfRekisteri {
     }
     
     /**
+     * Poistetaan halutun kierroksen väylät
+     * @param kierros väylät jotka kierrokselta poistetaan
+     * @return true tai false miten kävi
+     */
+    public boolean poistaKierros(List<Kierros> kierros) {
+        return this.kierrokset.poistaKierros(kierros);
+    }
+    
+    /**
      * Lukee golfRekisterin tiedot tiedostosta
      * @param nimi käytetään tiedoston lukemiseen
      * @throws SailoException jos lukeminen epäonnistuu
