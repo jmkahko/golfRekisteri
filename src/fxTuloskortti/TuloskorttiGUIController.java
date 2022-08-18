@@ -91,6 +91,7 @@ public class TuloskorttiGUIController implements Initializable {
     @FXML 
     private void handleMuokkaaSeuraa() {
         ModalController.showModal(TuloskorttiGUIController.class.getResource("SeuraView.fxml"), "Muokkaa seuraa", null, golfRekisteri);
+        haeKierrokset();
     }
     
     /**
@@ -289,13 +290,13 @@ public class TuloskorttiGUIController implements Initializable {
             return;
         }
         
-        
         this.vietavaTieto[0] = kierroksenKohdalla;
         this.vietavaTieto[1] = golfRekisteri;
         this.vietavaTieto[2] = false; // Muuttuja tieto, että onko kyseessä Uusi kierros vai vanha. False jos vanha
                 
         Object[] tulos = SyotaKierrosController.kysyKierros("Kierroksen muokkaus", null, vietavaTieto);
         if (tulos == null) {
+            haeKierrokset();
             return;
         }
         haeKierrokset();
