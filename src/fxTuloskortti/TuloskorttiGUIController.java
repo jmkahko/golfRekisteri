@@ -283,6 +283,13 @@ public class TuloskorttiGUIController implements Initializable {
      */
     public void naytaKierros() {
         kierroksenKohdalla = chooserKierrokset.getSelectedObject();
+        
+        if (kierroksenKohdalla == null) {
+            Dialogs.showMessageDialog("Valitse muokattava kierros");
+            return;
+        }
+        
+        
         this.vietavaTieto[0] = kierroksenKohdalla;
         this.vietavaTieto[1] = golfRekisteri;
         this.vietavaTieto[2] = false; // Muuttuja tieto, että onko kyseessä Uusi kierros vai vanha. False jos vanha
@@ -395,6 +402,7 @@ public class TuloskorttiGUIController implements Initializable {
         kierroksenKohdalla = chooserKierrokset.getSelectedObject();
         
         if (kierroksenKohdalla == null) {
+            Dialogs.showMessageDialog("Valitse poistettava kierros");
             return;
         }
         
