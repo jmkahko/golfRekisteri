@@ -246,6 +246,19 @@ public class Kierros implements Cloneable {
         return uusiKierros;
     }
     
+    /**
+     * Luodaan tyhjä kierros, jossa asetaaan oletus arvoja. Ainoastaan väylä numero tuodaan
+     * @param vaylanro tuodaan mones väylä halutaan tehdä
+     */
+    public void luoDummyKierros(int vaylanro) {
+        this.rekisteroi();
+        this.seuraId = 1;
+        this.kayttajaId = 1;
+        this.kierrospaiva = "01-01-1990";
+        this.pelattuTee = 62;
+        this.vayla = vaylanro;
+        this.tulos = 0;
+    }
     
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot tuloskortille.

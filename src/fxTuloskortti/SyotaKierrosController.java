@@ -22,7 +22,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import kanta.UusiTuloskortti;
 import tuloskortti.GolfRekisteri;
+import tuloskortti.Kierrokset;
 import tuloskortti.Kierros;
+import tuloskortti.SailoException;
 import tuloskortti.Seura;
 import tuloskortti.Tuloskortti;
 
@@ -148,23 +150,19 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     @FXML
     private void handleTallenna() {
         ModalController.closeStage(parYhteensa);
-        //tallennus();
-    }
+    }    
     
     /**
-     * Valitaan päiväys pelatulle kierrokselle
-     * @param event
+     * Käsitellään päivämäärä muutoksia
      */
     @FXML
     private void handlePaivays() {
-        //Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        // Ei toimintoa
     }
-    
 
     @Override
     public void handleShown() {
         // TODO Auto-generated method stub
-        boolean naytettavaKierros = (boolean) this.objectLista[2];
         if (!naytettavaKierros) {
             naytaKierros(kierrosEdits, objectLista);
         } else {
@@ -174,22 +172,15 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
-
-        // Kuuntelijat seura ja tee-paikka bokseille
-        seuraChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-
-            @Override
-            public void changed(ObservableValue<? extends Number> arg0,
-                    Number arg1, Number arg2) {
+        
+        seuraChoiceBox.setOnAction(event -> {
+            if (teeChoiseBox.getValue() != null && naytettavaKierros) {
                 alustaTulosKorttiNakyma(kierrosEdits, seuraChoiceBox.getValue(), Integer.valueOf(teeChoiseBox.getValue()));
             }
         });
         
-        teeChoiseBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-
-            @Override
-            public void changed(ObservableValue<? extends Number> arg0,
-                    Number arg1, Number arg2) {
+        teeChoiseBox.setOnAction(event -> {
+            if (teeChoiseBox.getValue() != null && naytettavaKierros) {
                 alustaTulosKorttiNakyma(kierrosEdits, seuraChoiceBox.getValue(), Integer.valueOf(teeChoiseBox.getValue()));
             }
         });
@@ -212,17 +203,21 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         vaylaId_16.setOnKeyReleased(e -> kasitteleKierrosMuutos(16, vaylaId_16));
         vaylaId_17.setOnKeyReleased(e -> kasitteleKierrosMuutos(17, vaylaId_17));
         vaylaId_18.setOnKeyReleased(e -> kasitteleKierrosMuutos(18, vaylaId_18));
+        
+        paivaPicker.setOnKeyReleased(e -> kasittelePaivaMuutos(paivaPicker));
+        seuraChoiceBox.setOnKeyReleased(e -> kasitteleSeuraMuutos(seuraChoiceBox));
+        teeChoiseBox.setOnKeyReleased(e -> kasitteleTeeMuutos(teeChoiseBox));
     }
 
     @Override
     public Object[] getResult() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.objectLista;
     }
 
     @Override
     public void setDefault(Object[] lista) {
         this.objectLista = lista;
+        this.naytettavaKierros = (boolean) lista[2];
         alusta();
     }
     
@@ -231,6 +226,47 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     
     private Object[] objectLista;
     private TextField[] kierrosEdits;
+    boolean naytettavaKierros;
+    
+    /**
+     * Käsittelee päivä muutoksen
+     * @param paiva tieto tuodaan
+     */
+    private void kasittelePaivaMuutos(DatePicker paiva) {
+        Kierros kierroksenKohdalla = (Kierros) objectLista[0];
+        kierroksenKohdalla.setPelattuPaiva(String.valueOf(paiva));
+        System.out.println(paiva);
+    }
+    
+    /**
+     * Käsittelee seura muutoksen
+     * @param seura tieto tuodaan
+     */
+    private void kasitteleSeuraMuutos(ChoiceBox<String> seura) {
+        Kierros kierroksenKohdalla = (Kierros) objectLista[0];
+        GolfRekisteri golfRekisteri = (GolfRekisteri) objectLista[1];
+        String saatuTieto = seura.getValue();
+        
+        List<Seura> seurat = golfRekisteri.annaSeurat();
+        int seuraId = -1;
+        for (Seura s : seurat) {
+            if (s.getSeurannimi().equals(saatuTieto)) {
+                seuraId = s.getTunnusNro();
+            }
+        }
+        kierroksenKohdalla.setPelattuTee(seuraId);
+    }
+    
+    /**
+     * Käsittelee tee-paikan muutoksen
+     * @param tee paikka tuodaan
+     */
+    private void kasitteleTeeMuutos(ChoiceBox<String> tee) {
+        Kierros kierroksenKohdalla = (Kierros) objectLista[0];
+        String saatuTieto = tee.getValue();
+        kierroksenKohdalla.setPelattuTee(Integer.valueOf(saatuTieto));
+        System.out.println(saatuTieto);
+    }
     
     /**
      * Käsitellään muutokset halutulle kierrokselle
@@ -264,18 +300,31 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         
         int numero = -1;
         try {
-            numero = Integer.parseInt(edit.getText());
+            if (edit.getText() != null) {
+                numero = Integer.parseInt(edit.getText());
+            }
         } catch (NumberFormatException e) {
             Dialogs.showMessageDialog("Kenttään ei voi syöttää kirjaimia");
         }
+        
+        int seuraId = -1;
+        
+        for (Seura s : golfRekisteri.annaSeurat()) {
+            if (s.getSeurannimi() == seuraChoiceBox.getValue()) {
+                seuraId = s.getTunnusNro();
+            }
+        }
 
         int muutettavaK = k + kierroksenKohdalla.getTunnusNro()-18; // Tulee kierroksen viimeisin kohta, tästä pitää mennä 18 pykällää taaksepäin
-       
+        
         for (Kierros kierros : halututKierrokset) {
+            System.out.println("tehtiinkö");
             if (kierros.getTunnusNro() == muutettavaK) {
-                kierros.setTulos(Integer.valueOf(numero));
+                kierros.setTulos(numero);
+                kierros.setPelattuPaiva(String.valueOf(paivaPicker.getValue()));
+                kierros.setSeuraId(seuraId);
+                kierros.setPelattuTee(Integer.valueOf(teeChoiseBox.getValue()));
             }
-            System.out.println("ki " + kierros.toString());
         }   
     }
     
@@ -319,6 +368,17 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     }
     
     /**
+     * Luodaan kierroksen muokkaus dialogi ja palautetaan sama tietue muutettuna tai null arvo
+     * @param otsikkotieto tuodaan otsikko näkymälle
+     * @param modalityStage mille ollaan modaalisia, null = sovellukselle
+     * @param object taulukossa tuodaan pelattu kierros ja golfRekisteri, jotta saadaan tuloskortti ja seuratiedot myös
+     * @return null jos painetaan Peruuta, muuten täytetään tietue
+     */
+    public static Object[] luoUusiKierros(String otsikkotieto, Stage modalityStage, Object[] object) {        
+        return ModalController.showModal(TuloskorttiGUIController.class.getResource("SyotaKierrosView.fxml"), otsikkotieto, modalityStage, object);
+    }
+    
+    /**
      * Näyttää kierroksen tiedot
      * @param edits näyttää kierroksen kentät
      * @param object taulukko
@@ -327,8 +387,14 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         
         Kierros kierroksenKohdalla = (Kierros) object[0];
         GolfRekisteri golfRekisteri = (GolfRekisteri) object[1];
+         
+        Seura seura = new Seura();
         
-        Seura seura = golfRekisteri.annaSeura(kierroksenKohdalla.getSeuraId()-1);        
+        for (Seura s : golfRekisteri.annaSeurat()) {
+            if (s.getTunnusNro() == kierroksenKohdalla.getSeuraId()) {
+                seura = s;
+            }
+        }
         Collection<Kierros> kaikkiKierrokset = golfRekisteri.annaKaikkiKierrokset();
         
         // Tiedot joista paristaan näyttönäkymä
@@ -431,16 +497,17 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         pelattuTee.setText(String.valueOf(teeId));
         
         List<Seura> seura = golfRekisteri.annaSeurat();
-        int seuraId = -1;
         
         // Haetaan seuran id
+        Seura saatuSeura = new Seura();
         for (Seura s: seura) {
             if (s.getSeurannimi().equals(seuraString)) {
-                seuraId = s.getTunnusNro();
+                saatuSeura = s;
             }
         }
         
-        List<Tuloskortti> tuloskortti = golfRekisteri.annaTuloskortti(golfRekisteri.annaSeura(seuraId-1));
+        List<Tuloskortti> tuloskortti = golfRekisteri.annaTuloskortti(saatuSeura);
+        
         int parLaskuri = 0;
         int matkaLaskuri = 0;  
         
@@ -476,74 +543,4 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         pelattuTee.setText(String.valueOf(teeId));
         tulosYhteensa.setText("");
     }
-    
-    private void tallennus() {
-        GolfRekisteri golfRekisteri = (GolfRekisteri) this.objectLista[1];
-        
-        List<Seura> seura = golfRekisteri.annaSeurat();
-        int seuraId = -1;
-        
-        // Tietojen asettaminen bokseihin
-        for (Seura s: seura) {
-            if (s.getSeurannimi().equals(seuraChoiceBox.getValue())) {
-                seuraId = s.getTunnusNro();
-                break;
-            }
-        }
-
-        List<Kierros> luotuKierros = new ArrayList<Kierros>();
-        Kierros vayla1 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 1, Integer.valueOf(vaylaId_1.getText()));
-        luotuKierros.add(vayla1);
-        
-        Kierros vayla2 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 2, Integer.valueOf(vaylaId_2.getText()));
-        luotuKierros.add(vayla2);
-        
-        Kierros vayla3 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 3, Integer.valueOf(vaylaId_3.getText()));
-        luotuKierros.add(vayla3);
-        
-        Kierros vayla4 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 4, Integer.valueOf(vaylaId_4.getText()));
-        luotuKierros.add(vayla4);
-        
-        Kierros vayla5 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 5, Integer.valueOf(vaylaId_5.getText()));
-        luotuKierros.add(vayla5);
-        
-        Kierros vayla6 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 6, Integer.valueOf(vaylaId_6.getText()));
-        luotuKierros.add(vayla6);
-        
-        Kierros vayla7 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 7, Integer.valueOf(vaylaId_7.getText()));
-        luotuKierros.add(vayla7);
-        
-        Kierros vayla8 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 8, Integer.valueOf(vaylaId_8.getText()));
-        luotuKierros.add(vayla8);
-        
-        Kierros vayla9 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 9, Integer.valueOf(vaylaId_9.getText()));
-        luotuKierros.add(vayla9);
-        
-        Kierros vayla10 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 10, Integer.valueOf(vaylaId_10.getText()));
-        luotuKierros.add(vayla10);
-        
-        Kierros vayla11 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 11, Integer.valueOf(vaylaId_11.getText()));
-        luotuKierros.add(vayla11);
-        
-        Kierros vayla12 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 12, Integer.valueOf(vaylaId_12.getText()));
-        luotuKierros.add(vayla12);
-        
-        Kierros vayla13 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 13, Integer.valueOf(vaylaId_13.getText()));
-        luotuKierros.add(vayla13);
-        
-        Kierros vayla14 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 14, Integer.valueOf(vaylaId_14.getText()));
-        luotuKierros.add(vayla14);
-        
-        Kierros vayla15 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 15, Integer.valueOf(vaylaId_15.getText()));
-        luotuKierros.add(vayla15);
-        
-        Kierros vayla16 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 16, Integer.valueOf(vaylaId_16.getText()));
-        luotuKierros.add(vayla16);
-        
-        Kierros vayla17 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 17, Integer.valueOf(vaylaId_17.getText()));
-        luotuKierros.add(vayla17);
-        
-        Kierros vayla18 = new Kierros(seuraId, 1, paivaPicker.getValue().toString(), Integer.valueOf(teeChoiseBox.getValue()), 18, Integer.valueOf(vaylaId_18.getText()));
-        luotuKierros.add(vayla18);
-     }
  }

@@ -106,7 +106,7 @@ public class GolfRekisteri {
     public Seura annaSeura(int i) {
         return this.seurat.annaSeura(i);
     }
-    
+        
     /**
      * Saadaan haettua kaikki golf seurat
      * @return palauttaa kaikki seurat

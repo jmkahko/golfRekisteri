@@ -24,6 +24,7 @@ import tuloskortti.Kierrokset;
 import tuloskortti.Kierros;
 import tuloskortti.SailoException;
 import tuloskortti.Seura;
+import tuloskortti.Seurat;
 
 /**
  * Luokka käyttöliittymän tapahtumien hoitamiseksi
@@ -268,10 +269,20 @@ public class TuloskorttiGUIController implements Initializable {
         Collection<Kierros> kaikkiKierrokset = golfRekisteri.annaKaikkiKierrokset();
         int kierrosLaskuri = 18;
         int tulosLaskuri = 0;
+        
+        List<Seura> seurat = this.golfRekisteri.annaSeurat();
+        
         for (Kierros tulos : kaikkiKierrokset) {
             tulosLaskuri += tulos.getTulos();
             if (kierrosLaskuri == tulos.getTunnusNro()) {
-                String seuranNimi = this.golfRekisteri.annaSeura(tulos.getSeuraId()-1).getSeurannimi();
+                
+                String seuranNimi = "";
+                for (Seura s : seurat) {
+                    if (s.getTunnusNro() == tulos.getSeuraId()) {
+                        seuranNimi = s.getSeurannimi();
+                    }
+                }
+                        
                 chooserKierrokset.add(tulos.getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), tulos);
                 kierrosLaskuri += 18;
                 tulosLaskuri = 0;
@@ -335,15 +346,36 @@ public class TuloskorttiGUIController implements Initializable {
      * Uuden kierroksen syöttäminen
      */
     private void uusiKierros() {
+        // Luodaan uusi kierros dummy tiedoilla
+        List<Kierros> luotuKierros = new ArrayList<Kierros>();
+
+        for (int x = 1; x < 19; x++) {
+            Kierros vayla = new Kierros();
+            vayla.luoDummyKierros(x);
+            luotuKierros.add(vayla);
+        }
+        golfRekisteri.lisaaKierros(luotuKierros);
+        
+        // Haetaan kaikki kierrokset
+        Collection<Kierros> kaikkiKierros = this.golfRekisteri.annaKaikkiKierrokset();
+        
+        // Otetaan viimeinen kierros
+        Kierros viimeinenKierros = new Kierros();
+        for (Kierros k : kaikkiKierros) {
+            viimeinenKierros = k;
+        }
+
+        this.vietavaTieto[0] = viimeinenKierros;
         this.vietavaTieto[1] = golfRekisteri;
         this.vietavaTieto[2] = true;
         
-        Object[] tulos = SyotaKierrosController.kysyKierros("Syötä uusi kierros", null, vietavaTieto);
+        Object[] tulos = SyotaKierrosController.luoUusiKierros("Syötä uusi kierros", null, vietavaTieto);
         
         if (tulos == null) {
-            System.out.println("nullii tuli");
             return;
-        }
+        }       
+        
+        haeKierrokset();
     }
     
     /**
