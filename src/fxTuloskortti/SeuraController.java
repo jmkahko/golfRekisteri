@@ -544,6 +544,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
             return;
         }
         
+        this.golfRekisteri.poistaKierros(seuranKohdalla);
         this.golfRekisteri.poistaSeuraJaTuloskortti(seuranKohdalla);
         
         int index = chooserSeurat.getSelectedIndex();

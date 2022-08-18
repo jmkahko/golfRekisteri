@@ -138,6 +138,25 @@ public class Kierrokset implements Iterable<Kierros> {
     public Collection<Kierros> annaKaikkiKierrokset() {
         return this.alkiot;
     }
+    
+    /**
+     * Poistetaan seuran kierrokset
+     * @param tunnusNro seuran numero, jonka kierrokset poistetaan
+     * @return palautetaan poistetut rivit
+     */
+    public int poistaKierros(int tunnusNro) {
+        int n = 0;
+        
+        for (Iterator<Kierros> it = this.alkiot.iterator(); it.hasNext();) {
+            Kierros kierros = it.next();
+            if (kierros.getSeuraId() == tunnusNro) {
+                it.remove();
+                n++;
+            }
+        }
+        
+        return n;
+    }
         
     
     /**

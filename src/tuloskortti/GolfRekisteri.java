@@ -230,6 +230,20 @@ public class GolfRekisteri {
         int tuloskorttiTulos = this.tuloskortit.poistaTuloskortti(seura.getTunnusNro());
         return tulos + tuloskorttiTulos;
     }
+
+    /**
+     * Poistaa kierrokset seuralta
+     * @param seura poistettavan seuran kierrokset
+     * @return palauttaa poistetun tai virheen
+     */
+    public int poistaKierros(Seura seura) {
+        if (seura == null) {
+            return 0;
+        }
+        
+        int tulos = this.kierrokset.poistaKierros(seura.getTunnusNro());
+        return tulos;
+    }
     
     /**
      * Lukee golfRekisterin tiedot tiedostosta
