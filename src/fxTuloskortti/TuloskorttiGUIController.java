@@ -331,6 +331,7 @@ public class TuloskorttiGUIController implements Initializable {
         this.vietavaTieto[2] = true;
         
         Object[] tulos = SyotaKierrosController.kysyKierros("Syötä uusi kierros", null, vietavaTieto);
+        
         if (tulos == null) {
             System.out.println("nullii tuli");
             return;
@@ -371,7 +372,7 @@ public class TuloskorttiGUIController implements Initializable {
         for (Kierros tulos : kaikkiKierrokset) {
             tulosLaskuri += tulos.getTulos();
             if (kierrosLaskuri == tulos.getTunnusNro()) {
-                String seuranNimi = this.golfRekisteri.annaSeura(tulos.getSeuraId()-1).getSeurannimi();
+                String seuranNimi = this.golfRekisteri.annaSeura(tulos.getSeuraId()).getSeurannimi();
                 if (!seuranNimi.contains(ehto)) {
                     chooserKierrokset.add(tulos.getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), tulos);
                     continue;
@@ -381,6 +382,9 @@ public class TuloskorttiGUIController implements Initializable {
             }
         }
         chooserKierrokset.setSelectedIndex(index); 
-
+        
+        if (ehto.length() == 0) {
+            haeKierrokset();
+        }
     }
 }

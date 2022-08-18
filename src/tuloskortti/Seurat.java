@@ -253,6 +253,40 @@ public class Seurat {
     }
     
     /**
+     * Etsii halutun seuran
+     * @param id halutun seuran id:n
+     * @return palauttaa seuran id:n tai -1 jos ei löydy
+     */
+    public int etsiSeuraId(int id) {
+        for (int x = 0; x < this.lkm; x++) {
+            if (id == this.alkiot[x].getTunnusNro()) {
+                return x;
+            }
+        }
+        return -1;
+    }
+    
+    /**
+     * Poistetaan haluttu seura
+     * @param id poistettava seura
+     * @return palautetaan 1, jos onnistui poisto ja 0, jos ei onnistu
+     */
+    public int poistaSeura(int id) {
+        int ind = etsiSeuraId(id);
+        if (ind < 0) {
+            return 0;
+        }
+        
+        this.lkm--;
+        
+        for (int x = ind; x < this.lkm; x++) {
+            this.alkiot[x] = this.alkiot[x + 1];
+        }
+        this.alkiot[lkm] = null;
+        return 1;
+    }
+    
+    /**
      * @param args ei käytössä
      */
     public static void main(String[] args) {

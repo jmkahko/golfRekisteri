@@ -125,6 +125,25 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
     }
     
     /**
+     * Poistetaan seuran tuloskortti
+     * @param tunnusNro seuran numero, jonka tuloskortti poistetaan
+     * @return palautetaan poistetut rivit
+     */
+    public int poistaTuloskortti(int tunnusNro) {
+        int n = 0;
+        
+        for (Iterator<Tuloskortti> it = this.alkiot.iterator(); it.hasNext();) {
+            Tuloskortti tuloskortti = it.next();
+            if (tuloskortti.getSeuraNro() == tunnusNro) {
+                it.remove();
+                n++;
+            }
+        }
+        
+        return n;
+    }
+    
+    /**
      * Tallentaa tuloskortin tiedostoon
      * Tiedoston muoto:
      * <pre>

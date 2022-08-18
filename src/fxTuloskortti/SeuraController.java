@@ -205,7 +205,8 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
      */
     @FXML
     void handlePoistaSeura() {
-        Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        //Dialogs.showMessageDialog("Ei vielä osata tehdä");
+        poistaSeura();
     }
     
     /**
@@ -526,5 +527,27 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
             return;
         }
         haeSeura(seuranKohdalla.getTunnusNro());
+        
+    }
+    
+    /**
+     * Poistaa valitun seuran ja seuralle liittyvän tuloskortin ja myös kierrokset, jos seuralle löytyy kierroksia
+     */
+    private void poistaSeura() {
+        Seura seuranKohdalla = chooserSeurat.getSelectedObject();
+        
+        if (seuranKohdalla == null) {
+            return;
+        }
+        
+        if (!Dialogs.showQuestionDialog("Poisto", "Poistetaanko seura: " + seuranKohdalla.getSeurannimi() + " ja seuralle liittyvä tuloskortti ja mahdolliset kierrokset", "Kyllä", "Ei")) {
+            return;
+        }
+        
+        this.golfRekisteri.poistaSeuraJaTuloskortti(seuranKohdalla);
+        
+        int index = chooserSeurat.getSelectedIndex();
+        haeSeura(0);
+        chooserSeurat.setSelectedIndex(index);
     }
 }

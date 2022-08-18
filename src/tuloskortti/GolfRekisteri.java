@@ -217,6 +217,21 @@ public class GolfRekisteri {
     }   
     
     /**
+     * Poistaa seuran ja seuran tuloskortin
+     * @param seura poistettava seura
+     * @return palauttaa poistetujen määrän tai virheen
+     */
+    public int poistaSeuraJaTuloskortti(Seura seura) {
+        if (seura == null) {
+            return 0;
+        }
+        
+        int tulos = this.seurat.poistaSeura(seura.getTunnusNro());
+        int tuloskorttiTulos = this.tuloskortit.poistaTuloskortti(seura.getTunnusNro());
+        return tulos + tuloskorttiTulos;
+    }
+    
+    /**
      * Lukee golfRekisterin tiedot tiedostosta
      * @param nimi käytetään tiedoston lukemiseen
      * @throws SailoException jos lukeminen epäonnistuu
