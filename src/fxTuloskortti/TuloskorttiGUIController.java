@@ -78,7 +78,6 @@ public class TuloskorttiGUIController implements Initializable {
         uusiKierros();
     }
     
-    
     /**
      * Käsitellään uuden seuran syöttäminen
      */
@@ -209,29 +208,7 @@ public class TuloskorttiGUIController implements Initializable {
     public void setGolfRekisteri(GolfRekisteri golfRekisteri) {
         this.golfRekisteri = golfRekisteri;
     }
-    
-        
-    /**
-     * Lisätään uusi generoitu kierros
-     */
-    public void uusiKierrosGeneroitu() {
-        golfRekisteri.lisaaKierros(UusiKierros.luoKierros(1, 55));
-        
-        Dialogs.showMessageDialog("Luotu uusi väylä kierrokselle. Tulostuu Console lokiin tieto");
-        
-        golfRekisteri.annaKierrokset(golfRekisteri.annaSeura(0), golfRekisteri.annaKayttaja(0));
-        
-        
-        List<Kierros> kierrokset2 = golfRekisteri.annaKierrokset(golfRekisteri.annaSeura(0), golfRekisteri.annaKayttaja(0));
-        
-        System.out.println("============= Kierrokset testi =================");
 
-        for (Kierros tulos : kierrokset2) {
-            System.out.print("SeuraId: " + tulos.getSeuraId() + " ");
-            tulos.tulosta(System.out);
-        }
-        haeKierrokset();
-    }
     
     /**
      * Käynnistyksessä jos pelaajaa ei ole luotu luodaan pelaaja
@@ -251,7 +228,7 @@ public class TuloskorttiGUIController implements Initializable {
     /**
      * Haetaan käyttäjän tiedot tiedostosta
      */
-    public void haeKayttajanTiedot() {
+    private void haeKayttajanTiedot() {
         Kayttaja kayttaja = golfRekisteri.annaKayttaja(0);
         
         if (kayttaja != null) {
@@ -265,7 +242,7 @@ public class TuloskorttiGUIController implements Initializable {
     /**
      * Haetaan kierrokset rivi per kierros
      */
-    public void haeKierrokset() {
+    private void haeKierrokset() {
         chooserKierrokset.clear();
 
         Collection<Kierros> kaikkiKierrokset = golfRekisteri.annaKaikkiKierrokset();
@@ -294,7 +271,7 @@ public class TuloskorttiGUIController implements Initializable {
     /**
      * Haetaan kieroksen tiedot
      */
-    public void naytaKierros() {
+    private void naytaKierros() {
         kierroksenKohdalla = chooserKierrokset.getSelectedObject();
         
         if (kierroksenKohdalla == null) {
@@ -327,6 +304,9 @@ public class TuloskorttiGUIController implements Initializable {
         }
     }
     
+    /**
+     * Luodaan käyttäjä tuloskortti golf rekisterille ensimmäisellä käynnistys kerralla
+     */
     private void luoUusiKayttaja() {
         GolfRekisteri luotu = LuoUusiPelaajaController.luoKayttaja("Luo käyttäjä", null, golfRekisteri);
         if (luotu == null) {
@@ -382,7 +362,7 @@ public class TuloskorttiGUIController implements Initializable {
     /**
      * Lisätään tuloskorttiin uusi seura
      */
-    public void uusiSeura() {
+    private void uusiSeura() {
         Seura uusiSeura = new Seura();
         Seura saatiinSeura = LuoSeuraController.kysySeura("Luo uusi seura", null, uusiSeura);
         

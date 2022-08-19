@@ -43,7 +43,9 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     @FXML private TextField seuraTextField;
     @FXML private TextField etsiSeuraTextField;
     
-    
+    /**
+     * Tuloskortin rivejä
+     */
     @FXML private TextField vayla1_48;
     @FXML private TextField vayla1_51;
     @FXML private TextField vayla1_55;
@@ -205,7 +207,6 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
      */
     @FXML
     void handlePoistaSeura() {
-        //Dialogs.showMessageDialog("Ei vielä osata tehdä");
         poistaSeura();
     }
     
@@ -232,14 +233,11 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
 
     @Override
     public GolfRekisteri getResult() {
-        // TODO Auto-generated method stub
         return this.golfRekisteri;
     }
     
     @Override
     public void handleShown() {
-        // TODO Auto-generated method stub
-
         haeSeura(0); // Haetaan seurojen tiedot, kun tullaan Seurat näkymälle ja valitaan ensimmäisessä indeksi oleva
     }
 
@@ -254,7 +252,6 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
-
     }
     
  // =================================================================
@@ -290,13 +287,12 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
                 vayla17_48, vayla17_51, vayla17_55, vayla17_62, vayla17_hcp, vayla17_par,
                 vayla18_48, vayla18_51, vayla18_55, vayla18_62, vayla18_hcp, vayla18_par};
         this.tuloskorttiEdits = tuloskorttiEdits;
-        
     }
     
     /**
      * Lisätään tuloskorttiin uusi seura
      */
-    public void uusiSeura() {
+    private void uusiSeura() {
         Seura uusiSeura = new Seura();
         
         Seura saatiinSeura = LuoSeuraController.kysySeura("Luo uusi seura", null, uusiSeura);
@@ -317,7 +313,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     /**
      * @param seuranro annetaan seuran numero
      */
-    public void haeSeura(int seuranro) {
+    private void haeSeura(int seuranro) {
         chooserSeurat.clear();
         
         int index = 0;
@@ -360,7 +356,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     /**
      * Luodaan uusi tulokortti seuralle
      */
-    public void uusiTuloskortti() {
+    private void uusiTuloskortti() {
         Seura seuranKohdalla = chooserSeurat.getSelectedObject();
         
         if (seuranKohdalla == null) {
@@ -395,7 +391,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     /**
      * Hakee seuran tiedot joka on valittuna seura listalla
      */
-    public void naytaSeura() {
+    private void naytaSeura() {
         Seura seuranKohdalla = chooserSeurat.getSelectedObject();
         
         if (seuranKohdalla == null) {
@@ -415,7 +411,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
      * @param edits viedään näytettävät kentät
      * @param seura jonka tuloskortti näytetään
      */
-    public void naytaTuloskortti(TextField[] edits, Seura seura) {
+    private void naytaTuloskortti(TextField[] edits, Seura seura) {
         if (seura == null) {
             return;
         }
@@ -461,23 +457,6 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         pituusYhteensa55.setText(String.valueOf(pituus55));
         pituusYhteensa62.setText(String.valueOf(pituus62));
         parYhteensa.setText(String.valueOf(par));
-    }
-    
-    /**
-     * Tulostetaan tuloskortin tiedot
-     * @param os PrintStream
-     * @param seura minkä tuloskortti tulostetaan
-     */
-    @SuppressWarnings("unused") // TODO: poistetaan kun käytetään
-    private void tulosta(PrintStream os, final Seura seura) {
-        os.println("-------- Pituudet --- " + seura.getSeurannimi());
-        os.println("---Väylä - 62, 55, 51, 48, PAR, HCP----");
-        List<Tuloskortti> tuloskortti = golfRekisteri.annaTuloskortti(seura);
-        
-        for (Tuloskortti t : tuloskortti) {
-            t.tulosta(os);
-        }
-        os.println("---------------------------------------");
     }
     
     /**

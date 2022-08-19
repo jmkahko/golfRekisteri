@@ -177,7 +177,6 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
 
     @Override
     public void handleShown() {
-        // TODO Auto-generated method stub
         if (this.tuloskorttiLista.size() == 0) {
             tyhjennaTuloskortti();
         }
@@ -333,7 +332,12 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
     private List<Tuloskortti> tuloskorttiLista;
     private TextField[] tuloskorttiEdits;
     
-    
+    /**
+     * Käsitellään kierroksen tuloksen muutoksia ja uuden kierroksen lisäyksessä seuran, tee-paikan ja päiväyksen muutoksia
+     * @param vayla muutettava väylä
+     * @param k TextField kentän rivinumero
+     * @param edit TextField kenttä
+     */
     private void kasitteleTuloskorttiMuutos(int vayla, int k, TextField edit) {
         if (this.tuloskorttiLista == null || this.tuloskorttiLista.size() == 0) {
             return;
@@ -346,8 +350,7 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
         } catch (NumberFormatException e) {
             Dialogs.showMessageDialog("Kenttään ei voi syöttää kirjaimia");
         }
-
-
+        
         int rivi = 1;
         for (Tuloskortti t : tuloskorttiLista) {
             if (rivi == vayla) {
@@ -406,7 +409,7 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
     /**
      * Alustetaan / tyhjennetään tuloskortti
      */
-    public void tyhjennaTuloskortti() {
+    private void tyhjennaTuloskortti() {
         for (int x = 0; x < this.tuloskorttiEdits.length; x++) {
             this.tuloskorttiEdits[x].setText("");
         }
@@ -417,7 +420,7 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
      * @param edits viedään näytettävät kentät
      * @param lista jonka tuloskortti näytetään
      */
-    public void naytaTuloskortti(TextField[] edits, List<Tuloskortti> lista) {
+    private void naytaTuloskortti(TextField[] edits, List<Tuloskortti> lista) {
         if (lista == null) {
             return;
         }

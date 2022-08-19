@@ -162,7 +162,6 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
 
     @Override
     public void handleShown() {
-        // TODO Auto-generated method stub
         if (!naytettavaKierros) {
             naytaKierros(kierrosEdits, objectLista);
         } else {
@@ -385,7 +384,7 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
      * @param edits näyttää kierroksen kentät
      * @param object taulukko
      */
-    public void naytaKierros(TextField[] edits, Object[] object) {
+    private void naytaKierros(TextField[] edits, Object[] object) {
         
         Kierros kierroksenKohdalla = (Kierros) object[0];
         GolfRekisteri golfRekisteri = (GolfRekisteri) object[1];
@@ -465,7 +464,7 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     
     /**
      * Alustetaan uuden kierroksen seuran näyttäminen. Tuodaan seuran tiedot ja tee paikat
-     * @param object
+     * @param object tuodaan tiedot
      */
     private void alustaSeuraNakyma(Object[] object) {
         GolfRekisteri golfRekisteri = (GolfRekisteri) object[1];

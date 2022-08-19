@@ -43,14 +43,11 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
      */
     @FXML
     private void handleTallenna() {
-        //Dialogs.showMessageDialog("Ei vielä osata tehdä");
-        //luoPelaaja();
         tallennaPelaaja();
     }
 
     @Override
     public void handleShown() {
-        // TODO Auto-generated method stub
         haePelaajanTiedot();
     }
 
@@ -96,39 +93,6 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     }
     
     /**
-     * Luodaan pelaaja tuloskortille
-     */
-    public void luoTestiPelaaja() {
-        Kayttaja uusiKayttaja = new Kayttaja();
-        uusiKayttaja.rekisteroi();
-        uusiKayttaja.taytaTestiTiedoilla();
-        
-        try {
-            this.golfRekisteri.lisaaKayttaja(uusiKayttaja);
-        } catch (SailoException e) {
-            Dialogs.showMessageDialog("Ongelmia uuden käyttäjän luonnissa: " + e.getMessage());
-        }
-        
-        Dialogs.showMessageDialog("Uusi käyttäjä luotu. Tulostuu Console lokiin tieto");
-        uusiKayttaja.tulosta(System.out);
-    }
-    
-    /**
-     * Luodaan uusi pelaaja annetuilla tiedoilla
-     */
-    public void luoPelaaja() {
-        Kayttaja uusiPelaaja = new Kayttaja(nimiTextField.getText(), seuraTextField.getText(), Double.valueOf(tasoitusTextField.getText()), Integer.valueOf(aloitusVuosiTextField.getText()));
-        try {
-            this.golfRekisteri.lisaaKayttaja(uusiPelaaja);
-        } catch (SailoException e) {
-            Dialogs.showMessageDialog("Ongelmia uuden käyttäjän luonnissa: " + e.getMessage());
-        }
-        
-        Dialogs.showMessageDialog("Uusi käyttäjä luotu. Tulostuu Console lokiin tieto");
-        uusiPelaaja.tulosta(System.out);
-    }
-    
-    /**
      * Tallennetaan pelaajan tiedot näytöltä
      */
     public void tallennaPelaaja() {
@@ -149,7 +113,7 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     /**
      * Luetaan tiedostosta pelaajan tiedot
      */
-    public void haePelaajanTiedot() {
+    private void haePelaajanTiedot() {
         if (this.golfRekisteri != null) {
             Kayttaja uusiKayttaja = this.golfRekisteri.annaKayttaja(0);
             
