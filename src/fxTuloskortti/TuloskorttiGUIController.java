@@ -433,7 +433,14 @@ public class TuloskorttiGUIController implements Initializable {
             return;
         }
         
-        if (!Dialogs.showQuestionDialog("Poisto", "Haluatko poistaa kierroksen: " + kierroksenKohdalla.getPelattuPaiva() + " " + this.golfRekisteri.annaSeura(kierroksenKohdalla.getSeuraId()).getSeurannimi(), "Kyllä", "Ei")) {
+        String seuranNimi = "";
+        for (Seura s : this.golfRekisteri.annaSeurat()) {
+            if (kierroksenKohdalla.getSeuraId() == s.getTunnusNro()) {
+                seuranNimi = s.getSeurannimi();
+            }
+        }
+        
+        if (!Dialogs.showQuestionDialog("Poisto", "Haluatko poistaa kierroksen: " + kierroksenKohdalla.getPelattuPaiva() + " " + seuranNimi, "Kyllä", "Ei")) {
             return;
         }
         
