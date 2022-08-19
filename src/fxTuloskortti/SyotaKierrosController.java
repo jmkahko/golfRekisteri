@@ -235,7 +235,6 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     private void kasittelePaivaMuutos(DatePicker paiva) {
         Kierros kierroksenKohdalla = (Kierros) objectLista[0];
         kierroksenKohdalla.setPelattuPaiva(String.valueOf(paiva));
-        System.out.println(paiva);
     }
     
     /**
@@ -265,7 +264,6 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         Kierros kierroksenKohdalla = (Kierros) objectLista[0];
         String saatuTieto = tee.getValue();
         kierroksenKohdalla.setPelattuTee(Integer.valueOf(saatuTieto));
-        System.out.println(saatuTieto);
     }
     
     /**
@@ -317,11 +315,15 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
 
         int muutettavaK = k + kierroksenKohdalla.getTunnusNro()-18; // Tulee kierroksen viimeisin kohta, tästä pitää mennä 18 pykällää taaksepäin
         
+        // Formatoidaan DatePicker boksista
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");        
+        LocalDate saatuPaiva = paivaPicker.getValue();
+        String muutettuPaiva = saatuPaiva.format(formatDate);
+        
         for (Kierros kierros : halututKierrokset) {
-            System.out.println("tehtiinkö");
             if (kierros.getTunnusNro() == muutettavaK) {
                 kierros.setTulos(numero);
-                kierros.setPelattuPaiva(String.valueOf(paivaPicker.getValue()));
+                kierros.setPelattuPaiva(muutettuPaiva);
                 kierros.setSeuraId(seuraId);
                 kierros.setPelattuTee(Integer.valueOf(teeChoiseBox.getValue()));
             }
