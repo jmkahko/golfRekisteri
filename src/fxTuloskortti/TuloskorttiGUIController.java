@@ -251,6 +251,7 @@ public class TuloskorttiGUIController implements Initializable {
 
         for (Kierros tulos : kaikkiKierrokset) {
             tulosLaskuri += tulos.getTulos();
+            
             if (kierrosLaskuri == tulos.getTunnusNro()) {
                 
                 String seuranNimi = "";

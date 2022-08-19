@@ -326,7 +326,7 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
                 kierros.setSeuraId(seuraId);
                 kierros.setPelattuTee(Integer.valueOf(teeChoiseBox.getValue()));
             }
-        }   
+        }
     }
     
     /**
