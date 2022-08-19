@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -167,6 +168,7 @@ public class TuloskorttiGUIController implements Initializable {
     private GolfRekisteri golfRekisteri;
     private Object[] vietavaTieto = new Object[3];
     private Kierros kierroksenKohdalla;
+    private List<Kierros.YksittainenKierros> kierrokset = new ArrayList<Kierros.YksittainenKierros>();
 
     /**
      * Tarkistetaan onko tallennus tehty
@@ -269,21 +271,20 @@ public class TuloskorttiGUIController implements Initializable {
         Collection<Kierros> kaikkiKierrokset = golfRekisteri.annaKaikkiKierrokset();
         int kierrosLaskuri = 18;
         int tulosLaskuri = 0;
-        
-        List<Seura> seurat = this.golfRekisteri.annaSeurat();
-        
+
         for (Kierros tulos : kaikkiKierrokset) {
             tulosLaskuri += tulos.getTulos();
             if (kierrosLaskuri == tulos.getTunnusNro()) {
                 
                 String seuranNimi = "";
-                for (Seura s : seurat) {
+                for (Seura s : this.golfRekisteri.annaSeurat()) {
                     if (s.getTunnusNro() == tulos.getSeuraId()) {
                         seuranNimi = s.getSeurannimi();
                     }
                 }
                         
                 chooserKierrokset.add(tulos.getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), tulos);
+                kierrokset.add(new Kierros.YksittainenKierros(tulos.getPelattuPaiva(), seuranNimi, String.valueOf(tulosLaskuri)));
                 kierrosLaskuri += 18;
                 tulosLaskuri = 0;
             }
@@ -400,30 +401,23 @@ public class TuloskorttiGUIController implements Initializable {
      * Etsitään haluttu kierros
      */
     private void etsiKierros() {
-                
-        chooserKierrokset.clear();
         
+        chooserKierrokset.clear();
         int index = 0;
         String ehto = etsiKierrosTextField.getText();
-
-        Collection<Kierros> kaikkiKierrokset = golfRekisteri.annaKaikkiKierrokset();
-        int kierrosLaskuri = 18;
-        int tulosLaskuri = 0;
-        for (Kierros tulos : kaikkiKierrokset) {
-            tulosLaskuri += tulos.getTulos();
-            if (kierrosLaskuri == tulos.getTunnusNro()) {
-                String seuranNimi = this.golfRekisteri.annaSeura(tulos.getSeuraId()).getSeurannimi();
-                if (!seuranNimi.contains(ehto)) {
-                    chooserKierrokset.add(tulos.getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), tulos);
-                    continue;
-                }
-                kierrosLaskuri += 18;
-                tulosLaskuri = 0;
+        Kierros kierros = new Kierros();
+        
+        for (Kierros.YksittainenKierros k : kierrokset) {
+        
+            if (k.getSeura().contains(ehto)) {
+                chooserKierrokset.add(k.toString(), kierros);
             }
         }
-        chooserKierrokset.setSelectedIndex(index); 
+        
+        chooserKierrokset.setSelectedIndex(index);
         
         if (ehto.length() == 0) {
+            kierrokset.clear();
             haeKierrokset();
         }
     }

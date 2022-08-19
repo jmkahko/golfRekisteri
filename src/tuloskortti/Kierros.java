@@ -279,6 +279,39 @@ public class Kierros implements Cloneable {
         this.tulos = UusiKierros.luoTulos(parLuku);
     }
     
+    /**
+     * Käytetään yksittäisen kierroksen haussa
+     * @author Janne Kähkönen
+     * @version 19.8.2022
+     */
+    public static class YksittainenKierros {
+        private String paiva;
+        private String seura;
+        private String tulos;
+                
+        /**
+         * @param paiva pelattu päivä
+         * @param seura pelattu seura
+         * @param tulos kierroksen tulos
+         */
+        public YksittainenKierros(String paiva, String seura, String tulos) {
+            this.paiva = paiva;
+            this.seura = seura;
+            this.tulos = tulos;
+        }
+        
+        /**
+         * @return palauttaa seuran nimen
+         */
+        public String getSeura() {
+            return this.seura;
+        }
+        
+        @Override
+        public String toString() {
+            return this.paiva + " " + this.seura + " " + this.tulos;
+        }
+    }
     
     /**
      * @param args ei käytössä
