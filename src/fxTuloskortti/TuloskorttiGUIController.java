@@ -245,27 +245,30 @@ public class TuloskorttiGUIController implements Initializable {
     private void haeKierrokset() {
         chooserKierrokset.clear();
 
-        Collection<Kierros> kaikkiKierrokset = golfRekisteri.annaKaikkiKierrokset();
-        int kierrosLaskuri = 18;
+        List<Kierros> kaikkiKierrokset = (List<Kierros>) golfRekisteri.annaKaikkiKierrokset();
         int tulosLaskuri = 0;
 
-        for (Kierros tulos : kaikkiKierrokset) {
-            tulosLaskuri += tulos.getTulos();
+        int rivi = 1;
+        
+        for (int x = 0; x < kaikkiKierrokset.size(); x++) {
+            System.out.println(" " + kaikkiKierrokset.get(x));
             
-            if (kierrosLaskuri == tulos.getTunnusNro()) {
-                
-                String seuranNimi = "";
-                for (Seura s : this.golfRekisteri.annaSeurat()) {
-                    if (s.getTunnusNro() == tulos.getSeuraId()) {
-                        seuranNimi = s.getSeurannimi();
-                    }
-                }
-                        
-                chooserKierrokset.add(tulos.getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), tulos);
-                kierrokset.add(new Kierros.YksittainenKierros(tulos.getPelattuPaiva(), seuranNimi, String.valueOf(tulosLaskuri)));
-                kierrosLaskuri += 18;
-                tulosLaskuri = 0;
+            tulosLaskuri += kaikkiKierrokset.get(x).getTulos();
+            
+            if (rivi >= 18) {
+              String seuranNimi = "";
+              for (Seura s : this.golfRekisteri.annaSeurat()) {
+                  if (s.getTunnusNro() == kaikkiKierrokset.get(x).getSeuraId()) {
+                      seuranNimi = s.getSeurannimi();
+                  }
+              }
+              System.out.println("käytiin " + seuranNimi);
+              chooserKierrokset.add(kaikkiKierrokset.get(x).getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), kaikkiKierrokset.get(x));
+              kierrokset.add(new Kierros.YksittainenKierros(kaikkiKierrokset.get(x).getPelattuPaiva(), seuranNimi, String.valueOf(tulosLaskuri)));
+              tulosLaskuri = 0;
+              rivi = 0;
             }
+            rivi++;
         }
     }
     
