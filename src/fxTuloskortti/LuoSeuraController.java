@@ -78,12 +78,23 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
             return;
         }
         
-        String s = edit.getText();
+        int numero = 0;
+        String s = "";
         
+        if (k == 3) {
+            try {
+                numero = Integer.parseInt(edit.getText());
+            } catch (NumberFormatException e) {
+                Dialogs.showMessageDialog("Kenttään ei voi syöttää kirjaimia");
+            }
+        } else {
+            s = edit.getText();
+        }
+
         switch (k) {
             case 1: seuraKohdalla.setSeurannimi(s); break;
             case 2: seuraKohdalla.setKatuosoite(s); break;
-            case 3: seuraKohdalla.setPostinumero(Integer.valueOf(s)); break;
+            case 3: seuraKohdalla.setPostinumero(numero); break;
             case 4: seuraKohdalla.setPostitoimipaikka(s); break;
             case 5: seuraKohdalla.setPuhelinnumero(s); break;
         default:
