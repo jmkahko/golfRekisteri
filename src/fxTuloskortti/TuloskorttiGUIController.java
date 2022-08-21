@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -244,6 +245,7 @@ public class TuloskorttiGUIController implements Initializable {
      */
     private void haeKierrokset() {
         chooserKierrokset.clear();
+        this.kierrokset.clear();
 
         List<Kierros> kaikkiKierrokset = (List<Kierros>) golfRekisteri.annaKaikkiKierrokset();
         int tulosLaskuri = 0;
@@ -260,13 +262,16 @@ public class TuloskorttiGUIController implements Initializable {
                       seuranNimi = s.getSeurannimi();
                   }
               }
-
-              chooserKierrokset.add(kaikkiKierrokset.get(x).getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), kaikkiKierrokset.get(x));
               kierrokset.add(new Kierros.YksittainenKierros(kaikkiKierrokset.get(x).getPelattuPaiva(), seuranNimi, String.valueOf(tulosLaskuri), kaikkiKierrokset.get(x)));
               tulosLaskuri = 0;
               rivi = 0;
             }
             rivi++;
+        }
+        Collections.sort(kierrokset, new Kierros.VertailijaPaiva());
+        
+        for (Kierros.YksittainenKierros k : kierrokset) {
+            chooserKierrokset.add(k.toString(), k.getKierros());
         }
     }
     
