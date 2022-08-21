@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.ModalController;
+import fi.jyu.mit.ohj2.WildChars;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -392,14 +393,17 @@ public class TuloskorttiGUIController implements Initializable {
      * Etsitään haluttu kierros
      */
     private void etsiKierros() {
-        
         chooserKierrokset.clear();
         int index = 0;
         String ehto = etsiKierrosTextField.getText();
         
+        if (ehto.indexOf('*') < 0) {
+            ehto = "*" + ehto + "*";
+        }   
+        
         for (Kierros.YksittainenKierros k : kierrokset) {
         
-            if (k.getSeura().contains(ehto)) {
+            if (WildChars.onkoSamat(k.getSeura(), ehto)) {
                 chooserKierrokset.add(k.toString(), k.getKierros());
             }
         }
