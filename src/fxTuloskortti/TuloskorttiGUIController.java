@@ -8,7 +8,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -20,14 +19,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import kanta.UusiKierros;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.Kayttaja;
-import tuloskortti.Kierrokset;
 import tuloskortti.Kierros;
 import tuloskortti.SailoException;
 import tuloskortti.Seura;
-import tuloskortti.Seurat;
 
 /**
  * Luokka käyttöliittymän tapahtumien hoitamiseksi

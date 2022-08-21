@@ -8,11 +8,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-import fi.jyu.mit.ohj2.Mjonot;
 import fi.jyu.mit.ohj2.WildChars;
 
 /**

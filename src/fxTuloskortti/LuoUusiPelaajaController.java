@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -14,7 +13,6 @@ import javafx.stage.Stage;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.Kayttaja;
 import tuloskortti.SailoException;
-import tuloskortti.Seura;
 
 /**
  * @author Janne Kähkönen

@@ -1,11 +1,8 @@
 package tuloskortti;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * +--------------------------------------+--------------------------------------+

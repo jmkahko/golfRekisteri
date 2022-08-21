@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Locale;
 
 import fi.jyu.mit.ohj2.Mjonot;
 import kanta.UusiKierros;

@@ -10,8 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import tuloskortti.GolfRekisteri;
-import tuloskortti.SailoException;
 import tuloskortti.Seura;
 
 /**

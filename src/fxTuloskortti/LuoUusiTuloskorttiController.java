@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import tuloskortti.SailoException;
 import tuloskortti.Tuloskortti;
 
 /**
@@ -373,6 +372,7 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
      * Alustetaan tuloskortin tiedot
      */
     protected void alusta() {
+        @SuppressWarnings("hiding")
         TextField[] tuloskorttiEdits = {
                 vayla1_48, vayla1_51, vayla1_55, vayla1_62, vayla1_hcp, vayla1_par,
                 vayla2_48, vayla2_51, vayla2_55, vayla2_62, vayla2_hcp, vayla2_par,

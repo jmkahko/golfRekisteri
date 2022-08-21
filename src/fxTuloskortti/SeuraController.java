@@ -1,6 +1,5 @@
 package fxTuloskortti;
 
-import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,13 +8,11 @@ import java.util.ResourceBundle;
 
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
-import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import kanta.UusiTuloskortti;
 import tuloskortti.GolfRekisteri;
 import tuloskortti.SailoException;
 import tuloskortti.Seura;
@@ -267,6 +264,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
         panelTuloskortti.setFitToHeight(true);
         chooserSeurat.clear();
         chooserSeurat.addSelectionListener(e -> naytaSeura());
+        @SuppressWarnings("hiding")
         TextField[] tuloskorttiEdits = {
                 vayla1_48, vayla1_51, vayla1_55, vayla1_62, vayla1_hcp, vayla1_par,
                 vayla2_48, vayla2_51, vayla2_55, vayla2_62, vayla2_hcp, vayla2_par,

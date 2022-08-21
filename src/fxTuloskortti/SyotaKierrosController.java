@@ -11,21 +11,14 @@ import java.util.ResourceBundle;
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
-import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import kanta.UusiTuloskortti;
 import tuloskortti.GolfRekisteri;
-import tuloskortti.Kierrokset;
 import tuloskortti.Kierros;
-import tuloskortti.SailoException;
 import tuloskortti.Seura;
 import tuloskortti.Tuloskortti;
 
@@ -335,6 +328,7 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
      */
     protected void alusta() {
 
+        @SuppressWarnings("hiding")
         TextField[] kierrosEdits = {
                 vaylaTee1, vaylaPar1, vaylaHcp1, vaylaId_1,
                 vaylaTee2, vaylaPar2, vaylaHcp2, vaylaId_2,
