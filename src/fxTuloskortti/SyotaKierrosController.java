@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -509,39 +510,43 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         
         List<Tuloskortti> tuloskortti = golfRekisteri.annaTuloskortti(saatuSeura);
         
-        int parLaskuri = 0;
-        int matkaLaskuri = 0;  
-        
-        int i = 0;
-        for (int x = 0; x < 18; x++) {
+        if (tuloskortti.size() == 0) {
+            Dialogs.showMessageDialog("Tuloskorttia ei ole luotu seuralle. Syöttääksesi tuloksen luo tuloskortti seuralle ensin");
+        } else {
+            int parLaskuri = 0;
+            int matkaLaskuri = 0;  
             
-            if (62 == teeId) {
-                edits[i].setText(String.valueOf(tuloskortti.get(x).getPituus62()));
-                matkaLaskuri += tuloskortti.get(x).getPituus62();
-            } else if (55 == teeId) {
-                edits[i].setText(String.valueOf(tuloskortti.get(x).getPituus55()));
-                matkaLaskuri += tuloskortti.get(x).getPituus55();
-            } else if (51 == teeId) {
-                edits[i].setText(String.valueOf(tuloskortti.get(x).getPituus51()));
-                matkaLaskuri += tuloskortti.get(x).getPituus51();
-            } else {
-                edits[i].setText(String.valueOf(tuloskortti.get(x).getPituus48()));
-                matkaLaskuri += tuloskortti.get(x).getPituus48();
-            }
+            int i = 0;
+            for (int x = 0; x < 18; x++) {
+                
+                if (62 == teeId) {
+                    edits[i].setText(String.valueOf(tuloskortti.get(x).getPituus62()));
+                    matkaLaskuri += tuloskortti.get(x).getPituus62();
+                } else if (55 == teeId) {
+                    edits[i].setText(String.valueOf(tuloskortti.get(x).getPituus55()));
+                    matkaLaskuri += tuloskortti.get(x).getPituus55();
+                } else if (51 == teeId) {
+                    edits[i].setText(String.valueOf(tuloskortti.get(x).getPituus51()));
+                    matkaLaskuri += tuloskortti.get(x).getPituus51();
+                } else {
+                    edits[i].setText(String.valueOf(tuloskortti.get(x).getPituus48()));
+                    matkaLaskuri += tuloskortti.get(x).getPituus48();
+                }
 
-            i++;
-            edits[i].setText(String.valueOf(tuloskortti.get(x).getPar()));
-            i++;
-            edits[i].setText(String.valueOf(tuloskortti.get(x).getHcp()));
-            i++;
-            edits[i].setText("");
-            i++;
-            
-            parLaskuri += tuloskortti.get(x).getPar();
-        }    
-        matkaYhteensa.setText(String.valueOf(matkaLaskuri));
-        parYhteensa.setText(String.valueOf(parLaskuri));
-        pelattuTee.setText(String.valueOf(teeId));
-        tulosYhteensa.setText("");
+                i++;
+                edits[i].setText(String.valueOf(tuloskortti.get(x).getPar()));
+                i++;
+                edits[i].setText(String.valueOf(tuloskortti.get(x).getHcp()));
+                i++;
+                edits[i].setText("");
+                i++;
+                
+                parLaskuri += tuloskortti.get(x).getPar();
+            }    
+            matkaYhteensa.setText(String.valueOf(matkaLaskuri));
+            parYhteensa.setText(String.valueOf(parLaskuri));
+            pelattuTee.setText(String.valueOf(teeId));
+            tulosYhteensa.setText("");
+        }
     }
  }
