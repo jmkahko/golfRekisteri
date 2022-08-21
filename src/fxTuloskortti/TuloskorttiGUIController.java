@@ -264,7 +264,7 @@ public class TuloskorttiGUIController implements Initializable {
               }
               System.out.println("käytiin " + seuranNimi);
               chooserKierrokset.add(kaikkiKierrokset.get(x).getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), kaikkiKierrokset.get(x));
-              kierrokset.add(new Kierros.YksittainenKierros(kaikkiKierrokset.get(x).getPelattuPaiva(), seuranNimi, String.valueOf(tulosLaskuri)));
+              kierrokset.add(new Kierros.YksittainenKierros(kaikkiKierrokset.get(x).getPelattuPaiva(), seuranNimi, String.valueOf(tulosLaskuri), kaikkiKierrokset.get(x)));
               tulosLaskuri = 0;
               rivi = 0;
             }
@@ -389,12 +389,11 @@ public class TuloskorttiGUIController implements Initializable {
         chooserKierrokset.clear();
         int index = 0;
         String ehto = etsiKierrosTextField.getText();
-        Kierros kierros = new Kierros();
         
         for (Kierros.YksittainenKierros k : kierrokset) {
         
             if (k.getSeura().contains(ehto)) {
-                chooserKierrokset.add(k.toString(), kierros);
+                chooserKierrokset.add(k.toString(), k.getKierros());
             }
         }
         

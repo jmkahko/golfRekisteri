@@ -2,6 +2,7 @@ package tuloskortti;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Comparator;
 
 import fi.jyu.mit.ohj2.Mjonot;
 import kanta.UusiKierros;
@@ -288,16 +289,19 @@ public class Kierros implements Cloneable {
         private String paiva;
         private String seura;
         private String tulos;
+        private Kierros kierros;
                 
         /**
          * @param paiva pelattu päivä
          * @param seura pelattu seura
          * @param tulos kierroksen tulos
+         * @param kierros kierroksen rivitieto
          */
-        public YksittainenKierros(String paiva, String seura, String tulos) {
+        public YksittainenKierros(String paiva, String seura, String tulos, Kierros kierros) {
             this.paiva = paiva;
             this.seura = seura;
             this.tulos = tulos;
+            this.kierros = kierros;
         }
         
         /**
@@ -307,9 +311,28 @@ public class Kierros implements Cloneable {
             return this.seura;
         }
         
+        /**
+         * @return palauttaa kierros tiedon
+         */
+        public Kierros getKierros() {
+            return this.kierros;
+        }
+        
         @Override
         public String toString() {
             return this.paiva + " " + this.seura + " " + this.tulos;
+        }
+    }
+    
+    /**
+     * Vertailijaa käytetään kahden eri kierroksen vertailussa, jotta kierrokset saadaan haluttuun järjestykseen
+     * @author Janne Kähkönen
+     * @version 17.8.2022
+     */
+    public static class Vertailija implements Comparator<YksittainenKierros> {
+        @Override
+        public int compare(YksittainenKierros k1, YksittainenKierros k2) {
+            return k1.getSeura().compareTo(k2.getSeura());
         }
     }
     
