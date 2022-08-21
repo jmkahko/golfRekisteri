@@ -2,7 +2,11 @@ package tuloskortti;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.Locale;
 
 import fi.jyu.mit.ohj2.Mjonot;
 import kanta.UusiKierros;
@@ -318,6 +322,13 @@ public class Kierros implements Cloneable {
             return this.kierros;
         }
         
+        /**
+         * @return palauttaa päivä tiedon
+         */
+        public String getPaiva() {
+            return this.paiva;
+        }
+        
         @Override
         public String toString() {
             return this.paiva + " " + this.seura + " " + this.tulos;
@@ -325,16 +336,41 @@ public class Kierros implements Cloneable {
     }
     
     /**
-     * Vertailijaa käytetään kahden eri kierroksen vertailussa, jotta kierrokset saadaan haluttuun järjestykseen
+     * VertailijaSeuraNimi käytetään kahden eri kierroksen vertailussa, jossa verrataan seuran nimeä
      * @author Janne Kähkönen
      * @version 17.8.2022
      */
-    public static class Vertailija implements Comparator<YksittainenKierros> {
+    public static class VertailijaSeuraNimi implements Comparator<YksittainenKierros> {
         @Override
         public int compare(YksittainenKierros k1, YksittainenKierros k2) {
             return k1.getSeura().compareTo(k2.getSeura());
         }
     }
+    
+    /**
+     * VertailijaPaiva käytetään kahden eri kierroksen vertailussa, jossa verrataan kierrosten päiväystä
+     * @author Janne Kähkönen
+     * @version 21.8.2022
+     */
+    public static class VertailijaPaiva implements Comparator<YksittainenKierros> {
+        @Override
+        public int compare(YksittainenKierros k1, YksittainenKierros k2) {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            Date k1date = new Date();
+            Date k2date = new Date();
+            
+            try {
+                k1date = sdf.parse(k1.getPaiva());
+                k2date = sdf.parse(k2.getPaiva());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return k1date.compareTo(k2date);
+        }
+    }
+    
+
     
     /**
      * @param args ei käytössä
