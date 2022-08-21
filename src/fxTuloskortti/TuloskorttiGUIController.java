@@ -250,9 +250,7 @@ public class TuloskorttiGUIController implements Initializable {
 
         int rivi = 1;
         
-        for (int x = 0; x < kaikkiKierrokset.size(); x++) {
-            System.out.println(" " + kaikkiKierrokset.get(x));
-            
+        for (int x = 0; x < kaikkiKierrokset.size(); x++) {            
             tulosLaskuri += kaikkiKierrokset.get(x).getTulos();
             
             if (rivi >= 18) {
@@ -262,7 +260,7 @@ public class TuloskorttiGUIController implements Initializable {
                       seuranNimi = s.getSeurannimi();
                   }
               }
-              System.out.println("käytiin " + seuranNimi);
+
               chooserKierrokset.add(kaikkiKierrokset.get(x).getPelattuPaiva() + " " + seuranNimi + " " + String.valueOf(tulosLaskuri), kaikkiKierrokset.get(x));
               kierrokset.add(new Kierros.YksittainenKierros(kaikkiKierrokset.get(x).getPelattuPaiva(), seuranNimi, String.valueOf(tulosLaskuri), kaikkiKierrokset.get(x)));
               tulosLaskuri = 0;
