@@ -302,7 +302,11 @@ public class TuloskorttiGUIController implements Initializable {
             golfRekisteri.lueTiedostosta("golfRekisteri");
             haeKayttajanTiedot();
         } catch (SailoException e) {
-            luoUusiKayttaja();
+            if (Dialogs.showQuestionDialog("Pelaajaa ei löydy", "Haluatko luoda uuden?", "Kyllä", "Ei")) {
+                luoUusiKayttaja();
+                return;
+            }
+            Platform.exit();
         }
     }
     
