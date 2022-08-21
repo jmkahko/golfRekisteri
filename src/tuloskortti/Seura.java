@@ -12,7 +12,7 @@ import kanta.UusiSeura;
  * | Luokan nimi: Seura                   | Avustajat:                           |
  * +--------------------------------------+--------------------------------------+
  * | Vastuualueet:                        |                                      |
- * |                                      |                                      |
+ * |                                      | - Vertailija                         |
  * | - Huolehtii golf seuran tiedoista    |                                      |
  * | - Ei tiedä käyttöliittymästä         |                                      |
  * | - Tietää seuran kentät (id,          |                                      |
@@ -62,7 +62,6 @@ public class Seura implements Cloneable {
                 "|" + this.postitoimipaikka + "|" + this.puhelinnumero);
     }
     
-    
     /**
      * Tulostetaan käyttäjän tiedot
      * @param os tietovirta johon tulosetaan
@@ -89,7 +88,6 @@ public class Seura implements Cloneable {
             seuraavaId = this.id + 1;
         }
     }
-    
     
     /**
      * Antaa Seuralle seuraavan rekisterinumeron.
@@ -274,5 +272,4 @@ public class Seura implements Cloneable {
         seura1.tulosta(System.out);
         seura2.tulosta(System.out);
     }
-
 }

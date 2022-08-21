@@ -44,7 +44,6 @@ public class Kayttajat {
         this.alkiot = new Kayttaja[MAX_KAYTTAJIA];
     }
     
-    
     /**
      * Lisätään uusi käyttäjä Kayttaja[] tietorakenteesen. Ottaa käyttäjän omistukseensa.
      * @param kayttaja annetaan käyttäjä
@@ -164,12 +163,10 @@ public class Kayttajat {
         }
     }
 
-    
     /**
      * @param args ei käytössä
      */
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         Kayttajat kayttajat = new Kayttajat();
         
         // Luetaan tiedostosta käyttäjät
@@ -179,7 +176,6 @@ public class Kayttajat {
             System.err.println(e.getMessage());
         }
         
-
         Kayttaja henkilo1 = new Kayttaja();
         Kayttaja henkilo2 = new Kayttaja();
         
@@ -195,7 +191,6 @@ public class Kayttajat {
             System.err.println(e.getMessage());
         }
 
-        
         System.out.println("======================= Käyttäjät testi =======================");
         for (int x = 0; x < kayttajat.getLkm(); x++) {
            Kayttaja kayttaja = kayttajat.annaKayttaja(x);
@@ -209,8 +204,5 @@ public class Kayttajat {
         } catch (SailoException e) {
             System.err.println(e.getMessage());
         }
-        
-        
-        
     }
 }

@@ -43,7 +43,6 @@ public class Tuloskortti implements Cloneable {
     // Luo jokaiselle tuloskortille oman "globaalin" seuraava id-numeron
     private static int seuraavaId = 1;
     
-    
     /**
      * Tuloskortin muodostaja oletusarvoilla
      */
@@ -81,7 +80,6 @@ public class Tuloskortti implements Cloneable {
         this.hcp = hcp;
     }
     
-    
     /**
      * Tulostetaan tuloskortin tiedot
      * @param out tietovirta johon tulostetaan
@@ -91,6 +89,9 @@ public class Tuloskortti implements Cloneable {
                 "|" + this.pituus51 + "|" + this.pituus48 + "|" + this.par + "|" + this.hcp);
     }
     
+    /**
+     * TUlostaa tuloskortin tiedot | eroteltuna
+     */
     @Override
     public String toString() {
         return this.id + "|" + this.seuraId + "|" + this.vayla + "|" + this.pituus62 + "|" + this.pituus55 + 
@@ -104,7 +105,6 @@ public class Tuloskortti implements Cloneable {
     public void tulosta(OutputStream os) {
         tulosta(new PrintStream(os));
     }
-    
     
     /**
      * Palauttaa tuloskortin id:n
@@ -233,7 +233,6 @@ public class Tuloskortti implements Cloneable {
         return this.par;
     }
     
-    
     /**
      * Antaa tuloskortille seuraavan rekisterinumeron.
      * @return tuloskortin uusi id
@@ -295,7 +294,6 @@ public class Tuloskortti implements Cloneable {
         return uusiTuloskortti;
     }
     
-    
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot tuloskortille.
      * TODO: poista kun kaikki toimii
@@ -313,7 +311,6 @@ public class Tuloskortti implements Cloneable {
         this.par = UusiTuloskortti.getPar();
         this.hcp = UusiTuloskortti.getHcp();
     }
-    
     
     /**
      * @param args ei käytössä

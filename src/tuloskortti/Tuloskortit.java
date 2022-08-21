@@ -139,7 +139,6 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
                 n++;
             }
         }
-        
         return n;
     }
     
@@ -165,7 +164,6 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
         } catch (FileNotFoundException e) {
             System.err.println("Tiedosto " + ftiedosto.getAbsolutePath() + " " + e.getMessage());
         }
-        
     }
     
     /**
@@ -198,7 +196,6 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
      * @param args ei käytössä
      */
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
 
         Tuloskortit tuloskortit = new Tuloskortit();
         
@@ -217,7 +214,6 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
 
         List<Tuloskortti> tuloskortti2 = tuloskortit.annaTuloskortit(1);
 
-
         for (Tuloskortti tulos : tuloskortti2) {
             System.out.print("Seura: " + tulos.getSeuraNro() + " ");
             tulos.tulosta(System.out);
@@ -229,6 +225,5 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
         } catch (SailoException e) {
             System.err.println(e.getMessage());
         }
-
     }
 }

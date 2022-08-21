@@ -16,9 +16,9 @@ import kanta.UusiKierros;
  * | Luokan nimi: Kierros                 | Avustajat:                           |
  * +--------------------------------------+--------------------------------------+
  * | Vastuualueet:                        |                                      |
- * |                                      |                                      |
- * | - Huolehtii kierroksen tiedoista     |                                      |
- * | - Ei tiedä käyttöliittymästä         |                                      |
+ * |                                      | - YksittainenKierros                 |
+ * | - Huolehtii kierroksen tiedoista     | - VertailijaSeuraNimi                |
+ * | - Ei tiedä käyttöliittymästä         | - VertailijaPaiva                    |
  * | - Tietää kierroksen kentät (id,      |                                      |
  * |   tuloskortti, kayttaja, paiva, jne) |                                      |
  * | - Osaa muuttaa merkkijonon           |                                      |
@@ -43,9 +43,8 @@ public class Kierros implements Cloneable {
     private int vayla;
     private int tulos;
     
-    // Luo jokaiselle kierrokselle oman "globaalin" seuraavan id-numeron
+    // Luo jokaiselle kierrokselle oma "globaali" seuraava id-numero
     private static int seuraavaId = 1;
-    
     
     /**
      * Kierroksen muodostaja oletusarvoilla
@@ -79,7 +78,6 @@ public class Kierros implements Cloneable {
         this.tulos = tulos;
     }
     
-    
     /**
      * Tulostetaan tuloskortin tiedot
      * @param out tietovirta johon tulostetaan
@@ -89,12 +87,20 @@ public class Kierros implements Cloneable {
                 "|" + this.vayla + "|" + this.tulos);
     }
     
+    /**
+     * Tulostaa kierroksen kierroksen tiedot | eroteltuna.
+     * @example
+     * <pre name="test">
+     * Kierros k = new Kierros();
+     * k.parse("       3         |       4    |   1");
+     * k.toString().startsWith("3|4|1") === true;
+     * </pre>
+     */
     @Override
     public String toString() {
         return this.id + "|" + this.seuraId + "|" + this.kayttajaId + "|" + this.kierrospaiva + "|" + this.pelattuTee + 
                     "|" + this.vayla + "|" + this.tulos;
     }
-    
     
     /**
      * Tulostetaan tuloskortin tiedot
@@ -103,7 +109,6 @@ public class Kierros implements Cloneable {
     public void tulosta(OutputStream os) {
         tulosta(new PrintStream(os));
     }
-    
     
     /**
      * Palauttaa kierroksen id:n
@@ -369,8 +374,6 @@ public class Kierros implements Cloneable {
             return k1date.compareTo(k2date);
         }
     }
-    
-
     
     /**
      * @param args ei käytössä

@@ -38,7 +38,7 @@ public class Kayttaja implements Cloneable {
     private double tasoitus;
     private int aloitusvuosi;
     
-    // Luo jokaiselle kayttajalle oman "globaalin" seuraan id-numeron
+    // Luo jokaiselle kayttajalle oman "globaali" id-numero
     private static int seuraavaId = 1;
     
     /**
@@ -67,7 +67,6 @@ public class Kayttaja implements Cloneable {
         this.aloitusvuosi = aloitusvuosi;
     }
         
-    
     /**
      * Tulostetaan käyttäjän tiedot
      * @param out tietovirta johon tulostetaan
@@ -76,7 +75,6 @@ public class Kayttaja implements Cloneable {
         out.println(this.id + "|" + this.nimi + "|" + this.kotiseura + "|" + this.tasoitus + "|" + this.aloitusvuosi);
     }
     
-    
     /**
      * Tulostetaan käyttäjän tiedot
      * @param os tietovirta johon tulosetaan
@@ -84,7 +82,6 @@ public class Kayttaja implements Cloneable {
     public void tulosta(OutputStream os) {
         tulosta(new PrintStream(os));
     }
-    
     
     /**
      * Palauttaa käyttäjän id:n
@@ -133,9 +130,6 @@ public class Kayttaja implements Cloneable {
         return this.aloitusvuosi;
     }
     
-    
-    
-    
     /**
      * @param nimi asettaa käyttäjän nimen
      */
@@ -163,7 +157,6 @@ public class Kayttaja implements Cloneable {
     public void setAloitusvuosi(int aloitusvuosi) {
         this.aloitusvuosi = aloitusvuosi;
     }
-    
     
     /**
      * Antaa käyttäjälle seuraavan rekisterinumeron.
@@ -194,13 +187,12 @@ public class Kayttaja implements Cloneable {
      * Kayttaja kayttaja = new Kayttaja();
      * kayttaja.parse("       3         |       Iines Ankka     |   Ankkalinna Golf");
      * kayttaja.toString().startsWith("3|Iines Ankka|Ankkalinna Golf") === true;
-     * 
+     * </pre>
      */
     @Override
     public String toString() {
         return this.getTunnusNro() + "|" + this.nimi + "|" + this.kotiseura + "|" + this.tasoitus + "|" + this.aloitusvuosi;
     }
-    
     
     /**
      * Selvittää käyttäjän tiedot | putkella erotellusta merkkijonosta
@@ -238,7 +230,6 @@ public class Kayttaja implements Cloneable {
         return uusiKayttaja;
     }
     
-    
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot käyttäjälle.
      * TODO: poista kun kaikki toimii
@@ -249,7 +240,6 @@ public class Kayttaja implements Cloneable {
         this.tasoitus = UusiKayttaja.arvoTasoitus();
         this.aloitusvuosi = UusiKayttaja.arvoVuosi();
     }
-    
     
     /**
      * @param args ei käytössä

@@ -184,7 +184,6 @@ public class Seurat {
         } catch (FileNotFoundException e) {
             System.err.println("Tiedosto " + ftiedosto.getAbsolutePath() + " " + e.getMessage());
         }
-        
     }
     
     /**
@@ -211,7 +210,6 @@ public class Seurat {
             throw new SailoException("Ei saa luettua tiedostoa: " + hnimi);
         }
     }
-    
     
     /**
      * Lisää uuden seuran tai muuttaa olemassa olevan seuran tietoja.
@@ -290,7 +288,6 @@ public class Seurat {
      * @param args ei käytössä
      */
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         Seurat seurat = new Seurat();
         
         // Luetaan tiedostosta seurat
@@ -299,7 +296,6 @@ public class Seurat {
         }  catch (SailoException e) {
             System.err.println(e.getMessage());
         }
-        
         
         Seura seura1 = new Seura();
         Seura seura2 = new Seura();
@@ -329,5 +325,4 @@ public class Seurat {
             System.err.println(e.getMessage());
         }
     }
-
 }
