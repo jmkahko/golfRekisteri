@@ -80,13 +80,31 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
             return;
         }
         
-        String s = edit.getText();
+        int numero = 0;
+        double numerod = 0.0;
+        String s = "";
+        
+        if (k == 4) {
+            try {
+                numero = Integer.parseInt(edit.getText());
+            } catch (NumberFormatException e) {
+                Dialogs.showMessageDialog("Kenttään ei voi syöttää kirjaimia");
+            }
+        } else if (k == 3) {
+            try {
+                numerod = Double.parseDouble(edit.getText());
+            } catch (NumberFormatException e) {
+                Dialogs.showMessageDialog("Kenttään ei voi syöttää kirjaimia");
+            }
+        } else {
+            s = edit.getText();
+        }
         
         switch (k) {
             case 1: kayttaja.setNimi(s); break;
             case 2: kayttaja.setKotiseura(s); break;
-            case 3: kayttaja.setTasoitus(Double.valueOf(s)); break;
-            case 4: kayttaja.setAloitusvuosi(Integer.valueOf(s)); break;
+            case 3: kayttaja.setTasoitus(numerod); break;
+            case 4: kayttaja.setAloitusvuosi(numero); break;
         default:
             break;
         }
