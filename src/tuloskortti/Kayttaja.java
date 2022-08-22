@@ -103,6 +103,7 @@ public class Kayttaja implements Cloneable {
     }
     
     /**
+     * Saadaan kysyttyä käyttäjän nimi
      * @return palauttaa käyttäjän nimen
      */
     public String getNimi() {
@@ -110,6 +111,7 @@ public class Kayttaja implements Cloneable {
     }
     
     /**
+     * Saadaan kysyttyä käyttäjän kotiseuran nimi
      * @return palauttaa käyttäjän kotiseuran
      */
     public String getKotiseura() {
@@ -117,6 +119,7 @@ public class Kayttaja implements Cloneable {
     }
     
     /**
+     * Saadaan kysyttyä käyttäjän tasoitus
      * @return palauttaa käyttäjän tasoituksen
      */
     public double getTasoitus() {
@@ -124,6 +127,7 @@ public class Kayttaja implements Cloneable {
     }
     
     /**
+     * Saadaan kysyttyä käyttäjän aloitusvuosi
      * @return palauttaa käyttäjän aloitusvuoden
      */
     public int getAloitusvuosi() {
@@ -131,6 +135,7 @@ public class Kayttaja implements Cloneable {
     }
     
     /**
+     * Asetetaan käyttäjän nimi
      * @param nimi asettaa käyttäjän nimen
      */
     public void setNimi(String nimi) {
@@ -138,6 +143,7 @@ public class Kayttaja implements Cloneable {
     }
     
     /**
+     * Asetetaan käyttäjän kotiseura
      * @param kotiseura asettaa käyttäjän kotiseuran
      */
     public void setKotiseura(String kotiseura) {
@@ -145,6 +151,7 @@ public class Kayttaja implements Cloneable {
     }
     
     /**
+     * Asetetaan käyttäjän tasoitus
      * @param tasoitus asettaa käyttäjän tasoituksen
      */
     public void setTasoitus(double tasoitus) {
@@ -152,6 +159,7 @@ public class Kayttaja implements Cloneable {
     }
     
     /**
+     * Asetetaan käyttäjän aloitusvuosi
      * @param aloitusvuosi asettaa käyttäjän aloitusvuoden
      */
     public void setAloitusvuosi(int aloitusvuosi) {
@@ -261,5 +269,4 @@ public class Kayttaja implements Cloneable {
         henkilo1.tulosta(System.out);
         henkilo2.tulosta(System.out);
     }
-
 }

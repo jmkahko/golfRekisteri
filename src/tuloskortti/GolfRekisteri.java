@@ -56,6 +56,7 @@ public class GolfRekisteri {
     }
     
     /**
+     * Saadaan kysyttyä käyttäjien määrä
      * @return palauttaa käyttäjien määrä
      */
     public int getKayttajia() {
@@ -90,6 +91,7 @@ public class GolfRekisteri {
     }
     
     /**
+     * Saadaan kysyttyä seurojen määrä
      * @return palauttaa seurojen määrän
      */
     public int getSeuroja() {
@@ -148,6 +150,7 @@ public class GolfRekisteri {
     }
     
     /**
+     * Palauttaa kaikkien tuloskorttien määrän
      * @return palauttaa tuloskorttien määrän
      */
     public int getTuloskortteja() {
@@ -155,6 +158,7 @@ public class GolfRekisteri {
     }
         
     /**
+     * Antaan tietyn seuran tuloskortin
      * @param seura tunnus
      * @return palautta seuran tuloskortin
      */
@@ -189,6 +193,7 @@ public class GolfRekisteri {
     }
     
     /**
+     * Saadaan kysyttyä kierrosten lukumäärä
      * @return palauttaa kierrosten määrän
      */
     public int getKierroksia() {
@@ -206,7 +211,7 @@ public class GolfRekisteri {
     }
     
     /**
-     * Palauttaa kierrokset jotka pelattu
+     * Saadaan kysyttyä kaikki pelatut kierrokset
      * @return palauttaa kaikki kierrokset
      */
     public Collection<Kierros> annaKaikkiKierrokset() {

@@ -111,6 +111,7 @@ public class Seura implements Cloneable {
     }
     
     /**
+     * Saadaan seuran nimi
      * @return palauttaa seuran nimen
      */
     public String getSeurannimi() {
@@ -118,6 +119,7 @@ public class Seura implements Cloneable {
     }
     
     /**
+     * Saadaan seuran katuosoite
      * @return palauttaa seuran katuosoitteen
      */
     public String getKatuosoite() {
@@ -125,6 +127,7 @@ public class Seura implements Cloneable {
     }
     
     /**
+     * Saadaan seuran postinumero
      * @return palauttaa seuran postinumeron
      */
     public int getPostinumero() {
@@ -132,6 +135,7 @@ public class Seura implements Cloneable {
     }
     
     /**
+     * Saadaan seuran kaupunki
      * @return palauttaa seuran postitoimipaikan
      */
     public String getPostitoimipaikka() {
@@ -139,6 +143,7 @@ public class Seura implements Cloneable {
     }
     
     /**
+     * Saadaan seuran puhelinnumero
      * @return palauttaa seuran puhelinnumeron
      */
     public String getPuhelinnumero() {
@@ -185,6 +190,10 @@ public class Seura implements Cloneable {
         this.puhelinnumero = puhelinnumero;
     }
 
+    /**
+     * Tulostaa halutun seuran tiedot | merkillä eroteltuna
+     * 1|Ankka Golf|Ankkalantie 2|90100|Ankkala|040-1234567
+     */
     @Override
     public String toString() {
         return this.id + "|" + this.seurannimi + "|" + this.katuosoite + "|" + this.postinumero + 

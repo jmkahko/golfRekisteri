@@ -82,6 +82,7 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
     }
     
     /**
+     * Saadaan haeuttua tuloskorttien lukumäärä
      * @return palauttaa tuloskortti rivien lukumäärän
      */
     public int getLkm() {

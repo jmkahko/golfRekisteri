@@ -160,6 +160,7 @@ public class Kierros implements Cloneable {
     }
     
     /**
+     * Saadaan asetetty pelattu tee paikka
      * @param tee paikka jolta pelattu
      */
     public void setPelattuTee(int tee) {
@@ -175,6 +176,7 @@ public class Kierros implements Cloneable {
     }
     
     /**
+     * Saadaan asetettu pelattu päivä
      * @param paiva joka asetetaan kierrokselle
      */
     public void setPelattuPaiva(String paiva) {
@@ -190,6 +192,7 @@ public class Kierros implements Cloneable {
     }
     
     /**
+     * Saadaan asetettu tulos
      * @param tulos asettaa tuloksen
      */
     public void setTulos(int tulos) {
@@ -313,6 +316,7 @@ public class Kierros implements Cloneable {
         }
         
         /**
+         * Saadaan haettya haluttu seura
          * @return palauttaa seuran nimen
          */
         public String getSeura() {
@@ -320,6 +324,7 @@ public class Kierros implements Cloneable {
         }
         
         /**
+         * Saadaan haettua haluttu kierros
          * @return palauttaa kierros tiedon
          */
         public Kierros getKierros() {
@@ -327,12 +332,16 @@ public class Kierros implements Cloneable {
         }
         
         /**
+         * Saadaan haettua pelattu päivä
          * @return palauttaa päivä tiedon
          */
         public String getPaiva() {
             return this.paiva;
         }
         
+        /**
+         * Tulostaa halutun tiedon muodossa 01-01-2001 Ankka Golf 59
+         */
         @Override
         public String toString() {
             return this.paiva + " " + this.seura + " " + this.tulos;

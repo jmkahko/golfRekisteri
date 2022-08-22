@@ -90,7 +90,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
-     * TUlostaa tuloskortin tiedot | eroteltuna
+     * Tulostaa tuloskortin tiedot | eroteltuna
      */
     @Override
     public String toString() {
@@ -107,7 +107,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
-     * Palauttaa tuloskortin id:n
+     * Saadaan tuloskortin id:n
      * @return palauttaa id:n
      */
     public int getTunnusNro() {
@@ -115,6 +115,7 @@ public class Tuloskortti implements Cloneable {
     }
         
     /**
+     * Saadaan pituus tee paikalta 62
      * @return pituus62
      */
     public int getPituus62() {
@@ -122,6 +123,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Saadaan pituus tee paikalta 55
      * @return pituus55
      */
     public int getPituus55() {
@@ -129,6 +131,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Saadaan pituus tee paikalta 51
      * @return pituus51
      */
     public int getPituus51() {
@@ -136,6 +139,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Saadaan pituus tee paikalta 48
      * @return pituus48
      */
     public int getPituus48() {
@@ -143,6 +147,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Saadaan väylän par-luku
      * @return par-luku
      */
     public int getPar() {
@@ -150,6 +155,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Saadaan väylän hcp-luku
      * @return hcp-luku
      */
     public int getHcp() {
@@ -157,6 +163,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Asetetaan pituus tee paikalle 62
      * @param luku Asettaa pituus62
      */
     public void setPituus62(int luku) {
@@ -164,6 +171,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Asetetaan pituus tee paikalle 55
      * @param luku Asettaa pituus55
      */
     public void setPituus55(int luku) {
@@ -171,6 +179,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Asetetaan pituus tee paikalle 51
      * @param luku Asettaa pituus51
      */
     public void setPituus51(int luku) {
@@ -178,6 +187,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Asetetaan pituus tee paikalle 48
      * @param luku Asettaa pituus48
      */
     public void setPituus48(int luku) {
@@ -185,6 +195,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Asetetaan väylän par-luku
      * @param luku Asettaa par-luku
      */
     public void setPar(int luku) {
@@ -192,6 +203,7 @@ public class Tuloskortti implements Cloneable {
     }
     
     /**
+     * Asetetaan väylän hcp-luku
      * @param luku Asettaa hcp-luku
      */
     public void setHcp(int luku) {

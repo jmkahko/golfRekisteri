@@ -48,6 +48,7 @@ public class Kierrokset implements Iterable<Kierros> {
     }
     
     /**
+     * Saadaan kysyttyä kierrosten määrä
      * @return palauttaa kierrosten määrän
      */
     public int getLkm() {
