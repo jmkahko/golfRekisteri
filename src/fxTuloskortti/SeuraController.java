@@ -336,8 +336,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
             ehto = "*" + ehto + "*";
         }
         
-        Collection<Seura> seurat;
-        seurat = this.golfRekisteri.etsiSeura(ehto);
+        Collection<Seura> seurat = this.golfRekisteri.etsiSeura(ehto);
         
         int lisatty = 0;
         for (Seura s : seurat) {
