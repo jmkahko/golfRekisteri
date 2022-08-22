@@ -66,10 +66,11 @@ public class Kayttaja implements Cloneable {
         this.tasoitus = tasoitus;
         this.aloitusvuosi = aloitusvuosi;
     }
-        
+    
     /**
-     * Tulostetaan käyttäjän tiedot
+     * Tulostetaan käyttäjän tiedot | putkella eroteltuna
      * @param out tietovirta johon tulostetaan
+     * @example
      */
     public void tulosta(PrintStream out) {
         out.println(this.id + "|" + this.nimi + "|" + this.kotiseura + "|" + this.tasoitus + "|" + this.aloitusvuosi);
@@ -229,7 +230,18 @@ public class Kayttaja implements Cloneable {
     
     /**
      * Cloonataan kayttaja
+     * @return palauttaa kloonatun Object Kayttajan
      * @thorws CloneNotSupportedException otetaan poikkeus jos tulee
+     * @example
+     * <pre name="test">
+     * #THROWS CloneNotSupportedException 
+     * Kayttaja k1 = new Kayttaja();
+     * k1.parse("       4         |       Tupu Ankka     |   Ankkalinna Golf");
+     * Kayttaja kopio = k1.clone();
+     * kopio.toString() === k1.toString();
+     * k1.parse("    1    | Iines Ankka    | Roope Golf");
+     * kopio.toString().equals(k1.toString()) === false;
+     * </pre>
      */
     @Override
     public Kayttaja clone() throws CloneNotSupportedException {
