@@ -71,6 +71,17 @@ public class Kayttaja implements Cloneable {
      * Tulostetaan käyttäjän tiedot | putkella eroteltuna
      * @param out tietovirta johon tulostetaan
      * @example
+     * <pre name="test">
+     * #import fi.jyu.mit.ohj2.Suuntaaja;
+     * Kayttaja kayttaja = new Kayttaja("Aku", "Ankka Golf", 2.1, 2001);
+     * 
+     * Suuntaaja.StringOutput so = new Suuntaaja.StringOutput();
+     * String tulos = "99|Aku|Ankka Golf|2.1|2001";
+     * kayttaja.setTunnusNro(99);
+     * kayttaja.tulosta(System.out);
+     * so.ero(tulos) === null;
+     * so.palauta();
+     * </pre>
      */
     public void tulosta(PrintStream out) {
         out.println(this.id + "|" + this.nimi + "|" + this.kotiseura + "|" + this.tasoitus + "|" + this.aloitusvuosi);
@@ -95,6 +106,12 @@ public class Kayttaja implements Cloneable {
     /**
      * Asettaa id numeron ja samalla varmistetaan, että seuraavaId numero on aina suurempi kuin nykyinen id numero
      * @param idNro joka asetetaan
+     * @example
+     * <pre name="test">
+     * Kayttaja kayttaja = new Kayttaja("Aku", "Ankka Gol", 2.1, 2001);
+     * kayttaja.setTunnusNro(5);
+     * kayttaja.getTunnusNro() === 5;
+     * </pre>
      */
     public void setTunnusNro(int idNro) {
         this.id = idNro;
