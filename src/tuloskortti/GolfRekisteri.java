@@ -201,7 +201,7 @@ public class GolfRekisteri {
     }
     
     /**
-     * Antaa GolfRekisterin kierroksen
+     * Antaa tietyn seuran ja käyttäjän kierrokset
      * @param seura seuran id numero
      * @param kayttaja käyttäjän id numero
      * @return palautta kierrokset
