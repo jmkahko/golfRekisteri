@@ -269,7 +269,6 @@ public class Kayttaja implements Cloneable {
     
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot käyttäjälle.
-     * TODO: poista kun kaikki toimii
      */
     public void taytaTestiTiedoilla() {
         this.nimi = UusiKayttaja.arvoPelaaja();

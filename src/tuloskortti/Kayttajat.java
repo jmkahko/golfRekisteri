@@ -49,20 +49,30 @@ public class Kayttajat {
      * @throws SailoException jos Kayttaja[] taulukko täynnä
      * @example
      * <pre name="test">
-     * #THROWS SailoException
      * Kayttajat kayttajat = new Kayttajat();
      * Kayttaja henkilo1 = new Kayttaja();
      * Kayttaja henkilo2 = new Kayttaja();
-     * Kayttaja henkilo3 = new Kayttaja();
      * kayttajat.getLkm() === 0;
-     * kayttajat.lisaa(henkilo1); kayttajat.getLkm() === 1;
-     * kayttajat.lisaa(henkilo2); kayttajat.getLkm() === 2;
+     * 
+     * try {
+     *      kayttajat.lisaa(henkilo1);
+     * } catch (SailoException e) {
+     *      e.printStackTrace();
+     * } 
+     * 
+     * kayttajat.getLkm() === 1;
+     * 
+     * try {
+     *      kayttajat.lisaa(henkilo2);
+     * } catch (SailoException e) {
+     *      e.printStackTrace();
+     * } 
+     * 
+     * kayttajat.getLkm() === 2;
      * kayttajat.annaKayttaja(0) === henkilo1;
      * kayttajat.annaKayttaja(1) === henkilo2;
      * kayttajat.annaKayttaja(0) == henkilo2 === false;
      * kayttajat.annaKayttaja(0) == henkilo1 === true;
-     * kayttajat.annaKayttaja(5) === henkilo1; #THROWS IndexOutOfBoundsException
-     * kayttajat.lisaa(henkilo3); #THROWS SailoException
      * </pre> 
      */
     public void lisaa(Kayttaja kayttaja) throws SailoException {
@@ -76,6 +86,30 @@ public class Kayttajat {
      * Etsii samalla kayttaja -tunnuksella olevaa käyttäjän, jos ei löydy niin luo uuden käyttäjän
      * @param kayttaja lisättävän tai muutettavan seuran tieto
      * @throws SailoException jos ei onnistu
+     * @example
+     * <pre name="test">
+     * Kayttajat kayttajat = new Kayttajat();
+     * Kayttaja kayttaja = new Kayttaja("Aku", "Ankka Gol", 2.1, 2001);
+     * try {
+     *      kayttajat.lisaaTaiMuutaKayttaja(kayttaja);
+     * } catch (SailoException e) {
+     *      e.printStackTrace();
+     * } 
+     * 
+     * Kayttaja kayttajaTesti = kayttajat.annaKayttaja(0);
+     * kayttajaTesti.toString() === kayttaja.toString();
+     * 
+     * Kayttaja muokattuKayttaja = new Kayttaja("Aku", "Ankka Gol", 1.9, 2001);
+     * 
+     * try {
+     *      kayttajat.lisaaTaiMuutaKayttaja(muokattuKayttaja);
+     * } catch (SailoException e) {
+     *      e.printStackTrace();
+     * } 
+     * 
+     * Kayttaja kayttajaTestiMuokattu = kayttajat.annaKayttaja(0);
+     * kayttajaTestiMuokattu.toString() === kayttaja.toString();
+     * </pre>
      */
     public void lisaaTaiMuutaKayttaja(Kayttaja kayttaja) throws SailoException {
         int id = kayttaja.getTunnusNro();
@@ -141,6 +175,36 @@ public class Kayttajat {
      * Lukee käyttäjät tiedostosta
      * @param hakemisto josta tiedosto löytyy
      * @throws SailoException jos lukeminen epäonnistuu
+     * 
+     * @example
+     * <pre name="test">
+     * #THROWS SailoException
+     * #import java.io.File;
+     * Kayttajat kayttajat = new Kayttajat();
+     * Kayttaja aku = new Kayttaja();
+     * aku.taytaTestiTiedoilla();
+     * aku.rekisteroi();
+     * Kayttaja iines = new Kayttaja();
+     * iines.taytaTestiTiedoilla();
+     * iines.rekisteroi();
+     * String hakemisto = "testiGolfRekisteri";
+     * String tiedostonNimi = hakemisto + "/kayttaja";
+     * File fTiedosto = new File(tiedostonNimi + ".dat");
+     * File dir = new File(hakemisto);
+     * dir.mkdir();
+     * fTiedosto.delete();
+     * kayttajat.lueTiedostosta(tiedostonNimi); #THROWS SailoException
+     * kayttajat.lisaa(aku);
+     * kayttajat.lisaa(iines);
+     * kayttajat.tallenna(hakemisto);
+     * kayttajat.getLkm() === 2;
+     * kayttajat = new Kayttajat(); // Tyhjennetään käyttäjät
+     * kayttajat.lueTiedostosta(tiedostonNimi);  #THROWS SailoException
+     * kayttajat.lisaa(aku);
+     * kayttajat.tallenna(hakemisto);
+     * fTiedosto.delete() === true;
+     * dir.delete() === true;
+     * </pre>
      */
     public void lueTiedostosta(String hakemisto) throws SailoException {
         String hnimi = hakemisto + "/kayttaja.dat";
