@@ -58,6 +58,16 @@ public class Kierrokset implements Iterable<Kierros> {
     /**
      * Saadaan lisättyä uusi kierros
      * @param kierros lisättävä kierros
+     * @example
+     * <pre name="test">
+     * Kierrokset kierrokset = new Kierrokset();
+     * Kierros vayla1 = new Kierros(1, 1, "01-01-2001", 55, 1, 4);
+     * kierrokset.lisaaKierros(vayla1);
+     * kierrokset.getLkm() === 1;
+     * Kierros vayla2 = new Kierros(1, 1, "01-01-2001", 55, 2, 3);
+     * kierrokset.lisaaKierros(vayla2);
+     * kierrokset.getLkm() === 2;
+     * </pre>
      */
     public void lisaaKierros(Kierros kierros) {
         this.alkiot.add(kierros);
@@ -66,6 +76,12 @@ public class Kierrokset implements Iterable<Kierros> {
     /**
      * Saadaan lisätty uudet kierrokset listana
      * @param kierrosLista annetaan listaus kierroksen tuloksista
+     * @example
+     * <pre name="test">
+     * Kierrokset kierrokset = new Kierrokset();
+     * kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 48)); // Lisää koko kierros eli 18 väylää
+     * kierrokset.getLkm() === 18;
+     * </pre>
      */
     public void lisaaKierros(List<Kierros> kierrosLista) {
         this.alkiot.addAll(kierrosLista);
@@ -76,6 +92,24 @@ public class Kierrokset implements Iterable<Kierros> {
      * Etsii samalla kierroksen -tunnuksella olevaa kierroksen, jos ei löydy niin luo uuden kierroksen
      * @param kierros lisättävän tai muutettavan seuran tieto
      * @throws SailoException jos ei onnistu
+     * @example
+     * <pre name="test">
+     * Kierrokset kierrokset = new Kierrokset();
+     * try {
+     *      kierrokset.lisaaTaiMuutaKierros(UusiKierros.luoKierros(1, 48));
+     * } catch (SailoException e) {
+     *      e.printStackTrace();
+     * } 
+     * kierrokset.getLkm() === 18;
+     * 
+     *
+     * try {
+     *      kierrokset.lisaaTaiMuutaKierros(UusiKierros.luoKierros(1, 48)); // Tässä luodaan uudet 18 väylää, josta johtuen kierrosmäärä on 36
+     * } catch (SailoException e) {
+     *      e.printStackTrace();
+     * } 
+     * kierrokset.getLkm() === 36;
+     * </pre>
      */
     public void lisaaTaiMuutaKierros(List<Kierros> kierros) throws SailoException {
         this.lisaaKierros(kierros);
@@ -142,6 +176,18 @@ public class Kierrokset implements Iterable<Kierros> {
      * Poistetaan seuran kierrokset
      * @param tunnusNro seuran numero, jonka kierrokset poistetaan
      * @return palautetaan poistetut rivit
+     * @example
+     * <pre name="test">
+     * Kierrokset kierrokset = new Kierrokset();
+     * kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 48)); // Lisää koko kierros eli 18 väylää, seura 1
+     * kierrokset.getLkm() === 18;
+     * kierrokset.lisaaKierros(UusiKierros.luoKierros(2, 48)); // Lisää koko kierros eli 18 väylää, seura 2
+     * kierrokset.getLkm() === 36;
+     * kierrokset.poistaKierros(1);
+     * kierrokset.getLkm() === 18;
+     * kierrokset.poistaKierros(2);
+     * kierrokset.getLkm() === 0;
+     * </pre>
      */
     public int poistaKierros(int tunnusNro) {
         int n = 0;
@@ -161,6 +207,23 @@ public class Kierrokset implements Iterable<Kierros> {
      * Poistetaan haluttu kierros
      * @param poistettavaKierros taulukkona kierroksen väylät jotka poistetaan
      * @return palautetaan true kun tehty
+     * @example
+     * <pre name="test">
+     * #import java.util.*;
+     * #import kanta.UusiKierros;
+     * Kierrokset kierrokset = new Kierrokset();
+     * kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
+     * List<Kierros> poistaKierros = kierrokset.annaKierrokset(1, 1);
+     * kierrokset.lisaaKierros(UusiKierros.luoKierros(1, 55));
+     * poistaKierros.size() === 18; 
+     * kierrokset.getLkm() === 36;
+     * kierrokset.poistaKierros(poistaKierros);
+     * List<Kierros> poistaKierros2 = kierrokset.annaKierrokset(1, 1);
+     * kierrokset.getLkm() === 18;
+     * poistaKierros2.size() === 18; 
+     * kierrokset.poistaKierros(poistaKierros2);
+     * kierrokset.getLkm() === 0;
+     * </pre>
      */
     public boolean poistaKierros(List<Kierros> poistettavaKierros) {        
         for (Kierros k : poistettavaKierros) {
@@ -198,6 +261,31 @@ public class Kierrokset implements Iterable<Kierros> {
      * Lukee kierroksen tiedostosta
      * @param hakemisto josta tiedosto löytyy
      * @throws SailoException jos lukeminen epäonnistuu
+     * @example
+     * <pre name="test">
+     * #THROWS SailoException
+     * #import java.io.File;
+     * Kierrokset kierrokset = new Kierrokset();
+     * Kierros vayla1 = new Kierros(1, 1, "01-01-2001", 55, 1, 4);
+     * Kierros vayla2 = new Kierros(1, 1, "01-01-2001", 55, 2, 3);
+     * String hakemisto = "testiGolfRekisteri";
+     * String tiedostonNimi = hakemisto + "/kierros";
+     * File fTiedosto = new File(tiedostonNimi + ".dat");
+     * File dir = new File(hakemisto);
+     * dir.mkdir();
+     * fTiedosto.delete();
+     * kierrokset.lueTiedostosta(tiedostonNimi); #THROWS SailoException
+     * kierrokset.lisaaKierros(vayla1);
+     * kierrokset.lisaaKierros(vayla2);
+     * kierrokset.tallenna(hakemisto);
+     * kierrokset.getLkm() === 2;
+     * kierrokset = new Kierrokset(); // Tyhjennetään kierrokset
+     * kierrokset.lueTiedostosta(tiedostonNimi);  #THROWS SailoException
+     * kierrokset.lisaaKierros(vayla1);
+     * kierrokset.tallenna(hakemisto);
+     * fTiedosto.delete() === true;
+     * dir.delete() === true;
+     * </pre>
      */
     public void lueTiedostosta(String hakemisto) throws SailoException {
         String hnimi = hakemisto + "/kierros.dat";
