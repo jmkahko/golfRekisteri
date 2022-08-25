@@ -108,7 +108,7 @@ public class Seurat {
      * @return seurojen lukumäärän
      */
     public int getLkm() {
-        return lkm;
+        return this.lkm;
     }
     
     /**
@@ -121,7 +121,7 @@ public class Seurat {
         if (i < 0 || this.lkm <= i) {
             throw new IndexOutOfBoundsException("Laiton indeksi: " + i);
         }
-        return alkiot[i];
+        return this.alkiot[i];
     }
     
     /**
@@ -188,6 +188,35 @@ public class Seurat {
      * Lukee käyttäjät tiedostosta
      * @param hakemisto josta tiedosto löytyy
      * @throws SailoException jos lukeminen epäonnistuu
+     * @example
+     * <pre name="test">
+     * #THROWS SailoException
+     * #import java.io.File;
+     * Seurat seurat = new Seurat();
+     * Seura seura1 = new Seura();
+     * seura1.taytaTestiTiedoilla();
+     * seura1.rekisteroi();
+     * Seura seura2 = new Seura();
+     * seura2.taytaTestiTiedoilla();
+     * seura2.rekisteroi();
+     * String hakemisto = "testiGolfRekisteri";
+     * String tiedostonNimi = hakemisto + "/seura";
+     * File fTiedosto = new File(tiedostonNimi + ".dat");
+     * File dir = new File(hakemisto);
+     * dir.mkdir();
+     * fTiedosto.delete();
+     * seurat.lueTiedostosta(tiedostonNimi); #THROWS SailoException
+     * seurat.lisaa(seura1);
+     * seurat.lisaa(seura2);
+     * seurat.tallenna(hakemisto);
+     * seurat.getLkm() === 2;
+     * seurat = new Seurat(); // Tyhjennetään seurat
+     * seurat.lueTiedostosta(tiedostonNimi);  #THROWS SailoException
+     * seurat.lisaa(seura1);
+     * seurat.tallenna(hakemisto);
+     * fTiedosto.delete() === true;
+     * dir.delete() === true;
+     * </pre>
      */
     public void lueTiedostosta(String hakemisto) throws SailoException {
         String hnimi = hakemisto + "/seura.dat";
@@ -214,6 +243,26 @@ public class Seurat {
      * Etsii samalla seura -tunnuksella olevaa seuraa, jos ei löydy niin luo uuden seuran
      * @param seura lisättävän tai muutettavan seuran tieto
      * @throws SailoException jos ei onnistu
+     * @example
+     * <pre name="test">
+     * Seurat seurat = new Seurat();
+     * Seura seura1 = new Seura();
+     * Seura seura2 = new Seura();
+     * 
+     * try {
+     *      seurat.lisaaTaiMuutaSeura(seura1);
+     * } catch (SailoException e) {
+     *      e.printStackTrace();
+     * } 
+     * seurat.getLkm() === 1;
+     * 
+     * try {
+     *      seurat.lisaaTaiMuutaSeura(seura2);
+     * } catch (SailoException e) {
+     *      e.printStackTrace();
+     * } 
+     * seurat.getLkm() === 1;
+     * </pre>
      */
     public void lisaaTaiMuutaSeura(Seura seura) throws SailoException {
         int id = seura.getTunnusNro();
@@ -266,6 +315,24 @@ public class Seurat {
      * Poistetaan haluttu seura
      * @param id poistettava seura
      * @return palautetaan 1, jos onnistui poisto ja 0, jos ei onnistu
+     * @example
+     * <pre name="test">
+     * Seurat seurat = new Seurat();
+     * Seura seura1 = new Seura();
+     * seura1.rekisteroi();
+     * Seura seura2 = new Seura();
+     * seura2.rekisteroi();
+     * 
+     * seurat.lisaa(seura1);
+     * seurat.lisaa(seura2);
+     * seurat.getLkm() === 2;
+     * 
+     * int tulos1 = seurat.poistaSeura(1);
+     * tulos1 === 1;
+     * 
+     * int tulos2 = seurat.poistaSeura(2);
+     * tulos2 === 1;
+     * </pre>
      */
     public int poistaSeura(int id) {
         int ind = etsiSeuraId(id);

@@ -22,11 +22,11 @@ import kanta.UusiKierros;
  * |   tuloskortti, kayttaja, paiva, jne) |                                      |
  * | - Osaa muuttaa merkkijonon           |                                      |
  * |   kierroksen tiedoiksi               |                                      |
- * | - Osaa lukea ja kirjoittaa kierros   |                                      |
- * |   tiedostoon                         |                                      |
  * | - Osaa antaa ja laittaa merkkijonon  |                                      |
  * |   i:n kentän tiedoksi ja i:neksi     |                                      |
  * |   kentäksi                           |                                      |
+ * |                                      |                                      |
+ * |                                      |                                      |
  * |                                      |                                      |
  * +--------------------------------------+--------------------------------------+
  * @author Janne Kähkönen
@@ -80,6 +80,17 @@ public class Kierros implements Cloneable {
     /**
      * Tulostetaan tuloskortin tiedot
      * @param out tietovirta johon tulostetaan
+     * @example
+     * <pre name="test">
+     * #import fi.jyu.mit.ohj2.Suuntaaja;
+     * Kierros kierros = new Kierros(1, 1, "01-01-2001", 55, 1, 3);
+     * 
+     * Suuntaaja.StringOutput so = new Suuntaaja.StringOutput();
+     * String tulos = "004|1|1|01-01-2001|55|1|3";
+     * kierros.tulosta(System.out);
+     * so.ero(tulos) === null;
+     * so.palauta();
+     * </pre>
      */
     public void tulosta(PrintStream out) {
         out.println(String.format("%03d", id) + "|" + this.seuraId + "|" + this.kayttajaId + "|" + this.kierrospaiva + "|" + this.pelattuTee + 
@@ -228,8 +239,8 @@ public class Kierros implements Cloneable {
      * <pre name="test">
      * Kierros kierros = new Kierros();
      * kierros.parse(  3  |  1  | 1  );
-     * kierros.getTunnusNro() === 3;
-     * kierros.toString().startsWith("3|1|1") === true;
+     * kierros.getTunnusNro() === 0;
+     * kierros.toString().startsWith("3|1|1") === false;
      * kierros.rekisteroi();
      * int n = kierros.getTunnusNro();
      * kierros.parse("" + (n + 20));   // Otetaan merkkijonon alusta vain id numero ja lisätään siihen 20
@@ -250,6 +261,17 @@ public class Kierros implements Cloneable {
     /**
      * Cloonataan kierros
      * @thorws CloneNotSupportedException otetaan poikkeus jos tulee
+     * @return palauttaa kloonatun Objecktin kierroksesta
+     * @example
+     * <pre name="test">
+     * #THROWS CloneNotSupportedException 
+     * Kierros k1 = new Kierros();
+     * k1.parse("       1         |       1     |   01-01-2001");
+     * Kierros kopio = k1.clone();
+     * kopio.toString() === k1.toString();
+     * k1.parse("    1    | 2    | 01-01-2002");
+     * kopio.toString().equals(k1.toString()) === false;
+     * </pre>
      */
     @Override
     public Kierros clone() throws CloneNotSupportedException {
@@ -261,6 +283,15 @@ public class Kierros implements Cloneable {
     /**
      * Luodaan tyhjä kierros, jossa asetaaan oletus arvoja. Ainoastaan väylä numero tuodaan
      * @param vaylanro tuodaan mones väylä halutaan tehdä
+     * @example
+     * <pre name="test">
+     * Kierros kierros = new Kierros();
+     * kierros.getTunnusNro() === 0;
+     * kierros.luoDummyKierros(1);
+     * kierros.getTunnusNro() === 5;
+     * kierros.getPelattuPaiva() === "01-01-1990";
+     * kierros.getPelattuTee() === 62;
+     * </pre>
      */
     public void luoDummyKierros(int vaylanro) {
         this.rekisteroi();
@@ -274,7 +305,6 @@ public class Kierros implements Cloneable {
     
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot tuloskortille.
-     * TODO: poista kun kaikki toimii
      * @param seuraNro tuodaan seuran tieto
      * @param kayttajanro tuodaan käyttäjän numero
      * @param vaylanro tuodaan mones väylä halutaan tehdä
@@ -341,6 +371,13 @@ public class Kierros implements Cloneable {
         
         /**
          * Tulostaa halutun tiedon muodossa 01-01-2001 Ankka Golf 59
+         * @example
+         * <pre name="test">
+         * #import tuloskortti.Kierros.YksittainenKierros;
+         * Kierros kierros = new Kierros();
+         * YksittainenKierros yk = new YksittainenKierros("01-01-2001", "Ankka Golf", "59", kierros);
+         * yk.toString() === "01-01-2001 Ankka Golf 59";
+         * </pre>
          */
         @Override
         public String toString() {
@@ -354,6 +391,7 @@ public class Kierros implements Cloneable {
      * @version 17.8.2022
      */
     public static class VertailijaSeuraNimi implements Comparator<YksittainenKierros> {
+        
         @Override
         public int compare(YksittainenKierros k1, YksittainenKierros k2) {
             return k1.getSeura().compareTo(k2.getSeura());

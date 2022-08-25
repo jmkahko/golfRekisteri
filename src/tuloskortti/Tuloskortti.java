@@ -20,9 +20,9 @@ import kanta.UusiTuloskortti;
  * |   seurantiedoiksi                    |                                      |
  * | - Osaa muuttaa merkkijonon numeroksi |                                      |
  * |   ja numeron merkkijonoksi           |                                      |
- * | - Osaa lukea ja kirjoittaa           |                                      |
- * |   tuloskortti tiedostoon             |                                      |
  * | - Osaa pyytää apua avustajiltaan     |                                      |
+ * |                                      |                                      |
+ * |                                      |                                      |
  * |                                      |                                      |
  * +--------------------------------------+--------------------------------------+
  * @author Janne Kähkönen
@@ -83,6 +83,17 @@ public class Tuloskortti implements Cloneable {
     /**
      * Tulostetaan tuloskortin tiedot
      * @param out tietovirta johon tulostetaan
+     * @example
+     * <pre name="test">
+     * #import fi.jyu.mit.ohj2.Suuntaaja;
+     * Tuloskortti tuloskortti = new Tuloskortti(1, 1, 190, 140, 120, 120, 3, 5);
+
+     * Suuntaaja.StringOutput so = new Suuntaaja.StringOutput();
+     * String tulos = "001|1|1|190|140|120|120|3|5";
+     * tuloskortti.tulosta(System.out);
+     * so.ero(tulos) === null;
+     * so.palauta();
+     * </pre>
      */
     public void tulosta(PrintStream out) {
         out.println(String.format("%03d", id) + "|" + this.seuraId + "|" + this.vayla + "|" + this.pituus62 + "|" + this.pituus55 + 
@@ -274,8 +285,8 @@ public class Tuloskortti implements Cloneable {
      * <pre name="test">
      * Tuloskortti tuloskortti = new Tuloskortti();
      * tuloskortti.parse(  3  |  1  | 1  );
-     * tuloskortti.getTunnusNro() === 3;
-     * tuloskortti.toString().startsWith("3|1|1") === true;
+     * tuloskortti.getTunnusNro() === 0;
+     * tuloskortti.toString().startsWith("3|1|1") === false;
      * tuloskortti.rekisteroi();
      * int n = tuloskortti.getTunnusNro();
      * tuloskortti.parse("" + (n + 20));   // Otetaan merkkijonon alusta vain id numero ja lisätään siihen 20
@@ -298,6 +309,15 @@ public class Tuloskortti implements Cloneable {
     /**
      * Cloonataan tuloskortti
      * @thorws CloneNotSupportedException otetaan poikkeus jos tulee
+     * @return palauttaa kloonin Objectin Tuloskortista
+     * @example
+     * <pre name="test">
+     * #THROWS CloneNotSupportedException 
+     * Tuloskortti tuloskortti = new Tuloskortti(1, 1, 190, 140, 120, 120, 3, 5);
+     * Tuloskortti kopio = tuloskortti.clone();
+     * kopio.toString() === tuloskortti.toString();
+     * kopio.toString().equals(tuloskortti.toString()) === true;
+     * </pre>
      */
     @Override
     public Tuloskortti clone() throws CloneNotSupportedException {
@@ -308,7 +328,6 @@ public class Tuloskortti implements Cloneable {
     
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot tuloskortille.
-     * TODO: poista kun kaikki toimii
      * @param seuranro tuodaan seuran tieto
      * @param vaylanro tuodaan mones väylä halutaan tehdä
      */

@@ -21,8 +21,8 @@ import kanta.UusiSeura;
  * |   i:n kentän tiedoksi ja i:neksi     |                                      |
  * |   kentäksi                           |                                      |
  * | - Osaa etsiä seuran                  |                                      |
- * | - Osaa lukea ja kirjoittaa seuran    |                                      |
- * |   tiedostoon                         |                                      |
+ * |                                      |                                      |
+ * |                                      |                                      |
  * |                                      |                                      |
  * |                                      |                                      |
  * +--------------------------------------+--------------------------------------+
@@ -56,6 +56,21 @@ public class Seura implements Cloneable {
     /**
      * Tulostetaan käyttäjän tiedot
      * @param out tietovirta johon tulostetaan
+     * @example
+     * <pre name="test">
+     * #import fi.jyu.mit.ohj2.Suuntaaja;
+     * Seura seura = new Seura();
+     * seura.setSeurannimi("AnkkaGolf");
+     * seura.setKatuosoite("Ankkatie 2");
+     * seura.setPostinumero(90100);
+     * seura.setPostitoimipaikka("Ankkala");
+     * seura.setPuhelinnumero("040-313");
+     * Suuntaaja.StringOutput so = new Suuntaaja.StringOutput();
+     * String tulos = "000|AnkkaGolf|Ankkatie 2|90100|Ankkala|040-313";
+     * seura.tulosta(System.out);
+     * so.ero(tulos) === null;
+     * so.palauta();
+     * </pre>
      */
     public void tulosta(PrintStream out) {
         out.println(String.format("%03d", id) + "|" + this.seurannimi + "|" + this.katuosoite + "|" + this.postinumero + 
@@ -193,6 +208,12 @@ public class Seura implements Cloneable {
     /**
      * Tulostaa halutun seuran tiedot | merkillä eroteltuna
      * 1|Ankka Golf|Ankkalantie 2|90100|Ankkala|040-1234567
+     * @example
+     * <pre name="test">
+     * Seura s = new Seura();
+     * s.parse("       3         |       Ankkala    |   1");
+     * s.toString().startsWith("3|Ankkala|1") === true;
+     * </pre>
      */
     @Override
     public String toString() {
@@ -202,7 +223,17 @@ public class Seura implements Cloneable {
     
     /**
      * Cloonataan seura
+     * @return palauttaa kloonatun Objecktin seurasta
      * @thorws CloneNotSupportedException otetaan poikkeus jos tulee
+     * @example
+     * <pre name="test">
+     * #THROWS CloneNotSupportedException 
+     * Seura s1 = new Seura();
+     * s1.setSeurannimi("AnkkaGolf");
+     * Seura kopio = s1.clone();
+     * kopio.toString() === s1.toString();
+     * kopio.toString().equals(s1.toString()) === true;
+     * </pre>
      */
     @Override
     public Seura clone() throws CloneNotSupportedException {
@@ -213,7 +244,6 @@ public class Seura implements Cloneable {
     
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot käyttäjälle.
-     * TODO: poista kun kaikki toimii
      */
     public void taytaTestiTiedoilla() {
         this.seurannimi = UusiSeura.arvoGolfSeura();

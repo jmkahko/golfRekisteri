@@ -49,6 +49,14 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
     /**
      * Lisätään uusi tuloskortti(väylän rivi) Tuloskortteihin
      * @param tulosk lisättävä tuloskortti
+     * @example
+     * <pre name="test">
+     * Tuloskortit tuloskortit = new Tuloskortit();
+     * Tuloskortti tuloskortti = new Tuloskortti(1, 1, 301, 290, 290, 270, 4, 4);
+     * tuloskortit.getLkm() === 0;
+     * tuloskortit.lisaaTuloskortti(tuloskortti);
+     * tuloskortit.getLkm() === 1;
+     * </pre>
      */
     public void lisaaTuloskortti(Tuloskortti tulosk) {
         this.alkiot.add(tulosk);
@@ -57,6 +65,14 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
     /**
      * Lisätään valmis lista kerralla, ettei yksitellen
      * @param tuloskorttiLista lisättävä tuloskortti lista
+     * @example
+     * <pre name="test">
+     * #import kanta.UusiTuloskortti;
+     * Tuloskortit tuloskortit = new Tuloskortit();
+     * tuloskortit.getLkm() === 0;
+     * tuloskortit.lisaaTuloskortti(UusiTuloskortti.luoTuloskortti(1));
+     * tuloskortit.getLkm() === 18;
+     * </pre>
      */
     public void lisaaTuloskortti(List<Tuloskortti> tuloskorttiLista) {
         this.alkiot.addAll(tuloskorttiLista);
@@ -67,6 +83,25 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
      * Etsii samalla tuloskortin -tunnuksella olevaa tuloskortin, jos ei löydy niin luo uuden tuloskortin
      * @param tuloskorttiLista lisättävän tai muutettavan seuran tieto
      * @throws SailoException jos ei onnistu
+     * @example
+     * <pre name="test">
+     * #import kanta.UusiTuloskortti;
+     * Tuloskortit tuloskortit = new Tuloskortit();
+     * tuloskortit.getLkm() === 0;
+     * try {
+     *      tuloskortit.lisaaTaiMuutaTuloskorttia(UusiTuloskortti.luoTuloskortti(1));
+     * } catch (SailoException e) {
+     *      e.printStackTrace();
+     * } 
+     * tuloskortit.getLkm() === 18;
+     * 
+     * try {
+     *      tuloskortit.lisaaTaiMuutaTuloskorttia(UusiTuloskortti.luoTuloskortti(2));
+     * } catch (SailoException e) {
+     *      e.printStackTrace();
+     * } 
+     * tuloskortit.getLkm() === 36;
+     * </pre>
      */
     public void lisaaTaiMuutaTuloskorttia(List<Tuloskortti> tuloskorttiLista) throws SailoException {
         this.lisaaTuloskortti(tuloskorttiLista);
@@ -129,6 +164,19 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
      * Poistetaan seuran tuloskortti
      * @param tunnusNro seuran numero, jonka tuloskortti poistetaan
      * @return palautetaan poistetut rivit
+     * @example
+     * <pre name="test">
+     * #import kanta.UusiTuloskortti;
+     * Tuloskortit tuloskortit = new Tuloskortit();
+     * tuloskortit.getLkm() === 0;
+     * tuloskortit.lisaaTuloskortti(UusiTuloskortti.luoTuloskortti(1));
+     * tuloskortit.lisaaTuloskortti(UusiTuloskortti.luoTuloskortti(2));
+     * tuloskortit.getLkm() === 36;
+     * tuloskortit.poistaTuloskortti(1);
+     * tuloskortit.getLkm() === 18;
+     * tuloskortit.poistaTuloskortti(2);
+     * tuloskortit.getLkm() === 0;
+     * </pre>
      */
     public int poistaTuloskortti(int tunnusNro) {
         int n = 0;
@@ -171,6 +219,31 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
      * Lukee tuloskortin tiedostosta
      * @param hakemisto josta tiedosto löytyy
      * @throws SailoException jos lukeminen epäonnistuu
+     * @example
+     * <pre name="test">
+     * #THROWS SailoException
+     * #import java.io.File;
+     * Tuloskortit tuloskortit = new Tuloskortit();
+     * Tuloskortti t1 = new Tuloskortti(1, 1, 310, 290, 290, 270, 4, 3);
+     * Tuloskortti t2 = new Tuloskortti(1, 2, 470, 450, 420, 420, 5, 8);
+     * String hakemisto = "testiGolfRekisteri";
+     * String tiedostonNimi = hakemisto + "/tuloskortti";
+     * File fTiedosto = new File(tiedostonNimi + ".dat");
+     * File dir = new File(hakemisto);
+     * dir.mkdir();
+     * fTiedosto.delete();
+     * tuloskortit.lueTiedostosta(tiedostonNimi); #THROWS SailoException
+     * tuloskortit.lisaaTuloskortti(t1);
+     * tuloskortit.lisaaTuloskortti(t2);
+     * tuloskortit.tallenna(hakemisto);
+     * tuloskortit.getLkm() === 2;
+     * tuloskortit = new Tuloskortit();
+     * tuloskortit.lueTiedostosta(tiedostonNimi);  #THROWS SailoException
+     * tuloskortit.lisaaTuloskortti(t2);
+     * tuloskortit.tallenna(hakemisto);
+     * fTiedosto.delete() === true;
+     * dir.delete() === true;
+     * </pre>
      */
     public void lueTiedostosta(String hakemisto) throws SailoException {
         String hnimi = hakemisto + "/tuloskortti.dat";
@@ -192,7 +265,6 @@ public class Tuloskortit implements Iterable<Tuloskortti> {
         }
     }
 
-    
     /**
      * @param args ei käytössä
      */
