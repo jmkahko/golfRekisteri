@@ -309,6 +309,7 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     }
     
     /**
+     * Haetaan seura ja asetaan se haluttuun indeksiin
      * @param seuranro annetaan seuran numero
      */
     private void haeSeura(int seuranro) {

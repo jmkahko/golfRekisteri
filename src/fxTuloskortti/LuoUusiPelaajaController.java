@@ -72,6 +72,11 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     
     private GolfRekisteri golfRekisteri;
     
+    /**
+     * Käsitellään pelaaja kenttien muutoksia
+     * @param k mille riville tehdään
+     * @param edit TextField kenttä josta tieto otetaan
+     */
     private void kasitteleKayttajaMuutos(int k, TextField edit) {
         Kayttaja kayttaja = this.golfRekisteri.annaKayttaja(0);
         if (kayttaja == null) {

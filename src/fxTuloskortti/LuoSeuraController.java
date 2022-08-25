@@ -70,7 +70,12 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
  // Tästä eteenpäin ei ole suoraan käyttöliittymään viittaavaa koodia
 
     private Seura seuraKohdalla;
- 
+
+    /**
+     * Käsittelee seura komponettien muutoksia
+     * @param kminkä rivin muutosta tehdään
+     * @param edit TextField kenttä josta tieto otetaan
+     */
     private void kasitteleSeuraMuutos(int k, TextField edit) {
         if (seuraKohdalla == null) {
             return;
@@ -102,7 +107,7 @@ public class LuoSeuraController implements ModalControllerInterface<Seura>, Init
     
     /**
      * Laitetaan seuran tiedot näkymälle
-     * @param seura viedään seuran tiedot
+     * @param seura tuodaan seuran tiedot
      */
     private void naytaSeura(Seura seura) {
         if (seura == null) {

@@ -297,7 +297,6 @@ public class TuloskorttiGUIController implements Initializable {
     
     /**
      * Alustetaan Golf Rekisteri lukemalla valitun niminen tiedosto
-     * @param nimi golfRekisterin tiedot luetaan täältä
      */
     private void lueTiedostosta() {
         try {
