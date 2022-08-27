@@ -28,7 +28,6 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
     
     /**
      * Perutaan muutokset
-     * @param event
      */
     @FXML 
     private void handlePeruuta() {
@@ -37,7 +36,6 @@ public class LuoUusiPelaajaController implements ModalControllerInterface<GolfRe
 
     /**
      * Tallennetaan muutokset
-     * @param event
      */
     @FXML
     private void handleTallenna() {

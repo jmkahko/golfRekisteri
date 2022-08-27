@@ -99,6 +99,7 @@ public class GolfRekisteri {
     }
     
     /**
+     * Saadaan tietty seura
      * @param i Antaa GolfRekisterin seuran
      * @return palautta seurann
      */

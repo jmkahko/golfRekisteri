@@ -125,6 +125,7 @@ public class Kierrokset implements Iterable<Kierros> {
     }
         
     /**
+     * Antaa tietyn tuloskortin kierrokset
      * @param tuloskorttiId viedään tuloskorttiId numero, että minkä tuloskortin kierros kyseessä
      * @param kayttajaId viedään kayttajaId numero, että minkä käyttäjän kierros on kyseessä
      * @return palauttaa kierrokset

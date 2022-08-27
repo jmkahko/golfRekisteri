@@ -4,7 +4,6 @@ package kanta;
  * UusiSeura -luokalla saadaan luotua testidataa golf seuralle
  * @author Janne Kähkönen
  * @version 12.7.2022
- *
  */
 public class UusiSeura {
 

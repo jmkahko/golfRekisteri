@@ -14,9 +14,9 @@ import javafx.stage.Stage;
 import tuloskortti.Tuloskortti;
 
 /**
+ * Uuden tuloskortin luonti seuralle
  * @author Janne Kähkönen
  * @version 13.6.2022
- * Uuden tuloskortin luonti seuralle
  */
 public class LuoUusiTuloskorttiController implements ModalControllerInterface<List<Tuloskortti>>, Initializable {
     
@@ -157,7 +157,6 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
 
     /**
      * Peruuta muutokset
-     * @param event
      */
     @FXML
     private void handlePeruuta() {
@@ -166,7 +165,6 @@ public class LuoUusiTuloskorttiController implements ModalControllerInterface<Li
 
     /**
      * Tallenna tuloskortin muutokset
-     * @param event
      */
     @FXML
     private void handleTallenna() {

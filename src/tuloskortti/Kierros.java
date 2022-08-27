@@ -148,6 +148,7 @@ public class Kierros implements Cloneable {
     }
     
     /**
+     * Asettaa seuran Id numeron
      * @param seura asetettava seuratieto
      */
     public void setSeuraId(int seura) {
@@ -333,6 +334,7 @@ public class Kierros implements Cloneable {
         private Kierros kierros;
                 
         /**
+         * Muodostetaan YksittainenKierros halutuilla arvoilla
          * @param paiva pelattu päivä
          * @param seura pelattu seura
          * @param tulos kierroksen tulos

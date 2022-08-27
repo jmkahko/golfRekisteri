@@ -187,6 +187,9 @@ public class TuloskorttiGUIController implements Initializable {
         }
     }
     
+    /**
+     * Näytetään sovelluksen tiedoissa GitLab linkki projektille
+     */
     private void tietojaSovelluksesta() {
         Desktop desktop = Desktop.getDesktop();
         try {
@@ -206,7 +209,6 @@ public class TuloskorttiGUIController implements Initializable {
     public void setGolfRekisteri(GolfRekisteri golfRekisteri) {
         this.golfRekisteri = golfRekisteri;
     }
-
     
     /**
      * Käynnistyksessä jos pelaajaa ei ole luotu luodaan pelaaja

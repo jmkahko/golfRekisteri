@@ -19,7 +19,6 @@ public class UusiTuloskortti {
     private static int pituus48 = 0;
     private static int par = 0;
     private static int hcp = 0;
-    
 
     /**
      * Väylän luonnin päätoteuttaja
@@ -57,7 +56,7 @@ public class UusiTuloskortti {
     }
     
     /**
-     * Luodaan väylän pituudet tietyn par-luvun mukaan
+     * Luodaan väylän pituudet tietyn par-luvun mukaan välille par3 105-150, par4 283-384 ja par5 405-495
      * @param parLuku annetaan luku minkä parin väylä tehdään
      * @return palauttaa taulukossa väylän pituuden eri tee- paikoille
      */
@@ -97,6 +96,7 @@ public class UusiTuloskortti {
     
     
     /**
+     * Antaa pituuden tee -paikalle 62
      * @return palauttaa tee- paikan 62 pituuden
      */
     public static int getPituus62() {
@@ -104,6 +104,7 @@ public class UusiTuloskortti {
     }
     
     /**
+     * Antaa pituuden tee -paikalle 55
      * @return palauttaa tee- paikan 55 pituuden
      */
     public static int getPituus55() {
@@ -111,6 +112,7 @@ public class UusiTuloskortti {
     }
     
     /**
+     * Antaa pituuden tee -paikalle 51
      * @return palauttaa tee- paikan 51 pituuden
      */
     public static int getPituus51() {
@@ -118,6 +120,7 @@ public class UusiTuloskortti {
     }
     
     /**
+     * Antaa pituuden tee- paikalle 48
      * @return palauttaa tee- paikan 48 pituuden
      */
     public static int getPituus48() {
@@ -125,6 +128,7 @@ public class UusiTuloskortti {
     }
     
     /**
+     * Antaa väylän par-luvun
      * @return palauttaa väylän par-luvun
      */
     public static int getPar() {
@@ -132,6 +136,7 @@ public class UusiTuloskortti {
     }
     
     /**
+     * Antaa väylän hcp-luvun
      * @return palauttaa väylän hcp-luvun
      */
     public static int getHcp() {
@@ -139,6 +144,7 @@ public class UusiTuloskortti {
     }
     
     /**
+     * Luodaan generoitu tuloskortti tietylle seuralle
      * Tuloskortilla on par3 väyliä monesti 4-5 kpl, par5 väyliä monesti 2-5 kpl ja loput väylät ovat par4
      * @param seuraNro annetaan halutun seuran numero, jolle tuloskortti luodaan
      * @return palauttaa taulukkona arvotun 18-reikäisen tuloskortin
@@ -185,7 +191,6 @@ public class UusiTuloskortti {
             if (!lisatty) {
                 vaylaParLuku.add(Yleinen.arvoLuku(3, 5));
             }
-                
         }
 
         List<Tuloskortti> luotu = new ArrayList<Tuloskortti>();

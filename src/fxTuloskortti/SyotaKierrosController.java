@@ -23,9 +23,9 @@ import tuloskortti.Seura;
 import tuloskortti.Tuloskortti;
 
 /**
+ * Pelatun kierroksen tuloksen syöttäminen
  * @author Janne Kähkönen
  * @version 13.6.2022
- * Pelatun kierroksen tuloksen syöttäminen
  */
 public class SyotaKierrosController implements ModalControllerInterface<Object[]>, Initializable {
 
@@ -130,7 +130,6 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
     
     /**
      * Perutaan tehdyt muutokset
-     * @param event
      */
     @FXML
     private void handlePeruuta() {
@@ -139,7 +138,6 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
 
     /**
      * Tallennetaan syötetty kierros
-     * @param event
      */
     @FXML
     private void handleTallenna() {
@@ -455,7 +453,6 @@ public class SyotaKierrosController implements ModalControllerInterface<Object[]
         teeChoiseBox.setValue(String.valueOf(kierroksenKohdalla.getPelattuTee()));
         seuraChoiceBox.setValue(seura.getSeurannimi());
     }
-    
     
     /**
      * Alustetaan uuden kierroksen seuran näyttäminen. Tuodaan seuran tiedot ja tee paikat

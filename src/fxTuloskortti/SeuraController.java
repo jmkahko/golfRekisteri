@@ -19,9 +19,9 @@ import tuloskortti.Seura;
 import tuloskortti.Tuloskortti;
 
 /**
+ * Seura käyttöliittymän muokkaamista varten, voidaan syöttää uusi tuloskortti tai muokata. Voidaan muokata seurantietoja
  * @author Janne Kähkönen
  * @version 13.6.2022
- * Seura käyttöliittymän muokkaamista varten, voidaan syöttää uusi tuloskortti tai muokata. Voidaan muokata seurantietoja
  */
 public class SeuraController implements ModalControllerInterface<GolfRekisteri>, Initializable {
    
@@ -183,7 +183,6 @@ public class SeuraController implements ModalControllerInterface<GolfRekisteri>,
     @FXML private TextField pituusYhteensa55;
     @FXML private TextField pituusYhteensa62;
    
-    
     /**
      * Voidaan etsiä seura
      */

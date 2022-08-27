@@ -15,6 +15,7 @@ public class UusiKierros {
 
     
     /**
+     * Luodaan uusi tulos par3 väylälle väliltä 1-6, par4 väylälle väliltä 2-8 ja par5 väylälle väliltä 3-10
      * @param parLuku mikä on väylän par tulos
      * @return palauttaa väylän tuloksen
      */
