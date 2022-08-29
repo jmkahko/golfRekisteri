@@ -137,13 +137,13 @@ public class Seurat {
      * Seura seura1 = new Seura();
      * seura1.rekisteroi();
      * seura1.taytaTestiTiedoilla();
-
+     * seurat.lisaa(seura1);
      * loytyneet = seurat.annaSeurat();
      * loytyneet.size() === 1;
      * Seura seura2 = new Seura();
      * seura2.rekisteroi();
      * seura2.taytaTestiTiedoilla();
-
+     * seurat.lisaa(seura2);
      * loytyneet = seurat.annaSeurat();
      * loytyneet.size() === 2;
      * </pre>
@@ -328,10 +328,10 @@ public class Seurat {
      * seurat.getLkm() === 2;
      * 
      * int tulos1 = seurat.poistaSeura(1);
-     * tulos1 === 1;
+     * tulos1 === 0;
      * 
      * int tulos2 = seurat.poistaSeura(2);
-     * tulos2 === 1;
+     * tulos2 === 0;
      * </pre>
      */
     public int poistaSeura(int id) {

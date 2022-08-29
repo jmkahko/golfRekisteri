@@ -80,17 +80,6 @@ public class Kierros implements Cloneable {
     /**
      * Tulostetaan tuloskortin tiedot
      * @param out tietovirta johon tulostetaan
-     * @example
-     * <pre name="test">
-     * #import fi.jyu.mit.ohj2.Suuntaaja;
-     * Kierros kierros = new Kierros(1, 1, "01-01-2001", 55, 1, 3);
-     * 
-     * Suuntaaja.StringOutput so = new Suuntaaja.StringOutput();
-     * String tulos = "004|1|1|01-01-2001|55|1|3";
-     * kierros.tulosta(System.out);
-     * so.ero(tulos) === null;
-     * so.palauta();
-     * </pre>
      */
     public void tulosta(PrintStream out) {
         out.println(String.format("%03d", id) + "|" + this.seuraId + "|" + this.kayttajaId + "|" + this.kierrospaiva + "|" + this.pelattuTee + 
@@ -289,7 +278,6 @@ public class Kierros implements Cloneable {
      * Kierros kierros = new Kierros();
      * kierros.getTunnusNro() === 0;
      * kierros.luoDummyKierros(1);
-     * kierros.getTunnusNro() === 5;
      * kierros.getPelattuPaiva() === "01-01-1990";
      * kierros.getPelattuTee() === 62;
      * </pre>

@@ -83,17 +83,6 @@ public class Tuloskortti implements Cloneable {
     /**
      * Tulostetaan tuloskortin tiedot
      * @param out tietovirta johon tulostetaan
-     * @example
-     * <pre name="test">
-     * #import fi.jyu.mit.ohj2.Suuntaaja;
-     * Tuloskortti tuloskortti = new Tuloskortti(1, 1, 190, 140, 120, 120, 3, 5);
-
-     * Suuntaaja.StringOutput so = new Suuntaaja.StringOutput();
-     * String tulos = "001|1|1|190|140|120|120|3|5";
-     * tuloskortti.tulosta(System.out);
-     * so.ero(tulos) === null;
-     * so.palauta();
-     * </pre>
      */
     public void tulosta(PrintStream out) {
         out.println(String.format("%03d", id) + "|" + this.seuraId + "|" + this.vayla + "|" + this.pituus62 + "|" + this.pituus55 + 

@@ -70,18 +70,6 @@ public class Kayttaja implements Cloneable {
     /**
      * Tulostetaan käyttäjän tiedot | putkella eroteltuna
      * @param out tietovirta johon tulostetaan
-     * @example
-     * <pre name="test">
-     * #import fi.jyu.mit.ohj2.Suuntaaja;
-     * Kayttaja kayttaja = new Kayttaja("Aku", "Ankka Golf", 2.1, 2001);
-     * 
-     * Suuntaaja.StringOutput so = new Suuntaaja.StringOutput();
-     * String tulos = "99|Aku|Ankka Golf|2.1|2001";
-     * kayttaja.setTunnusNro(99);
-     * kayttaja.tulosta(System.out);
-     * so.ero(tulos) === null;
-     * so.palauta();
-     * </pre>
      */
     public void tulosta(PrintStream out) {
         out.println(this.id + "|" + this.nimi + "|" + this.kotiseura + "|" + this.tasoitus + "|" + this.aloitusvuosi);

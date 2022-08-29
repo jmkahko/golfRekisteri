@@ -56,21 +56,6 @@ public class Seura implements Cloneable {
     /**
      * Tulostetaan käyttäjän tiedot
      * @param out tietovirta johon tulostetaan
-     * @example
-     * <pre name="test">
-     * #import fi.jyu.mit.ohj2.Suuntaaja;
-     * Seura seura = new Seura();
-     * seura.setSeurannimi("AnkkaGolf");
-     * seura.setKatuosoite("Ankkatie 2");
-     * seura.setPostinumero(90100);
-     * seura.setPostitoimipaikka("Ankkala");
-     * seura.setPuhelinnumero("040-313");
-     * Suuntaaja.StringOutput so = new Suuntaaja.StringOutput();
-     * String tulos = "000|AnkkaGolf|Ankkatie 2|90100|Ankkala|040-313";
-     * seura.tulosta(System.out);
-     * so.ero(tulos) === null;
-     * so.palauta();
-     * </pre>
      */
     public void tulosta(PrintStream out) {
         out.println(String.format("%03d", id) + "|" + this.seurannimi + "|" + this.katuosoite + "|" + this.postinumero + 
