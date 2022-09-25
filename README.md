@@ -1,6 +1,4 @@
-# pohja
+# Golf Rekisteri harjoitustyö
 
-Pohja kevään 2022 harjoitustöiden GIT-repoille
-
-Lue käyttöohjeet TIMistä: <https://tim.jyu.fi/view/kurssit/tie/ohj2/tyokalut/git/ohj2git#fork>
+Jyväskylän yliopiston [TIEP111 Ohjelmointi 2 (8 op)](https://opinto-opas.jyu.fi/2022/fi/opintojakso/tiep111/) -kurssin harjoitustyö.
 
